@@ -80,6 +80,11 @@
             <div class="icon-text">Winamp</div>
         </div>
 
+        <div class="icon" style="top: 320px; left: 120px;" ondblclick="openWindow('win-minesweeper')" onmousedown="startIconDrag(event, this)">
+            <div class="icon-img" style="background-image: url('https://win98icons.alexmeub.com/icons/png/game_mine_1-0.png');"></div>
+            <div class="icon-text">Démineur</div>
+        </div>
+
         <!-- Easter Egg: Danger -->
         <div class="icon" style="top: 20px; right: 20px; left: auto;" ondblclick="triggerBSOD()" onmousedown="startIconDrag(event, this)">
             <div class="icon-img" style="background-image: url('https://win98icons.alexmeub.com/icons/png/msg_warning-0.png');"></div>
@@ -283,7 +288,7 @@
                 <a href="https://github.com/SaladeFetide" target="_blank" class="btn-retro" style="text-decoration: none; color: black; padding: 5px 10px;">
                     <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="16" style="vertical-align: middle;"> GitHub
                 </a>
-                <a href="https://www.linkedin.com/in/louka-riquoir-5b3b1b223/" target="_blank" class="btn-retro" style="text-decoration: none; color: black; padding: 5px 10px;">
+                <a href="https://www.linkedin.com/in/louka-riquoir" target="_blank" class="btn-retro" style="text-decoration: none; color: black; padding: 5px 10px;">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" width="16" style="vertical-align: middle;"> LinkedIn
                 </a>
             </div>
@@ -333,6 +338,26 @@
                 <button class="btn-retro" style="min-width: 30px;">||</button>
                 <button class="btn-retro" style="min-width: 30px;">&gt;&gt;</button>
             </div>
+        </div>
+    </div>
+
+    <!-- DÉMINEUR -->
+    <div class="window" id="win-minesweeper" style="top: 100px; left: 300px; width: auto;">
+        <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+            <span>Démineur</span>
+            <div class="win-controls">
+                <div class="min-btn" onclick="minimizeWindow('win-minesweeper')">_</div>
+                <div class="max-btn" onclick="maximizeWindow('win-minesweeper')"><div class="max-icon"></div></div>
+                <div class="close-btn" onclick="closeWindow('win-minesweeper')">X</div>
+            </div>
+        </div>
+        <div class="content-area" style="background: #c0c0c0; padding: 5px;">
+            <div class="mine-status-bar">
+                <div id="mine-count" class="digital-display">010</div>
+                <button class="btn-retro smiley-btn" onclick="initMinesweeper()">😊</button>
+                <div id="mine-timer" class="digital-display">000</div>
+            </div>
+            <div id="mine-grid" class="mine-grid"></div>
         </div>
     </div>
 

@@ -5,9 +5,21 @@ window.onload = function() {
     }, 1500);
     setTimeout(() => {
         document.getElementById('boot-screen').style.display = 'none';
-        // Jouer un son ici si souhaité
+        playStartupSound();
     }, 3000);
 }
+
+function playStartupSound() {
+    const audio = new Audio('https://www.myinstants.com/media/sounds/windows-98-startup.mp3');
+    audio.play().catch(e => console.log("Audio autoplay blocked:", e));
+}
+
+// --- SONS CLIC ---
+const clickAudio = new Audio('https://www.myinstants.com/media/sounds/windows-98-click.mp3');
+document.addEventListener('mousedown', () => {
+    clickAudio.currentTime = 0;
+    clickAudio.play().catch(() => {});
+});
 
 // --- MENU DÉMARRER ---
 const startMenu = document.getElementById('start-menu');
@@ -64,7 +76,8 @@ const windowsInfo = {
     'win-contact': { title: 'Contact', icon: 'https://win98icons.alexmeub.com/icons/png/outlook_express-4.png' },
     'win-ie': { title: 'Internet Explorer', icon: 'https://win98icons.alexmeub.com/icons/png/msie1-2.png' },
     'win-terminal': { title: 'MS-DOS Prompt', icon: 'https://win98icons.alexmeub.com/icons/png/console_prompt-0.png' },
-    'win-winamp': { title: 'Winamp', icon: 'https://win98icons.alexmeub.com/icons/png/cd_audio_cd_a-3.png' }
+    'win-winamp': { title: 'Winamp', icon: 'https://win98icons.alexmeub.com/icons/png/cd_audio_cd_a-3.png' },
+    'win-minesweeper': { title: 'Démineur', icon: 'https://win98icons.alexmeub.com/icons/png/game_mine_1-0.png' }
 };
 
 function openWindow(id) {
@@ -320,3 +333,159 @@ if (cmdInput) {
         }
     });
 }
+
+// --- DÉMINEUR ---
+let mineGrid = [];
+let mineRows = 9;
+let mineCols = 9;
+let mineCount = 10;
+let mineFlags = 0;
+let mineGameOver = false;
+let mineTimerInterval;
+let mineTime = 0;
+
+function initMinesweeper() {
+    const gridEl = document.getElementById('mine-grid');
+    gridEl.innerHTML = '';
+    mineGrid = [];
+    mineFlags = 0;
+    mineGameOver = false;
+    mineTime = 0;
+    document.getElementById('mine-count').textContent = String(mineCount).padStart(3, '0');
+    document.getElementById('mine-timer').textContent = '000';
+    clearInterval(mineTimerInterval);
+    mineTimerInterval = setInterval(() => {
+        if (!mineGameOver) {
+            mineTime++;
+            document.getElementById('mine-timer').textContent = String(Math.min(999, mineTime)).padStart(3, '0');
+        }
+    }, 1000);
+
+    document.querySelector('.smiley-btn').textContent = '😊';
+
+    // Init grid
+    for (let r = 0; r < mineRows; r++) {
+        let row = [];
+        for (let c = 0; c < mineCols; c++) {
+            let cell = {
+                r, c,
+                isMine: false,
+                isRevealed: false,
+                isFlagged: false,
+                neighbors: 0,
+                el: document.createElement('div')
+            };
+            cell.el.className = 'mine-cell';
+            cell.el.onmousedown = (e) => handleMineClick(e, r, c);
+            cell.el.oncontextmenu = (e) => { e.preventDefault(); };
+            gridEl.appendChild(cell.el);
+            row.push(cell);
+        }
+        mineGrid.push(row);
+    }
+
+    // Place mines
+    let minesPlaced = 0;
+    while (minesPlaced < mineCount) {
+        let r = Math.floor(Math.random() * mineRows);
+        let c = Math.floor(Math.random() * mineCols);
+        if (!mineGrid[r][c].isMine) {
+            mineGrid[r][c].isMine = true;
+            minesPlaced++;
+        }
+    }
+
+    // Calc neighbors
+    for (let r = 0; r < mineRows; r++) {
+        for (let c = 0; c < mineCols; c++) {
+            if (!mineGrid[r][c].isMine) {
+                let count = 0;
+                for (let i = -1; i <= 1; i++) {
+                    for (let j = -1; j <= 1; j++) {
+                        if (r+i >= 0 && r+i < mineRows && c+j >= 0 && c+j < mineCols) {
+                            if (mineGrid[r+i][c+j].isMine) count++;
+                        }
+                    }
+                }
+                mineGrid[r][c].neighbors = count;
+            }
+        }
+    }
+}
+
+function handleMineClick(e, r, c) {
+    if (mineGameOver) return;
+    const cell = mineGrid[r][c];
+
+    if (e.button === 2) { // Right click (Flag)
+        if (!cell.isRevealed) {
+            cell.isFlagged = !cell.isFlagged;
+            cell.el.textContent = cell.isFlagged ? '🚩' : '';
+            cell.el.classList.toggle('flag');
+            mineFlags += cell.isFlagged ? 1 : -1;
+            document.getElementById('mine-count').textContent = String(mineCount - mineFlags).padStart(3, '0');
+        }
+    } else if (e.button === 0) { // Left click (Reveal)
+        if (cell.isFlagged) return;
+        if (cell.isMine) {
+            gameOver(false);
+        } else {
+            revealCell(r, c);
+            checkWin();
+        }
+    }
+}
+
+function revealCell(r, c) {
+    if (r < 0 || r >= mineRows || c < 0 || c >= mineCols) return;
+    const cell = mineGrid[r][c];
+    if (cell.isRevealed || cell.isFlagged) return;
+
+    cell.isRevealed = true;
+    cell.el.classList.add('revealed');
+
+    if (cell.neighbors > 0) {
+        cell.el.textContent = cell.neighbors;
+        cell.el.classList.add('c' + cell.neighbors);
+    } else {
+        // Flood fill
+        for (let i = -1; i <= 1; i++) {
+            for (let j = -1; j <= 1; j++) {
+                revealCell(r+i, c+j);
+            }
+        }
+    }
+}
+
+function gameOver(won) {
+    mineGameOver = true;
+    clearInterval(mineTimerInterval);
+    document.querySelector('.smiley-btn').textContent = won ? '😎' : '😵';
+    
+    if (!won) {
+        // Reveal all mines
+        for (let r = 0; r < mineRows; r++) {
+            for (let c = 0; c < mineCols; c++) {
+                if (mineGrid[r][c].isMine) {
+                    mineGrid[r][c].el.classList.add('revealed', 'mine');
+                    mineGrid[r][c].el.textContent = '💣';
+                }
+            }
+        }
+    }
+}
+
+function checkWin() {
+    let revealedCount = 0;
+    for (let r = 0; r < mineRows; r++) {
+        for (let c = 0; c < mineCols; c++) {
+            if (mineGrid[r][c].isRevealed) revealedCount++;
+        }
+    }
+    if (revealedCount === (mineRows * mineCols - mineCount)) {
+        gameOver(true);
+    }
+}
+
+// Init Minesweeper on load (but window is hidden)
+initMinesweeper();
