@@ -17,7 +17,7 @@ body {
        image and tile it (repeat). If you prefer a single centered image, set
        `background-repeat: no-repeat; background-position: center top;` */
     background-color: var(--desktop-teal);
-    background-image: url('Fond.jpg');
+    background-image: url('../assets/images/Fond.jpg');
     background-repeat: repeat; /* change to `no-repeat` to center a single image */
     background-position: center var(--wallpaper-offset);
     background-size: auto;

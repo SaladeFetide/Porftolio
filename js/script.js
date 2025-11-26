@@ -61,7 +61,10 @@ const windowsInfo = {
     'win-projects': { title: 'Mes Projets', icon: 'https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png' },
     'win-skills': { title: 'Compétences.exe', icon: 'https://win98icons.alexmeub.com/icons/png/game_solitaire-1.png' },
     'win-notepad': { title: 'Bloc-notes', icon: 'https://win98icons.alexmeub.com/icons/png/notepad-5.png' },
-    'win-contact': { title: 'Contact', icon: 'https://win98icons.alexmeub.com/icons/png/outlook_express-4.png' }
+    'win-contact': { title: 'Contact', icon: 'https://win98icons.alexmeub.com/icons/png/outlook_express-4.png' },
+    'win-ie': { title: 'Internet Explorer', icon: 'https://win98icons.alexmeub.com/icons/png/msie1-2.png' },
+    'win-terminal': { title: 'MS-DOS Prompt', icon: 'https://win98icons.alexmeub.com/icons/png/console_prompt-0.png' },
+    'win-winamp': { title: 'Winamp', icon: 'https://win98icons.alexmeub.com/icons/png/cd_audio_cd_a-3.png' }
 };
 
 function openWindow(id) {
@@ -258,5 +261,62 @@ function copyEmail() {
     }).catch(err => {
         console.error('Erreur lors de la copie :', err);
         alert("Erreur lors de la copie.");
+    });
+}
+
+// --- TERMINAL (MS-DOS) ---
+const cmdInput = document.getElementById('cmd-input');
+const terminalOutput = document.getElementById('terminal-output');
+
+if (cmdInput) {
+    cmdInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            const command = this.value.trim().toLowerCase();
+            this.value = '';
+            
+            // Afficher la commande tapée
+            terminalOutput.innerHTML += `<div>C:\\WINDOWS> ${command}</div>`;
+            
+            // Traiter la commande
+            let response = '';
+            switch(command) {
+                case 'help':
+                    response = 'COMMANDS: HELP, ABOUT, SKILLS, PROJECTS, CONTACT, CLEAR, EXIT';
+                    break;
+                case 'about':
+                    response = 'LOUKA RIQUOIR - ETUDIANT BUT INFORMATIQUE - PASSIONNE DE BACK-END.';
+                    break;
+                case 'skills':
+                    response = 'JAVA, PYTHON, LUA, SQL, LINUX, GIT...';
+                    break;
+                case 'projects':
+                    response = 'OPENING PROJECTS FOLDER...';
+                    openWindow('win-projects');
+                    break;
+                case 'contact':
+                    response = 'OPENING CONTACT...';
+                    openWindow('win-contact');
+                    break;
+                case 'clear':
+                    terminalOutput.innerHTML = '';
+                    return; // Pas de nouvelle ligne
+                case 'exit':
+                    closeWindow('win-terminal');
+                    return;
+                case '':
+                    break;
+                default:
+                    response = 'Bad command or file name';
+            }
+            
+            if (response) {
+                terminalOutput.innerHTML += `<div>${response}</div>`;
+            }
+            terminalOutput.innerHTML += '<br>';
+            
+            // Scroll vers le bas
+            const contentArea = document.getElementById('terminal-content');
+            contentArea.scrollTop = contentArea.scrollHeight;
+        }
     });
 }
