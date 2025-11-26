@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>LoukaOS 98</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- BOOT SCREEN -->
+    <div id="boot-screen">
+        <div>Award Modular BIOS v4.51PG, An Energy Star Ally</div>
+        <div>Copyright (C) 1984-98, Award Software, Inc.</div>
+        <br>
+        <div>PENTIUM-MMX CPU at 233MHz</div>
+        <div>Memory Test :  64536K OK</div>
+        <br>
+        <div>Award Plug and Play BIOS Extension v1.0A</div>
+        <div>Initialize Plug and Play Cards...</div>
+        <div>PNP Init Completed</div>
+        <br>
+        <div>Detecting Primary Master ... LOUKA-HD 20GB</div>
+        <div>Detecting Primary Slave  ... None</div>
+        <br>
+        <div id="boot-msg">Starting LoukaOS 98...<span class="cursor-blink">_</span></div>
+    </div>
+
+    <!-- BSOD SCREEN -->
+    <div id="bsod" onclick="location.reload()">
+        <p>A fatal exception 0E has occurred at 0028:C0011E36 in VXD VMM(01) + 00010E36.</p>
+        <p>The current application will be terminated.</p>
+        <br>
+        <p>* Press any key to terminate the current application.</p>
+        <p>* Press CTRL+ALT+DEL again to restart your computer.</p>
+        <br>
+        <p>Press any key to continue _</p>
+    </div>
+
+    <div class="desktop" id="desktop">
+        
+        <!-- Icônes positionnées en absolu pour le drag & drop -->
+        <div class="icon" style="top: 20px; left: 20px;" ondblclick="openWindow('win-about')" onmousedown="startIconDrag(event, this)">
+            <div class="icon-img ico-pc"></div>
+            <div class="icon-text">Poste de Louka</div>
+        </div>
+
+        <div class="icon" style="top: 120px; left: 20px;" ondblclick="openWindow('win-projects')" onmousedown="startIconDrag(event, this)">
+            <div class="icon-img ico-folder"></div>
+            <div class="icon-text">Mes Projets</div>
+        </div>
+
+        <div class="icon" style="top: 220px; left: 20px;" ondblclick="openWindow('win-skills')" onmousedown="startIconDrag(event, this)">
+            <div class="icon-img ico-game"></div>
+            <div class="icon-text">Compétences.exe</div>
+        </div>
+
+        <div class="icon" style="top: 320px; left: 20px;" ondblclick="openWindow('win-contact')" onmousedown="startIconDrag(event, this)">
+            <div class="icon-img ico-mail"></div>
+            <div class="icon-text">Contact</div>
+        </div>
+
+        <div class="icon" style="top: 420px; left: 20px;" onclick="window.open('CV_LOUKA_RIQUOIR.pdf', '_blank')" onmousedown="startIconDrag(event, this)">
+            <div class="icon-img" style="background-image: url('https://win98icons.alexmeub.com/icons/png/chm-1.png');"></div>
+            <div class="icon-text">Mon CV.pdf</div>
+        </div>
+
+        <!-- Easter Egg: Danger -->
+        <div class="icon" style="top: 20px; right: 20px; left: auto;" ondblclick="triggerBSOD()" onmousedown="startIconDrag(event, this)">
+            <div class="icon-img" style="background-image: url('https://win98icons.alexmeub.com/icons/png/msg_warning-0.png');"></div>
+            <div class="icon-text">NE PAS CLIQUER</div>
+        </div>
+
+    </div>
+
+    <!-- CONTEXT MENU -->
+    <div class="context-menu" id="context-menu">
+        <div class="ctx-item" onclick="location.reload()">Actualiser</div>
+        <div class="ctx-line"></div>
+        <div class="ctx-item">Nouveau <span style="font-size:10px">▶</span></div>
+        <div class="ctx-line"></div>
+        <div class="ctx-item" onclick="openWindow('win-about')">Propriétés</div>
+    </div>
+
+    <!-- MENU DÉMARRER -->
+    <div class="start-menu" id="start-menu">
+        <div style="display: flex; height: 100%;">
+            <div class="start-sidebar"><strong>LoukaOS</strong> 98</div>
+            <div class="start-content">
+                <div class="start-item" onclick="openWindow('win-notepad')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/notepad-5.png" width="24">
+                    Bloc-notes
+                </div>
+                <div class="start-item" onclick="openWindow('win-projects')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png" width="24">
+                    Mes Projets
+                </div>
+                <div class="start-item" onclick="openWindow('win-skills')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/game_solitaire-1.png" width="24">
+                    Compétences
+                </div>
+                <div class="start-item" onclick="window.open('CV_LOUKA_RIQUOIR.pdf', '_blank')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/chm-1.png" width="24">
+                    Mon CV
+                </div>
+                <div class="start-line"></div>
+                <div class="start-item" onclick="openWindow('win-about')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/help_book_big-0.png" width="24">
+                    A propos
+                </div>
+                <div class="start-line"></div>
+                <div class="start-item" onclick="alert('Arrêt du système impossible : vous êtes trop productif !')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/shut_down_cool-4.png" width="24">
+                    Arrêter...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="window" id="win-about" style="z-index: 10;">
+        <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+            <span>Poste de Louka - Propriétés</span>
+            <div class="win-controls">
+                <div class="min-btn" onclick="minimizeWindow('win-about')">_</div>
+                <div class="max-btn" onclick="maximizeWindow('win-about')"><div class="max-icon"></div></div>
+                <div class="close-btn" onclick="closeWindow('win-about')">X</div>
+            </div>
+        </div>
+        <div class="content-area">
+              <!-- Remplacez `portrait.png` par le fichier de votre photo placé à côté de index.html -->
+              <img src="Photo cv (png).png" alt="Portrait" 
+                  onerror="this.onerror=null;this.src='https://win98icons.alexmeub.com/icons/png/user_world-0.png'"
+                  style="float:left; margin-right:15px; width:64px; height:64px; object-fit: cover; border:2px solid #fff;">
+            <h2>LOUKA RIQUOIR</h2>
+            <p><strong>Système :</strong> Étudiant BUT Informatique</p>
+            <p><strong>Version :</strong> 2.0 (Année 2)</p>
+            <p><strong>Localisation :</strong> Douai / Lens</p>
+            <br>
+            <p>Bienvenue sur mon système ! Je suis un développeur passionné par le Back-end, Java et l'automatisation.</p>
+            <p>Je cherche une alternance ou stage pour 2026.</p>
+            <br>
+            <center><button class="btn-retro" onclick="closeWindow('win-about')">OK</button></center>
+        </div>
+    </div>
+
+    <div class="window" id="win-projects" style="top: 150px; left: 300px;">
+        <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+            <span>C:\Mes Documents\Projets</span>
+            <div class="win-controls">
+                <div class="min-btn" onclick="minimizeWindow('win-projects')">_</div>
+                <div class="max-btn" onclick="maximizeWindow('win-projects')"><div class="max-icon"></div></div>
+                <div class="close-btn" onclick="closeWindow('win-projects')">X</div>
+            </div>
+        </div>
+        <div class="content-area">
+            <h2>LISTE DES PROJETS</h2>
+            
+            <p><a href="https://github.com/SaladeFetide/Projet-Bomberman" target="_blank" style="color: blue; text-decoration: none; cursor: pointer;"><strong>📂 BOMBERMAN </strong></a><br>
+            [Java / JavaFX]<br>
+            Réplique complète du jeu avec gestion I.A.</p>
+            <hr>
+
+            <p><a href="https://poke-battle-vert.vercel.app/" target="_blank" style="color: blue; text-decoration: none; cursor: pointer;"><strong>📂 PokéBattle (Projet Perso)</strong></a><br>
+            [Java / HTML]<br>
+            Web App de combat de Pokémon.</p>
+            <hr>
+
+            <p><a href="https://github.com/SaladeFetide/TheCocktail" target="_blank" style="color: blue; text-decoration: none; cursor: pointer;"><strong>📂 Quizz Cocktails</strong></a><br>
+            [Python / Flask / SQLite]<br>
+            Jeu de quiz interactif : devinez les ingrédients !<br>
+            (API, Timer, Leaderboard, Mode Sombre)</p>
+            <hr>
+
+            <p><a href="https://github.com/SaladeFetide/LenSymphony" target="_blank" style="color: blue; text-decoration: none; cursor: pointer;"><strong>📂 LenSymphony</strong></a><br>
+            [Java / Design Patterns]<br>
+            Bibliothèque de synthèse musicale.<br>
+            (Factory, Decorator, Composite, MusicXML)</p>
+            <hr>
+
+            <p><a href="https://github.com/SaladeFetide/Onitama" target="_blank" style="color: blue; text-decoration: none; cursor: pointer;"><strong>📂 Onitama</strong></a><br>
+            [Java / Gradle / JUnit]<br>
+            Implémentation du jeu de plateau avec architecture claire.<br>
+            (Moteur de jeu, Tests unitaires)</p>
+            <hr>
+            
+            <p><a href="#" target="_blank" style="color: blue; text-decoration: none; cursor: pointer;"><strong>📂 FIVEM SCRIPTS (Projet Perso)</strong></a><br>
+            [Lua]<br>
+            Scripts pour serveurs GTA RP (Inventaire, Métiers).</p>
+            <hr>
+        </div>
+    </div>
+
+    <div class="window" id="win-skills" style="top: 50px; left: 500px;">
+        <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+            <span>Compétences.exe</span>
+            <div class="win-controls">
+                <div class="min-btn" onclick="minimizeWindow('win-skills')">_</div>
+                <div class="max-btn" onclick="maximizeWindow('win-skills')"><div class="max-icon"></div></div>
+                <div class="close-btn" onclick="closeWindow('win-skills')">X</div>
+            </div>
+        </div>
+        <div class="content-area" style="background: black; color: lime; font-family: 'Courier New';">
+            C:\> RUN SKILLS_SCAN<br><br>
+            SCANNING...<br><br>
+            [OK] JAVA ..........<br>
+            [OK] PYTHON ........<br>
+            [OK] LUA ...........<br>
+            [OK] SQL ...........<br>
+            [OK] Javascript .........<br>
+            [OK] PHP .........<br>
+            [OK] REACT .........<br>
+            [OK] Bash .........<br>
+            [OK] HTML/CSS .........<br>
+            <br>
+            SYSTEM READY.
+        </div>
+    </div>
+
+    <!-- BLOC-NOTES -->
+    <div class="window" id="win-notepad" style="top: 200px; left: 400px;">
+        <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+            <span>Sans titre - Bloc-notes</span>
+            <div class="win-controls">
+                <div class="min-btn" onclick="minimizeWindow('win-notepad')">_</div>
+                <div class="max-btn" onclick="maximizeWindow('win-notepad')"><div class="max-icon"></div></div>
+                <div class="close-btn" onclick="closeWindow('win-notepad')">X</div>
+            </div>
+        </div>
+        <div class="content-area" style="padding: 0; overflow: hidden;">
+            <textarea class="notepad-area" placeholder="Écrivez quelque chose..."></textarea>
+        </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="window" id="win-contact" style="top: 100px; left: 100px; width: 300px;">
+        <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+            <span>Contact</span>
+            <div class="win-controls">
+                <div class="min-btn" onclick="minimizeWindow('win-contact')">_</div>
+                <div class="max-btn" onclick="maximizeWindow('win-contact')"><div class="max-icon"></div></div>
+                <div class="close-btn" onclick="closeWindow('win-contact')">X</div>
+            </div>
+        </div>
+        <div class="content-area" style="text-align: center;">
+            <img src="https://win98icons.alexmeub.com/icons/png/outlook_express-4.png" style="margin-bottom: 10px;">
+            <p>Vous pouvez me contacter à cette adresse :</p>
+            <br>
+            <input type="text" value="louka.riquoir@gmail.com" readonly style="width: 80%; margin-bottom: 10px; text-align: center;">
+            <br>
+            <button class="btn-retro" onclick="copyEmail()">Copier l'adresse</button>
+        </div>
+    </div>
+
+    <div class="taskbar">
+        <div class="start-btn" id="start-btn">
+            <img src="https://win98icons.alexmeub.com/icons/png/windows-0.png">
+            Start
+        </div>
+        <div class="taskbar-apps" id="taskbar-apps">
+            <!-- Les applications ouvertes s'afficheront ici -->
+        </div>
+        <div class="clock" id="clock">12:00 PM</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
