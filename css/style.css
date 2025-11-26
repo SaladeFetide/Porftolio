@@ -436,3 +436,10 @@ ul { list-style-type: square; padding-left: 20px; }
 .c6 { color: teal; }
 .c7 { color: black; }
 .c8 { color: gray; }
+
+/* --- ICÔNES (Images URL) --- */
+/* Utilisation d'icônes libres style Windows 98 */
+.ico-pc { background-image: url('https://win98icons.alexmeub.com/icons/png/computer_explorer-4.png'); }
+.ico-folder { background-image: url('https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png'); }
+.ico-game { background-image: url('https://win98icons.alexmeub.com/icons/png/game_solitaire-1.png'); }
+.ico-mail { background-image: url('https://win98icons.alexmeub.com/icons/png/outlook_express-4.png'); }
