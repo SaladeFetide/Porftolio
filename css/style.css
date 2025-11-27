@@ -514,4 +514,14 @@ ul { list-style-type: square; padding-left: 20px; }
         font-size: 0.9rem;
         padding: 10px;
     }
+
+    /* Content Area on Mobile */
+    .content-area {
+        height: auto !important;
+        max-height: 60vh !important;
+    }
+
+    body {
+        font-size: 1rem;
+    }
 }
