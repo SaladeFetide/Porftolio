@@ -360,6 +360,62 @@ ul { list-style-type: square; padding-left: 20px; }
     overflow: auto;
 }
 
+/* --- NOTEPAD MENU --- */
+.menubar {
+    background: var(--win-gray);
+    padding: 2px 5px;
+    display: flex;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+.menubar span {
+    cursor: pointer;
+    padding: 2px 5px;
+}
+.menubar span:hover {
+    background: var(--win-blue);
+    color: white;
+}
+
+/* --- RECYCLE BIN --- */
+.file-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.file-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 2px;
+    cursor: pointer;
+}
+.file-item:hover {
+    background: var(--win-blue);
+    color: white;
+}
+.file-item img {
+    width: 16px; height: 16px;
+}
+
+/* --- CALENDAR --- */
+#calendar-table th {
+    font-weight: bold;
+    padding: 5px;
+}
+#calendar-table td {
+    padding: 5px;
+    cursor: pointer;
+}
+#calendar-table td:hover {
+    background: var(--win-blue);
+    color: white;
+}
+#calendar-table td.today {
+    border: 1px dotted black;
+    font-weight: bold;
+}
+
 /* --- DÉMINEUR --- */
 .mine-status-bar {
     display: flex;

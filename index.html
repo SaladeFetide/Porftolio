@@ -60,7 +60,7 @@
             <div class="icon-text">Contact</div>
         </div>
 
-        <div class="icon" style="top: 420px; left: 20px;" onclick="window.open('assets/docs/CV_LOUKA_RIQUOIR.pdf', '_blank')" onmousedown="startIconDrag(event, this)">
+        <div class="icon" style="top: 420px; left: 20px;" onclick="downloadCV()" onmousedown="startIconDrag(event, this)">
             <div class="icon-img" style="background-image: url('https://win98icons.alexmeub.com/icons/png/chm-1.png');"></div>
             <div class="icon-text">Mon CV.pdf</div>
         </div>
@@ -89,6 +89,12 @@
         <div class="icon" style="top: 420px; left: 120px;" ondblclick="openWindow('win-paint')" onmousedown="startIconDrag(event, this)">
             <div class="icon-img" style="background-image: url('https://win98icons.alexmeub.com/icons/png/paint_file-2.png');"></div>
             <div class="icon-text">Paint</div>
+        </div>
+
+        <!-- RECYCLE BIN -->
+        <div class="icon" style="top: 20px; left: 220px;" ondblclick="openWindow('win-recycle')" onmousedown="startIconDrag(event, this)">
+            <div class="icon-img" style="background-image: url('https://win98icons.alexmeub.com/icons/png/recycle_bin_full-4.png');"></div>
+            <div class="icon-text">Corbeille</div>
         </div>
 
         <!-- Easter Egg: Danger -->
@@ -254,8 +260,14 @@
                 <div class="close-btn" onclick="closeWindow('win-notepad')">X</div>
             </div>
         </div>
-        <div class="content-area" style="padding: 0; overflow: hidden;">
-            <textarea class="notepad-area" placeholder="Écrivez quelque chose..."></textarea>
+        <div class="menubar">
+            <span onclick="saveNotepad()">Fichier</span>
+            <span>Edition</span>
+            <span>Recherche</span>
+            <span>Aide</span>
+        </div>
+        <div class="content-area" style="padding: 0; overflow: hidden; height: calc(100% - 50px);">
+            <textarea class="notepad-area" id="notepad-content" placeholder="Écrivez quelque chose..." oninput="autoSaveNotepad()"></textarea>
         </div>
     </div>
 
@@ -447,6 +459,89 @@
         </div>
     </div>
 
+    <!-- RECYCLE BIN WINDOW -->
+    <div class="window" id="win-recycle" style="top: 100px; left: 350px;">
+        <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+            <span>Corbeille</span>
+            <div class="win-controls">
+                <div class="min-btn" onclick="minimizeWindow('win-recycle')">_</div>
+                <div class="max-btn" onclick="maximizeWindow('win-recycle')"><div class="max-icon"></div></div>
+                <div class="close-btn" onclick="closeWindow('win-recycle')">X</div>
+            </div>
+        </div>
+        <div class="content-area">
+            <div class="file-list">
+                <div class="file-item">
+                    <img src="https://win98icons.alexmeub.com/icons/png/txt-1.png">
+                    <span>Idées_nulles.txt</span>
+                </div>
+                <div class="file-item">
+                    <img src="https://win98icons.alexmeub.com/icons/png/wordpad-0.png">
+                    <span>Projet_abandonné_v1.doc</span>
+                </div>
+                <div class="file-item">
+                    <img src="https://win98icons.alexmeub.com/icons/png/image_old_gif-0.png">
+                    <span>meme_pas_drole.gif</span>
+                </div>
+                <div class="file-item">
+                    <img src="https://win98icons.alexmeub.com/icons/png/script_file_blue-0.png">
+                    <span>bug_infini.js</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CALENDAR WINDOW -->
+    <div class="window" id="win-calendar" style="top: 150px; left: 450px; width: 300px; height: auto;">
+        <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+            <span>Calendrier</span>
+            <div class="win-controls">
+                <div class="min-btn" onclick="minimizeWindow('win-calendar')">_</div>
+                <div class="close-btn" onclick="closeWindow('win-calendar')">X</div>
+            </div>
+        </div>
+        <div class="content-area" style="height: auto; min-height: 250px;">
+            <div id="calendar-header" style="text-align: center; font-weight: bold; margin-bottom: 10px; display: flex; justify-content: space-between;">
+                <button class="btn-retro" style="padding: 0 5px;" onclick="changeMonth(-1)">&lt;</button>
+                <span id="calendar-month-year"></span>
+                <button class="btn-retro" style="padding: 0 5px;" onclick="changeMonth(1)">&gt;</button>
+            </div>
+            <table id="calendar-table" style="width: 100%; text-align: center; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th>Di</th><th>Lu</th><th>Ma</th><th>Me</th><th>Je</th><th>Ve</th><th>Sa</th>
+                    </tr>
+                </thead>
+                <tbody id="calendar-body">
+                    <!-- Generated by JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- DOWNLOAD DIALOG -->
+    <div class="window" id="win-download" style="top: 200px; left: 300px; width: 350px; height: auto; z-index: 9999;">
+        <div class="title-bar">
+            <span>Téléchargement de fichier</span>
+        </div>
+        <div class="content-area" style="height: auto; background: #c0c0c0; border: none;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                <img src="https://win98icons.alexmeub.com/icons/png/download-0.png" width="32">
+                <div>
+                    <div>Téléchargement de <strong>CV_LOUKA_RIQUOIR.pdf</strong></div>
+                    <div style="font-size: 0.8rem;">depuis c:\Users\Louka\Documents</div>
+                </div>
+            </div>
+            <div style="margin-bottom: 5px;">Progression :</div>
+            <div style="width: 100%; height: 20px; background: white; border: 1px solid #808080; position: relative;">
+                <div id="download-bar" style="width: 0%; height: 100%; background: #000080;"></div>
+            </div>
+            <div style="display: flex; justify-content: center; margin-top: 15px;">
+                <button class="btn-retro" onclick="closeWindow('win-download')">Annuler</button>
+            </div>
+        </div>
+    </div>
+
     <div class="taskbar">
         <div class="start-btn" id="start-btn">
             <img src="https://win98icons.alexmeub.com/icons/png/windows-0.png">
@@ -455,7 +550,7 @@
         <div class="taskbar-apps" id="taskbar-apps">
             <!-- Les applications ouvertes s'afficheront ici -->
         </div>
-        <div class="clock" id="clock">12:00 PM</div>
+        <div class="clock" id="clock" onclick="openWindow('win-calendar'); renderCalendar();" style="cursor: pointer;">12:00 PM</div>
     </div>
 
     <script src="js/script.js"></script>

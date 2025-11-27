@@ -9,6 +9,7 @@ window.onload = function() {
         playStartupSound();
     }, 3000);
     initPaint(); // Init Paint
+    initNotepad(); // Init Notepad
 }
 
 function playStartupSound() {
@@ -80,7 +81,9 @@ const windowsInfo = {
     'win-terminal': { title: 'MS-DOS Prompt', icon: 'https://win98icons.alexmeub.com/icons/png/console_prompt-0.png' },
     'win-winamp': { title: 'Winamp', icon: 'https://win98icons.alexmeub.com/icons/png/cd_audio_cd_a-3.png' },
     'win-minesweeper': { title: 'Démineur', icon: 'https://win98icons.alexmeub.com/icons/png/game_mine_1-0.png' },
-    'win-paint': { title: 'Paint', icon: 'https://win98icons.alexmeub.com/icons/png/paint_file-2.png' }
+    'win-paint': { title: 'Paint', icon: 'https://win98icons.alexmeub.com/icons/png/paint_file-2.png' },
+    'win-recycle': { title: 'Corbeille', icon: 'https://win98icons.alexmeub.com/icons/png/recycle_bin_full-4.png' },
+    'win-calendar': { title: 'Calendrier', icon: 'https://win98icons.alexmeub.com/icons/png/calendar-1.png' }
 };
 
 function openWindow(id) {
@@ -681,6 +684,97 @@ function drawPaint(e) {
         paintCtx.fillStyle = 'white';
         paintCtx.fillRect(x-5, y-5, 10, 10);
     }
+}
+
+// --- NOTEPAD ---
+function initNotepad() {
+    const savedText = localStorage.getItem('notepad-content');
+    if (savedText) {
+        document.getElementById('notepad-content').value = savedText;
+    }
+}
+
+function autoSaveNotepad() {
+    const text = document.getElementById('notepad-content').value;
+    localStorage.setItem('notepad-content', text);
+}
+
+function saveNotepad() {
+    autoSaveNotepad();
+    alert("Fichier enregistré avec succès !");
+}
+
+// --- CALENDAR ---
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
+
+function renderCalendar() {
+    const monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay(); // 0 = Sunday
+
+    document.getElementById('calendar-month-year').textContent = `${monthNames[currentMonth]} ${currentYear}`;
+
+    const tbody = document.getElementById('calendar-body');
+    tbody.innerHTML = '';
+
+    let date = 1;
+    for (let i = 0; i < 6; i++) {
+        const row = document.createElement('tr');
+        for (let j = 0; j < 7; j++) {
+            const cell = document.createElement('td');
+            if (i === 0 && j < firstDay) {
+                cell.textContent = '';
+            } else if (date > daysInMonth) {
+                break;
+            } else {
+                cell.textContent = date;
+                const today = new Date();
+                if (date === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear()) {
+                    cell.classList.add('today');
+                }
+                date++;
+            }
+            row.appendChild(cell);
+        }
+        tbody.appendChild(row);
+    }
+}
+
+function changeMonth(delta) {
+    currentMonth += delta;
+    if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+    } else if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+    }
+    renderCalendar();
+}
+
+// --- FAKE DOWNLOAD ---
+function downloadCV() {
+    const win = document.getElementById('win-download');
+    const bar = document.getElementById('download-bar');
+    win.style.display = 'flex';
+    bringToFront(win);
+    
+    let progress = 0;
+    bar.style.width = '0%';
+    
+    const interval = setInterval(() => {
+        progress += Math.random() * 10;
+        if (progress >= 100) {
+            progress = 100;
+            clearInterval(interval);
+            setTimeout(() => {
+                closeWindow('win-download');
+                window.open('assets/docs/CV_LOUKA_RIQUOIR.pdf', '_blank');
+            }, 500);
+        }
+        bar.style.width = progress + '%';
+    }, 200);
 }
 
 // --- SHUTDOWN ---
