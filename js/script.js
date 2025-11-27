@@ -682,3 +682,155 @@ function drawPaint(e) {
         paintCtx.fillRect(x-5, y-5, 10, 10);
     }
 }
+
+// --- SHUTDOWN ---
+function triggerShutdown() {
+    // Fade out effect
+    document.body.style.transition = "filter 1s ease";
+    document.body.style.filter = "grayscale(100%) brightness(0.5)";
+    
+    setTimeout(() => {
+        document.getElementById('shutdown-screen').style.display = 'flex';
+        document.body.style.filter = "none"; // Reset for the black screen
+    }, 1000);
+}
+
+// --- CLIPPY ---
+const clippyPhrases = [
+    "Il semble que vous cherchiez un développeur. Voulez-vous de l'aide ?",
+    "Astuce : Double-cliquez sur les icônes pour les ouvrir.",
+    "Je vois que vous regardez mon CV. Excellent choix !",
+    "N'oubliez pas de tester le Démineur !",
+    "Besoin d'un site web ? Louka est là pour ça !",
+    "Tapez 'matrix' dans le terminal pour un effet cool.",
+    "Vous pouvez changer le fond d'écran avec un clic droit !"
+];
+
+function showClippy() {
+    const clippy = document.getElementById('clippy');
+    clippy.style.display = 'flex';
+    clippyTalk();
+}
+
+function clippyTalk() {
+    const textEl = document.getElementById('clippy-text');
+    const phrase = clippyPhrases[Math.floor(Math.random() * clippyPhrases.length)];
+    textEl.textContent = phrase;
+}
+
+// Show Clippy randomly
+setTimeout(showClippy, 10000);
+setInterval(() => {
+    if (Math.random() > 0.7) showClippy();
+}, 30000);
+
+
+// --- WALLPAPER CHANGER ---
+function updatePreview() {
+    const select = document.getElementById('wallpaper-select');
+    const preview = document.getElementById('preview-screen');
+    const val = select.value;
+    
+    let bg = '';
+    if (val === 'teal') bg = '#008080';
+    else if (val === 'clouds') bg = 'url(https://win98icons.alexmeub.com/images/clouds-wallpaper.jpg)'; // Exemple
+    else if (val === 'matrix') bg = 'black';
+    else if (val === 'red') bg = '#800000';
+    else if (val === 'black') bg = '#000000';
+
+    preview.style.background = bg;
+    preview.style.backgroundSize = 'cover';
+}
+
+function applyWallpaper() {
+    const select = document.getElementById('wallpaper-select');
+    const val = select.value;
+    
+    if (val === 'teal') {
+        document.body.style.backgroundImage = 'none';
+        document.body.style.backgroundColor = '#008080';
+    } else if (val === 'clouds') {
+        document.body.style.backgroundImage = "url('https://win98icons.alexmeub.com/images/clouds-wallpaper.jpg')"; // Placeholder
+        document.body.style.backgroundSize = "cover";
+    } else if (val === 'matrix') {
+        document.body.style.backgroundImage = 'none';
+        document.body.style.backgroundColor = 'black';
+        // On pourrait lancer l'effet matrix en background mais restons simple
+    } else if (val === 'red') {
+        document.body.style.backgroundImage = 'none';
+        document.body.style.backgroundColor = '#800000';
+    } else if (val === 'black') {
+        document.body.style.backgroundImage = 'none';
+        document.body.style.backgroundColor = '#000000';
+    }
+    closeWindow('win-properties');
+}
+
+// --- DESKTOP SELECTION (RUBBER BAND) ---
+const selectionBox = document.getElementById('selection-box');
+let startX, startY;
+
+document.addEventListener('mousedown', (e) => {
+    // Only on desktop (body) directly
+    if (e.target === document.body || e.target.classList.contains('desktop')) {
+        isDragging = true; // Reuse existing flag or create new one
+        dragType = 'selection';
+        startX = e.clientX;
+        startY = e.clientY;
+        
+        selectionBox.style.left = startX + 'px';
+        selectionBox.style.top = startY + 'px';
+        selectionBox.style.width = '0px';
+        selectionBox.style.height = '0px';
+        selectionBox.style.display = 'block';
+    }
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (dragType === 'selection') {
+        const currentX = e.clientX;
+        const currentY = e.clientY;
+        
+        const width = Math.abs(currentX - startX);
+        const height = Math.abs(currentY - startY);
+        const left = Math.min(currentX, startX);
+        const top = Math.min(currentY, startY);
+        
+        selectionBox.style.width = width + 'px';
+        selectionBox.style.height = height + 'px';
+        selectionBox.style.left = left + 'px';
+        selectionBox.style.top = top + 'px';
+    }
+});
+
+document.addEventListener('mouseup', () => {
+    if (dragType === 'selection') {
+        selectionBox.style.display = 'none';
+        dragType = null;
+        isDragging = false;
+    }
+});
+
+// --- KONAMI CODE ---
+const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+let konamiIndex = 0;
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === konamiCode[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiCode.length) {
+            activateKonami();
+            konamiIndex = 0;
+        }
+    } else {
+        konamiIndex = 0;
+    }
+});
+
+function activateKonami() {
+    alert("CHEAT CODE ACTIVATED: GOD MODE (Just kidding, but here's a cool effect)");
+    document.body.style.filter = "invert(100%)";
+    setTimeout(() => {
+        document.body.style.filter = "none";
+    }, 5000);
+}

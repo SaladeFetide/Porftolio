@@ -105,7 +105,7 @@
         <div class="ctx-line"></div>
         <div class="ctx-item">Nouveau <span style="font-size:10px">▶</span></div>
         <div class="ctx-line"></div>
-        <div class="ctx-item" onclick="openWindow('win-about')">Propriétés</div>
+        <div class="ctx-item" onclick="openWindow('win-properties')">Propriétés</div>
     </div>
 
     <!-- MENU DÉMARRER -->
@@ -135,7 +135,7 @@
                     A propos
                 </div>
                 <div class="start-line"></div>
-                <div class="start-item" onclick="alert('Arrêt du système impossible : vous êtes trop productif !')">
+                <div class="start-item" onclick="triggerShutdown()">
                     <img src="https://win98icons.alexmeub.com/icons/png/shut_down_cool-4.png" width="24">
                     Arrêter...
                 </div>
@@ -395,6 +395,54 @@
             </div>
             <div style="background: var(--win-gray); padding: 2px 5px; font-size: 0.8rem; border-top: 1px solid white;">
                 Pour aide, cliquez sur Aide dans le menu Aide.
+            </div>
+        </div>
+    </div>
+
+    <!-- SHUTDOWN SCREEN -->
+    <div id="shutdown-screen" onclick="location.reload()">
+        <div class="shutdown-text">
+            VOUS POUVEZ MAINTENANT ÉTEINDRE<br>VOTRE ORDINATEUR EN TOUTE SÉCURITÉ.
+        </div>
+        <div class="restart-hint">(Cliquez pour redémarrer)</div>
+    </div>
+
+    <!-- CLIPPY -->
+    <div id="clippy">
+        <div class="clippy-bubble" id="clippy-text">
+            Salut ! Je vois que vous cherchez un développeur compétent. Besoin d'aide ?
+        </div>
+        <img src="https://web.archive.org/web/20160304035343im_/http://clipart.nicubunu.ro/svg/computer/clippy.svg" width="100" onclick="clippyTalk()">
+    </div>
+
+    <!-- SELECTION BOX -->
+    <div id="selection-box"></div>
+
+    <!-- PROPRIÉTÉS AFFICHAGE -->
+    <div class="window" id="win-properties" style="top: 100px; left: 150px; width: 350px; height: 300px;">
+        <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+            <span>Propriétés de Affichage</span>
+            <div class="win-controls">
+                <div class="close-btn" onclick="closeWindow('win-properties')">X</div>
+            </div>
+        </div>
+        <div class="content-area" style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="border: 2px inset #fff; height: 100px; background: var(--desktop-teal); position: relative; margin-bottom: 10px;" id="preview-screen">
+                <div style="position: absolute; top: 20px; left: 20px; width: 30px; height: 30px; background: white; border: 1px solid black;"></div>
+            </div>
+            <fieldset>
+                <legend>Papier peint</legend>
+                <select id="wallpaper-select" onchange="updatePreview()" size="4" style="width: 100%;">
+                    <option value="teal" selected>Windows Standard (Teal)</option>
+                    <option value="clouds">Nuages (Windows 98)</option>
+                    <option value="matrix">Matrix Code</option>
+                    <option value="red">Rouge Brique</option>
+                    <option value="black">Noir (Hacker)</option>
+                </select>
+            </fieldset>
+            <div style="display: flex; justify-content: flex-end; gap: 5px; margin-top: auto;">
+                <button class="btn-retro" onclick="applyWallpaper()">Appliquer</button>
+                <button class="btn-retro" onclick="closeWindow('win-properties')">Annuler</button>
             </div>
         </div>
     </div>
