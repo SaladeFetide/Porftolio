@@ -1,5 +1,6 @@
 // --- BOOT SEQUENCE ---
 window.onload = function() {
+    loadIconPositions(); // Load saved positions
     setTimeout(() => {
         document.getElementById('boot-msg').innerHTML = "Starting LoukaOS 98... OK";
     }, 1500);
@@ -7,6 +8,7 @@ window.onload = function() {
         document.getElementById('boot-screen').style.display = 'none';
         playStartupSound();
     }, 3000);
+    initPaint(); // Init Paint
 }
 
 function playStartupSound() {
@@ -77,7 +79,8 @@ const windowsInfo = {
     'win-ie': { title: 'Internet Explorer', icon: 'https://win98icons.alexmeub.com/icons/png/msie1-2.png' },
     'win-terminal': { title: 'MS-DOS Prompt', icon: 'https://win98icons.alexmeub.com/icons/png/console_prompt-0.png' },
     'win-winamp': { title: 'Winamp', icon: 'https://win98icons.alexmeub.com/icons/png/cd_audio_cd_a-3.png' },
-    'win-minesweeper': { title: 'Démineur', icon: 'https://win98icons.alexmeub.com/icons/png/game_mine_1-0.png' }
+    'win-minesweeper': { title: 'Démineur', icon: 'https://win98icons.alexmeub.com/icons/png/game_mine_1-0.png' },
+    'win-paint': { title: 'Paint', icon: 'https://win98icons.alexmeub.com/icons/png/paint_file-2.png' }
 };
 
 function openWindow(id) {
@@ -241,11 +244,40 @@ document.addEventListener('mousemove', (e) => {
 document.addEventListener('mouseup', () => {
     if (isDragging && dragType === 'icon' && currentElement) {
         currentElement.classList.remove('dragging');
+        saveIconPositions(); // Save on drop
     }
     isDragging = false;
     currentElement = null;
     dragType = null;
 });
+
+// --- ICON PERSISTENCE ---
+function saveIconPositions() {
+    const icons = document.querySelectorAll('.icon');
+    const positions = [];
+    icons.forEach((icon, index) => {
+        positions.push({
+            index: index,
+            left: icon.style.left,
+            top: icon.style.top
+        });
+    });
+    localStorage.setItem('iconPositions', JSON.stringify(positions));
+}
+
+function loadIconPositions() {
+    const saved = localStorage.getItem('iconPositions');
+    if (saved) {
+        const positions = JSON.parse(saved);
+        const icons = document.querySelectorAll('.icon');
+        positions.forEach(pos => {
+            if (icons[pos.index]) {
+                icons[pos.index].style.left = pos.left;
+                icons[pos.index].style.top = pos.top;
+            }
+        });
+    }
+}
 
 // --- CONTEXT MENU (CLIC DROIT) ---
 const ctxMenu = document.getElementById('context-menu');
@@ -310,6 +342,9 @@ if (cmdInput) {
                     response = 'OPENING CONTACT...';
                     openWindow('win-contact');
                     break;
+                case 'matrix':
+                    startMatrix();
+                    return;
                 case 'clear':
                     terminalOutput.innerHTML = '';
                     return; // Pas de nouvelle ligne
@@ -503,4 +538,147 @@ if (window.innerWidth <= 768) {
             }
         });
     });
+}
+
+// --- MATRIX EFFECT ---
+let matrixInterval;
+function startMatrix() {
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+    const terminalContent = document.getElementById('terminal-content');
+    
+    canvas.style.display = 'block';
+    canvas.width = terminalContent.clientWidth;
+    canvas.height = terminalContent.clientHeight;
+
+    const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const nums = '0123456789';
+    const alphabet = katakana + latin + nums;
+
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+
+    const rainDrops = [];
+    for( let x = 0; x < columns; x++ ) {
+        rainDrops[x] = 1;
+    }
+
+    const draw = () => {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = '#0F0';
+        ctx.font = fontSize + 'px monospace';
+
+        for(let i = 0; i < rainDrops.length; i++) {
+            const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+            ctx.fillText(text, i*fontSize, rainDrops[i]*fontSize);
+
+            if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
+                rainDrops[i] = 0;
+            }
+            rainDrops[i]++;
+        }
+    };
+
+    if (matrixInterval) clearInterval(matrixInterval);
+    matrixInterval = setInterval(draw, 30);
+    
+    // Stop on click or keypress
+    const stopMatrix = () => {
+        clearInterval(matrixInterval);
+        canvas.style.display = 'none';
+        document.removeEventListener('click', stopMatrix);
+        document.removeEventListener('keydown', stopMatrix);
+    };
+    // Delay adding listener to avoid immediate stop
+    setTimeout(() => {
+        document.addEventListener('click', stopMatrix);
+        document.addEventListener('keydown', stopMatrix);
+    }, 500);
+}
+
+// --- PAINT APP ---
+let paintCtx, paintCanvas;
+let isPainting = false;
+let currentTool = 'pencil';
+let currentColor = '#000000';
+
+function initPaint() {
+    paintCanvas = document.getElementById('paint-canvas');
+    paintCtx = paintCanvas.getContext('2d');
+    
+    // White background
+    paintCtx.fillStyle = 'white';
+    paintCtx.fillRect(0, 0, paintCanvas.width, paintCanvas.height);
+
+    // Colors
+    const colors = ['#000000', '#808080', '#800000', '#808000', '#008000', '#008080', '#000080', '#800080', '#808040', '#004040', '#0080FF', '#004080', '#4000FF', '#804000',
+                    '#FFFFFF', '#C0C0C0', '#FF0000', '#FFFF00', '#00FF00', '#00FFFF', '#0000FF', '#FF00FF', '#FFFF80', '#00FF80', '#80FFFF', '#8080FF', '#FF80FF', '#FF8040'];
+    
+    const palette = document.getElementById('color-palette');
+    colors.forEach((c, i) => {
+        const swatch = document.createElement('div');
+        swatch.className = 'color-swatch';
+        swatch.style.backgroundColor = c;
+        if (i === 0) swatch.classList.add('active');
+        swatch.onclick = () => selectColor(c, swatch);
+        palette.appendChild(swatch);
+    });
+
+    // Events
+    paintCanvas.addEventListener('mousedown', startPainting);
+    paintCanvas.addEventListener('mousemove', drawPaint);
+    paintCanvas.addEventListener('mouseup', stopPainting);
+    paintCanvas.addEventListener('mouseleave', stopPainting);
+}
+
+function selectTool(tool) {
+    currentTool = tool;
+    document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tool-' + tool).classList.add('active');
+}
+
+function selectColor(color, el) {
+    currentColor = color;
+    document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+    el.classList.add('active');
+}
+
+function clearCanvas() {
+    paintCtx.fillStyle = 'white';
+    paintCtx.fillRect(0, 0, paintCanvas.width, paintCanvas.height);
+}
+
+function startPainting(e) {
+    isPainting = true;
+    drawPaint(e);
+}
+
+function stopPainting() {
+    isPainting = false;
+    paintCtx.beginPath();
+}
+
+function drawPaint(e) {
+    if (!isPainting) return;
+
+    const rect = paintCanvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    paintCtx.lineWidth = 2;
+    paintCtx.lineCap = 'round';
+
+    if (currentTool === 'pencil') {
+        paintCtx.strokeStyle = currentColor;
+        paintCtx.lineTo(x, y);
+        paintCtx.stroke();
+        paintCtx.beginPath();
+        paintCtx.moveTo(x, y);
+    } else if (currentTool === 'eraser') {
+        paintCtx.fillStyle = 'white';
+        paintCtx.fillRect(x-5, y-5, 10, 10);
+    }
 }

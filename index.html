@@ -86,6 +86,11 @@
             <div class="icon-text">Démineur</div>
         </div>
 
+        <div class="icon" style="top: 420px; left: 120px;" ondblclick="openWindow('win-paint')" onmousedown="startIconDrag(event, this)">
+            <div class="icon-img" style="background-image: url('https://win98icons.alexmeub.com/icons/png/paint_file-2.png');"></div>
+            <div class="icon-text">Paint</div>
+        </div>
+
         <!-- Easter Egg: Danger -->
         <div class="icon" style="top: 20px; right: 20px; left: auto;" ondblclick="triggerBSOD()" onmousedown="startIconDrag(event, this)">
             <div class="icon-img" style="background-image: url('https://win98icons.alexmeub.com/icons/png/msg_warning-0.png');"></div>
@@ -164,7 +169,7 @@
         </div>
     </div>
 
-    <div class="window" id="win-projects" style="top: 150px; left: 300px;">
+    <div class="window" id="win-projects" style="top: 150px; left: 300px; width: 550px;">
         <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
             <span>C:\Mes Documents\Projets</span>
             <div class="win-controls">
@@ -173,41 +178,43 @@
                 <div class="close-btn" onclick="closeWindow('win-projects')">X</div>
             </div>
         </div>
-        <div class="content-area">
-            <h2>LISTE DES PROJETS</h2>
-            
-            <p><a href="https://github.com/SaladeFetide/Projet-Bomberman" target="_blank" style="color: blue; text-decoration: none; cursor: pointer;"><strong>📂 BOMBERMAN </strong></a><br>
-            [Java / JavaFX]<br>
-            Réplique complète du jeu avec gestion I.A.</p>
-            <hr>
+        <div class="content-area" style="background: white;">
+            <div class="project-grid">
+                
+                <div class="project-icon" onclick="window.open('https://github.com/SaladeFetide/Projet-Bomberman', '_blank')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/java-0.png">
+                    <div class="icon-text">Bomberman.jar</div>
+                </div>
 
-            <p><a href="https://poke-battle-vert.vercel.app/" target="_blank" style="color: blue; text-decoration: none; cursor: pointer;"><strong>📂 PokéBattle (Projet Perso)</strong></a><br>
-            [Java / HTML]<br>
-            Web App de combat de Pokémon.</p>
-            <hr>
+                <div class="project-icon" onclick="window.open('https://poke-battle-vert.vercel.app/', '_blank')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/html-0.png">
+                    <div class="icon-text">PokeBattle.html</div>
+                </div>
 
-            <p><a href="https://github.com/SaladeFetide/TheCocktail" target="_blank" style="color: blue; text-decoration: none; cursor: pointer;"><strong>📂 Quizz Cocktails</strong></a><br>
-            [Python / Flask / SQLite]<br>
-            Jeu de quiz interactif : devinez les ingrédients !<br>
-            (API, Timer, Leaderboard, Mode Sombre)</p>
-            <hr>
+                <div class="project-icon" onclick="window.open('https://github.com/SaladeFetide/TheCocktail', '_blank')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/script_file_blue-0.png">
+                    <div class="icon-text">Cocktails.py</div>
+                </div>
 
-            <p><a href="https://github.com/SaladeFetide/LenSymphony" target="_blank" style="color: blue; text-decoration: none; cursor: pointer;"><strong>📂 LenSymphony</strong></a><br>
-            [Java / Design Patterns]<br>
-            Bibliothèque de synthèse musicale.<br>
-            (Factory, Decorator, Composite, MusicXML)</p>
-            <hr>
+                <div class="project-icon" onclick="window.open('https://github.com/SaladeFetide/LenSymphony', '_blank')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/cd_audio_cd_a-3.png">
+                    <div class="icon-text">LenSymphony.lib</div>
+                </div>
 
-            <p><a href="https://github.com/SaladeFetide/Onitama" target="_blank" style="color: blue; text-decoration: none; cursor: pointer;"><strong>📂 Onitama</strong></a><br>
-            [Java / Gradle / JUnit]<br>
-            Implémentation du jeu de plateau avec architecture claire.<br>
-            (Moteur de jeu, Tests unitaires)</p>
-            <hr>
-            
-            <p><a href="#" target="_blank" style="color: blue; text-decoration: none; cursor: pointer;"><strong>📂 FIVEM SCRIPTS (Projet Perso)</strong></a><br>
-            [Lua]<br>
-            Scripts pour serveurs GTA RP (Inventaire, Métiers).</p>
-            <hr>
+                <div class="project-icon" onclick="window.open('https://github.com/SaladeFetide/Onitama', '_blank')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/game_freecell-1.png">
+                    <div class="icon-text">Onitama.exe</div>
+                </div>
+
+                <div class="project-icon" onclick="window.open('#', '_blank')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/script_file_yellow-0.png">
+                    <div class="icon-text">FiveM_Scripts.lua</div>
+                </div>
+
+            </div>
+            <div style="margin-top: 20px; border-top: 1px solid #ccc; padding-top: 10px; font-size: 0.9rem;">
+                <p>6 objet(s)</p>
+            </div>
         </div>
     </div>
 
@@ -306,13 +313,14 @@
                 <div class="close-btn" onclick="closeWindow('win-terminal')">X</div>
             </div>
         </div>
-        <div class="content-area" style="background: black; color: #c0c0c0; font-family: 'Courier New', monospace; padding: 5px; overflow-y: auto;" id="terminal-content" onclick="document.getElementById('cmd-input').focus()">
-            <div id="terminal-output">
+        <div class="content-area" style="background: black; color: #c0c0c0; font-family: 'Courier New', monospace; padding: 5px; overflow-y: auto; position: relative;" id="terminal-content" onclick="document.getElementById('cmd-input').focus()">
+            <canvas id="matrix-canvas" style="display:none;"></canvas>
+            <div id="terminal-output" style="position: relative; z-index: 10;">
                 Microsoft(R) Windows 98<br>
                 (C)Copyright Microsoft Corp 1981-1998.<br><br>
                 C:\WINDOWS> Type 'help' for commands.<br><br>
             </div>
-            <div style="display: flex;">
+            <div style="display: flex; position: relative; z-index: 10;">
                 <span>C:\WINDOWS></span>
                 <input type="text" id="cmd-input" style="background: transparent; border: none; color: white; font-family: inherit; flex-grow: 1; outline: none; margin-left: 5px;" autocomplete="off">
             </div>
@@ -359,6 +367,35 @@
                 <div id="mine-timer" class="digital-display">000</div>
             </div>
             <div id="mine-grid" class="mine-grid"></div>
+        </div>
+    </div>
+
+    <!-- PAINT -->
+    <div class="window" id="win-paint" style="top: 50px; left: 50px; width: 600px; height: 450px;">
+        <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+            <span>Paint - Sans titre</span>
+            <div class="win-controls">
+                <div class="min-btn" onclick="minimizeWindow('win-paint')">_</div>
+                <div class="max-btn" onclick="maximizeWindow('win-paint')"><div class="max-icon"></div></div>
+                <div class="close-btn" onclick="closeWindow('win-paint')">X</div>
+            </div>
+        </div>
+        <div class="content-area" style="padding: 0; display: flex; flex-direction: column; overflow: hidden;">
+            <div class="paint-toolbar">
+                <div class="tool-btn active" id="tool-pencil" onclick="selectTool('pencil')">✏️</div>
+                <div class="tool-btn" id="tool-eraser" onclick="selectTool('eraser')">🧼</div>
+                <div class="tool-btn" onclick="clearCanvas()">🗑️</div>
+                <div style="width: 1px; background: #808080; margin: 0 5px;"></div>
+                <div class="color-palette" id="color-palette">
+                    <!-- Colors generated by JS -->
+                </div>
+            </div>
+            <div class="paint-canvas-container">
+                <canvas id="paint-canvas" class="paint-canvas" width="500" height="300"></canvas>
+            </div>
+            <div style="background: var(--win-gray); padding: 2px 5px; font-size: 0.8rem; border-top: 1px solid white;">
+                Pour aide, cliquez sur Aide dans le menu Aide.
+            </div>
         </div>
     </div>
 
