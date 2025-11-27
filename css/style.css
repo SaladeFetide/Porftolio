@@ -443,3 +443,75 @@ ul { list-style-type: square; padding-left: 20px; }
 .ico-folder { background-image: url('https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png'); }
 .ico-game { background-image: url('https://win98icons.alexmeub.com/icons/png/game_solitaire-1.png'); }
 .ico-mail { background-image: url('https://win98icons.alexmeub.com/icons/png/outlook_express-4.png'); }
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 768px) {
+    /* Desktop Icons: Flow layout */
+    .desktop {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: flex-start;
+        gap: 15px;
+        overflow-y: auto;
+        height: calc(100vh - 45px);
+        padding-top: 20px;
+    }
+
+    .icon {
+        position: static !important; /* Disable absolute positioning */
+        margin: 0;
+    }
+
+    /* Windows */
+    .window {
+        width: 94% !important;
+        left: 3% !important;
+        top: 5% !important;
+        height: auto !important;
+        max-height: 85vh !important;
+    }
+    
+    /* Fix for specific windows */
+    #win-ie, #win-terminal, #win-contact, #win-winamp, #win-minesweeper, #win-projects, #win-skills, #win-notepad, #win-about {
+        width: 94% !important;
+        height: auto !important;
+        max-height: 85vh !important;
+    }
+
+    /* Taskbar */
+    .taskbar-app {
+        width: auto;
+        flex: 1;
+        max-width: 50px; /* Icon only mode */
+        justify-content: center;
+        padding: 0;
+    }
+    .taskbar-app span {
+        display: none;
+    }
+    .taskbar-app img {
+        margin: 0;
+    }
+    
+    .clock {
+        font-size: 0.8rem;
+        padding: 0 5px;
+        display: none; /* Hide clock on very small screens if needed, or keep it small */
+    }
+    @media (min-width: 350px) {
+        .clock { display: block; }
+    }
+
+    /* Start Menu */
+    .start-menu {
+        width: 90%;
+        left: 5%;
+        bottom: 45px;
+    }
+
+    /* BSOD & Boot */
+    #bsod, #boot-screen {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}

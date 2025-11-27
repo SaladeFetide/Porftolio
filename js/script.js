@@ -489,3 +489,18 @@ function checkWin() {
 
 // Init Minesweeper on load (but window is hidden)
 initMinesweeper();
+
+// --- MOBILE OPTIMIZATIONS ---
+// Convert double-click to single-click for icons on mobile
+if (window.innerWidth <= 768) {
+    document.querySelectorAll('.icon').forEach(icon => {
+        icon.addEventListener('click', (e) => {
+            // Only trigger if it has an ondblclick attribute (standard icons)
+            // Links with onclick will work natively
+            const action = icon.getAttribute('ondblclick');
+            if (action) {
+                new Function(action)();
+            }
+        });
+    });
+}
