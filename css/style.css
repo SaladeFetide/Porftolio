@@ -18,9 +18,9 @@ body {
        `background-repeat: no-repeat; background-position: center top;` */
     background-color: var(--desktop-teal);
     background-image: url('../assets/images/Fond.jpg');
-    background-repeat: repeat; /* change to `no-repeat` to center a single image */
-    background-position: center var(--wallpaper-offset);
-    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
     font-family: 'VT323', monospace;
     font-size: 1.2rem;
     height: 100vh;
@@ -758,4 +758,61 @@ ul { list-style-type: square; padding-left: 20px; }
     display: none;
     pointer-events: none;
     z-index: 5;
+}
+
+/* --- RESPONSIVE LARGE SCREENS --- */
+@media (min-width: 1024px) {
+    /* Increase base font size */
+    body {
+        font-size: 1.4rem;
+    }
+
+    /* Larger icons and better spacing */
+    .desktop {
+        gap: 40px; /* Plus d'espace entre les icônes verticalement */
+        padding: 40px; /* Marge plus grande depuis le bord */
+    }
+
+    .icon {
+        width: 120px; /* Plus large pour que le texte ne coupe pas */
+    }
+    
+    .icon-img {
+        width: 64px; height: 64px;
+        margin-bottom: 10px; /* Espace entre l'image et le texte */
+    }
+
+    /* Larger windows */
+    .window:not([data-maximized="true"]) {
+        width: 50vw !important;
+        min-width: 600px;
+        max-width: 1200px; /* Limite pour ne pas être trop large */
+    }
+
+    /* Agrandir la zone de contenu en hauteur */
+    .window .content-area {
+        height: 50vh;
+        max-height: 700px;
+    }
+
+    /* Exceptions for small tools */
+    #win-contact:not([data-maximized="true"]), 
+    #win-winamp:not([data-maximized="true"]),
+    #win-minesweeper:not([data-maximized="true"]) {
+        width: auto !important;
+        min-width: unset;
+    }
+
+    /* Reset height for small tools */
+    #win-contact .content-area,
+    #win-winamp .content-area,
+    #win-minesweeper .content-area {
+        height: auto;
+    }
+    
+    /* Paint needs more space */
+    #win-paint:not([data-maximized="true"]) {
+        width: 60vw !important;
+        height: 60vh !important;
+    }
 }
