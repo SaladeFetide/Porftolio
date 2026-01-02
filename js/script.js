@@ -374,21 +374,9 @@ function updateProjectDetailContent(id) {
 
 
 // --- BOOT SEQUENCE ---
-window.onload = function () {
-    loadIconPositions(); // Load saved positions
-    setTimeout(() => {
-        document.getElementById('boot-msg').innerHTML = (translations[currentLang]?.boot_sequence || "Starting LoukaOS 98...") + " <span class='cursor-blink'>_</span>";
-    }, 1500);
-    setTimeout(() => {
-        document.getElementById('boot-screen').style.display = 'none';
-        playStartupSound();
-    }, 3000);
-    initPaint(); // Init Paint
-    initNotepad(); // Init Notepad
+// Boot logic moved to simulateModem in new onload override at bottom
+// setupKeyboardAccessibility(); // also moved
 
-    // Add accessibility support for keyboard
-    setupKeyboardAccessibility();
-}
 
 function setupKeyboardAccessibility() {
     // Make elements with role="button" clickable via Enter key
@@ -1412,36 +1400,171 @@ function updatePreview() {
     }
 }
 
+// --- THEME LOGIC ---
+function applyThemeUser(theme) {
+    document.body.className = ''; // Reset
+    if (theme && theme !== 'default') {
+        document.body.classList.add('theme-' + theme);
+    }
+}
+
+function updatePreview() {
+    const select = document.getElementById('wallpaper-select');
+    const value = select.value;
+    const preview = document.querySelector('#preview-screen');
+
+    if (!preview) return;
+
+    preview.style.backgroundImage = 'none';
+    preview.style.backgroundColor = 'var(--desktop-teal)';
+
+    switch (value) {
+        case 'teal':
+            preview.style.backgroundColor = '#008080';
+            break;
+        case 'red':
+            preview.style.backgroundColor = '#800000';
+            break;
+        case 'black':
+            preview.style.backgroundColor = '#000000';
+            break;
+        case 'clouds':
+            preview.style.backgroundImage = 'url("https://win98icons.alexmeub.com/images/clouds.jpg")';
+            preview.style.backgroundSize = 'cover';
+            break;
+        case 'bsod':
+            preview.style.backgroundColor = '#0000AA';
+            break;
+        case 'original':
+            preview.style.backgroundImage = 'url("assets/images/Fond.jpg")'; // Local path
+            preview.style.backgroundSize = 'cover';
+            break;
+    }
+}
+
 function applyWallpaper() {
     const select = document.getElementById('wallpaper-select');
     const value = select.value;
 
+    document.body.style.backgroundImage = 'none'; // reset
+
     switch (value) {
         case 'teal':
-            document.body.style.backgroundImage = 'none';
             document.body.style.backgroundColor = '#008080';
             break;
         case 'red':
-            document.body.style.backgroundImage = 'none';
             document.body.style.backgroundColor = '#800000';
             break;
         case 'black':
-            document.body.style.backgroundImage = 'none';
             document.body.style.backgroundColor = '#000000';
             break;
         case 'clouds':
-            // Using a public URL for demo, ideally local asset
-            document.body.style.backgroundColor = '#008080';
             document.body.style.backgroundImage = 'url("https://win98icons.alexmeub.com/images/clouds.jpg")';
             break;
         case 'matrix':
-            // Start matrix effect as wallpaper?
-            // Reusing canvas but z-index -1
-            document.body.style.backgroundImage = 'none';
+            // Handled by canvas, but maybe set black bg
             document.body.style.backgroundColor = 'black';
-            // Simple hack: start matrix in terminal but full screen
-            alert("Matrix wallpaper not fully supported yet! Try 'matrix' in terminal.");
+            startMatrix(); // Ensure matrix is running
+            break;
+        case 'original':
+            document.body.style.backgroundImage = 'url("assets/images/Fond.jpg")';
             break;
     }
     closeWindow('win-properties');
+}
+
+
+// --- MODEM SIMULATION ---
+function simulateModem() {
+    // Only run if not disabled by user preference (optional, implementing simple for now)
+    // Check if session storage has flag (so it only runs once per tab session)
+    if (sessionStorage.getItem('modemRan')) {
+        // Just boot
+        document.getElementById('boot-msg').innerHTML = (translations[currentLang]?.boot_sequence || "Starting LoukaOS 98...") + " <span class='cursor-blink'>_</span>";
+        setTimeout(() => {
+            document.getElementById('boot-screen').style.display = 'none';
+            playStartupSound();
+        }, 1500);
+        return;
+    }
+
+    sessionStorage.setItem('modemRan', 'true');
+
+    // Hide boot screen for a moment while modem overlay handles things? 
+    // Actually, "Boot screen" typically comes AFTER BIOS but BEFORE Desktop.
+    // Let's show Modem Overlay ON TOP of Boot Screen.
+
+    const overlay = document.getElementById('modem-overlay');
+    const log = document.getElementById('modem-log');
+    overlay.style.display = 'flex'; // It's a window flex
+
+    // Play sound
+    // Using a short creative commons dialup sound or beep sequence
+    // const audio = new Audio('assets/sounds/dialup.mp3'); // We don't have file
+    // Let's simulate with text updates, sound is hard without file.
+    // I will try to use a decent online sound if possible, or just skip sound if file missing.
+    const modemAudio = new Audio('https://www.myinstants.com/media/sounds/dial-up-internet.mp3');
+    modemAudio.volume = 0.5;
+    modemAudio.play().catch(() => console.log("Auto-play prevented"));
+
+    const steps = [
+        { text: "AT Z", delay: 500 },
+        { text: "OK", delay: 800 },
+        { text: "ATDT 44656489001", delay: 1500 },
+        { text: "CONNECT 56000...", delay: 5000 },
+        { text: "Verifying Username and Password...", delay: 6000 },
+        { text: "Logged on.", delay: 7000 }
+    ];
+
+    let stepIndex = 0;
+
+    function nextStep() {
+        if (stepIndex >= steps.length) {
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                modemAudio.pause();
+                // Resume boot sequence
+                document.getElementById('boot-msg').innerHTML = (translations[currentLang]?.boot_sequence || "Starting LoukaOS 98...") + " <span class='cursor-blink'>_</span>";
+                setTimeout(() => {
+                    document.getElementById('boot-screen').style.display = 'none';
+                    playStartupSound();
+
+                    // Trigger Clippy a bit later
+                    setTimeout(() => {
+                        showClippy(translations[currentLang]?.clippy_intro);
+                    }, 4000);
+                }, 1500);
+            }, 1000);
+            return;
+        }
+
+        const step = steps[stepIndex];
+        setTimeout(() => {
+            log.innerHTML += step.text + "<br>";
+            log.scrollTop = log.scrollHeight;
+            stepIndex++;
+            nextStep();
+        }, step.delay - (stepIndex > 0 ? steps[stepIndex - 1].delay : 0));
+    }
+
+    nextStep();
+}
+
+function skipModem() {
+    const overlay = document.getElementById('modem-overlay');
+    overlay.style.display = 'none';
+    // Resume boot immediately
+    document.getElementById('boot-screen').style.display = 'none';
+    playStartupSound();
+}
+
+// Override existing window.onload to include modem
+window.onload = function () {
+    loadIconPositions();
+    initPaint();
+    initNotepad();
+    setupKeyboardAccessibility();
+
+    // Start Modem text instead of direct boot
+    simulateModem();
 }

@@ -77,36 +77,31 @@
         <!-- NOUVELLES ICÔNES -->
         <div class="icon" style="top: 20px; left: 120px;" ondblclick="openWindow('win-ie')"
             onmousedown="startIconDrag(event, this)" role="button" tabindex="0" aria-label="Internet Explorer">
-            <div class="icon-img"
-                style="background-image: url('https://win98icons.alexmeub.com/icons/png/msie1-2.png');"></div>
+            <div class="icon-img ico-ie"></div>
             <div class="icon-text" data-lang-key="desktop_ie">Internet Explorer</div>
         </div>
 
         <div class="icon" style="top: 120px; left: 120px;" ondblclick="openWindow('win-terminal')"
             onmousedown="startIconDrag(event, this)" role="button" tabindex="0" aria-label="MS-DOS Prompt">
-            <div class="icon-img"
-                style="background-image: url('https://win98icons.alexmeub.com/icons/png/console_prompt-0.png');"></div>
+            <div class="icon-img ico-terminal"></div>
             <div class="icon-text" data-lang-key="desktop_terminal">MS-DOS Prompt</div>
         </div>
 
         <div class="icon" style="top: 220px; left: 120px;" ondblclick="openWindow('win-winamp')"
             onmousedown="startIconDrag(event, this)" role="button" tabindex="0" aria-label="Winamp">
-            <div class="icon-img"
-                style="background-image: url('https://win98icons.alexmeub.com/icons/png/cd_audio_cd_a-3.png');"></div>
+            <div class="icon-img ico-winamp"></div>
             <div class="icon-text" data-lang-key="desktop_winamp">Winamp</div>
         </div>
 
         <div class="icon" style="top: 320px; left: 120px;" ondblclick="openWindow('win-minesweeper')"
             onmousedown="startIconDrag(event, this)" role="button" tabindex="0" aria-label="Démineur">
-            <div class="icon-img"
-                style="background-image: url('https://win98icons.alexmeub.com/icons/png/game_mine_1-0.png');"></div>
+            <div class="icon-img ico-minesweeper"></div>
             <div class="icon-text" data-lang-key="desktop_minesweeper">Démineur</div>
         </div>
 
         <div class="icon" style="top: 420px; left: 120px;" ondblclick="openWindow('win-paint')"
             onmousedown="startIconDrag(event, this)" role="button" tabindex="0" aria-label="Paint">
-            <div class="icon-img"
-                style="background-image: url('https://win98icons.alexmeub.com/icons/png/paint_file-2.png');"></div>
+            <div class="icon-img ico-paint"></div>
             <div class="icon-text" data-lang-key="desktop_paint">Paint</div>
         </div>
 
@@ -598,18 +593,29 @@
                 <select id="wallpaper-select" onchange="updatePreview()" size="4" style="width: 100%;"
                     aria-label="Select Wallpaper">
                     <option value="teal" selected>Windows Standard (Teal)</option>
+                    <option value="original">Original (Fond.jpg)</option>
                     <option value="clouds">Nuages (Windows 98)</option>
                     <option value="matrix">Matrix Code</option>
                     <option value="red">Rouge Brique</option>
                     <option value="black">Noir (Hacker)</option>
                 </select>
-            </fieldset>
-            <div style="display: flex; justify-content: flex-end; gap: 5px; margin-top: auto;">
-                <button class="btn-retro" onclick="applyWallpaper()" data-lang-key="btn_apply">Appliquer</button>
-                <button class="btn-retro" onclick="closeWindow('win-properties')"
-                    data-lang-key="btn_cancel">Annuler</button>
-            </div>
         </div>
+
+        <div style="margin-bottom: 15px; border-top: 1px solid #808080; padding-top: 10px;">
+            <label style="font-weight: bold;">Thème (Plus! Pack):</label><br>
+            <select id="theme-select" style="width: 100%; margin-top: 5px;" onchange="applyThemeUser(this.value)">
+                <option value="default" selected>Windows 98 (Défaut)</option>
+                <option value="hacker">Hacker (Matrix Console)</option>
+                <option value="vaporwave">Vaporwave (Aesthetic)</option>
+                <option value="win2000">Windows 2000 Pro</option>
+            </select>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 5px; margin-top: auto;">
+            <button class="btn-retro" onclick="applyWallpaper()" data-lang-key="btn_apply">Appliquer</button>
+            <button class="btn-retro" onclick="closeWindow('win-properties')"
+                data-lang-key="btn_cancel">Annuler</button>
+        </div>
+    </div>
     </div>
 
     <!-- RECYCLE BIN WINDOW -->
@@ -698,6 +704,31 @@
             </div>
             <div style="display: flex; justify-content: center; margin-top: 15px;">
                 <button class="btn-retro" onclick="closeWindow('win-download')">Annuler</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODEM CONNECTION OVERLAY -->
+    <div id="modem-overlay" class="window"
+        style="display:none; width: 350px; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10000; flex-direction: column;">
+        <div class="title-bar">
+            <span>Connexion - Louka Online</span>
+        </div>
+        <div class="content-area"
+            style="height: auto; min-height: 150px; background: #c0c0c0; border: none; display: flex; flex-direction: column;">
+            <div style="display: flex; gap: 15px; align-items: center; margin-bottom: 15px;">
+                <img src="https://win98icons.alexmeub.com/icons/png/modem-4.png" width="48" alt="Modem">
+                <div style="font-family: 'Tahoma', sans-serif; font-size: 0.9rem;">
+                    <div style="font-weight: bold; margin-bottom: 5px;">Composition du numéro...</div>
+                    <div>44 656 489 001</div>
+                </div>
+            </div>
+            <div style="background: white; border: 2px inset white; padding: 5px; height: 80px; overflow-y: auto; font-family: monospace; font-size: 0.8rem; margin-bottom: 10px;"
+                id="modem-log">
+
+            </div>
+            <div style="text-align: right; margin-top: auto;">
+                <button class="btn-retro" style="min-width: 80px;" onclick="skipModem()">Annuler</button>
             </div>
         </div>
     </div>
