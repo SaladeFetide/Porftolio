@@ -678,11 +678,9 @@
             </div>
         </div>
         <div class="content-area"
-            style="padding: 0; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; background: black;">
-            <img src="assets/images/doom_logo.png"
-                style="width: 300px; margin-bottom: 10px; image-rendering: pixelated;" alt="DOOM 98">
-            <canvas id="doom-canvas" width="640" height="480"
-                style="background: black; border: 4px inset #666; width: 100%; height: 100%; object-fit: contain; box-shadow: 0 0 20px rgba(0,0,0,0.8);"></canvas>
+            style="padding: 0; overflow: hidden; display: flex; flex-direction: column; background: black; height: 100%;">
+            <canvas id="doom-canvas"
+                style="background: black; border: 4px inset #666; flex-grow: 1; width: 100%; image-rendering: pixelated; box-shadow: 0 0 20px rgba(0,0,0,0.8);"></canvas>
         </div>
     </div>
 
@@ -691,6 +689,10 @@
         <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
             <span data-lang-key="win_properties_title">Propriétés de Affichage</span>
             <div class="win-controls">
+                <div class="min-btn" onclick="minimizeWindow('win-properties')">_</div>
+                <div class="max-btn" onclick="maximizeWindow('win-properties')">
+                    <div class="max-icon"></div>
+                </div>
                 <div class="close-btn" onclick="closeWindow('win-properties')">X</div>
             </div>
         </div>
@@ -774,6 +776,9 @@
             <span data-lang-key="win_calendar_title">Calendrier</span>
             <div class="win-controls">
                 <div class="min-btn" onclick="minimizeWindow('win-calendar')">_</div>
+                <div class="max-btn" onclick="maximizeWindow('win-calendar')">
+                    <div class="max-icon"></div>
+                </div>
                 <div class="close-btn" onclick="closeWindow('win-calendar')">X</div>
             </div>
         </div>
@@ -878,7 +883,10 @@
         <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
             <span data-lang-key="win_taskmgr_title">Gestionnaire des tâches</span>
             <div class="win-controls">
-                <div class="minimize-btn" onclick="maximizeWindow('win-taskmgr')">□</div>
+                <div class="min-btn" onclick="minimizeWindow('win-taskmgr')">_</div>
+                <div class="max-btn" onclick="maximizeWindow('win-taskmgr')">
+                    <div class="max-icon"></div>
+                </div>
                 <div class="close-btn" onclick="closeWindow('win-taskmgr')">X</div>
             </div>
         </div>

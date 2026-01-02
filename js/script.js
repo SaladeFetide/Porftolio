@@ -538,6 +538,11 @@ function maximizeWindow(id) {
         win.dataset.maximized = 'true';
     }
     bringToFront(win);
+
+    // Resize Doom canvas if it's the Doom window
+    if (id === 'win-doom' && typeof resizeCanvas === 'function') {
+        setTimeout(() => resizeCanvas(), 100);
+    }
 }
 
 function toggleWindow(id) {

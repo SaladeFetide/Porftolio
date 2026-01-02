@@ -1010,10 +1010,27 @@ body.theme-hacker .taskbar-app.active {
     #win-projects,
     #win-skills,
     #win-notepad,
-    #win-about {
+    #win-about,
+    #win-doom {
         width: 94% !important;
         height: auto !important;
         max-height: 85vh !important;
+    }
+
+    /* Ajustements spécifiques pour Doom sur mobile */
+    #win-doom {
+        height: 70vh !important;
+        max-height: 70vh !important;
+    }
+
+    #win-doom .content-area {
+        height: calc(100% - 30px) !important;
+        padding: 0 !important;
+    }
+
+    #doom-canvas {
+        width: 100% !important;
+        height: 100% !important;
     }
 
     .taskbar-app {
@@ -1057,6 +1074,30 @@ body.theme-hacker .taskbar-app.active {
     }
 }
 
+/* Media queries pour tablettes */
+@media (min-width: 769px) and (max-width: 1023px) {
+    .window {
+        width: 80% !important;
+        left: 10% !important;
+        max-height: 80vh !important;
+    }
+
+    #win-doom {
+        width: 85% !important;
+        left: 7.5% !important;
+        height: 75vh !important;
+    }
+
+    .desktop {
+        gap: 25px;
+        padding: 25px;
+    }
+
+    .icon {
+        width: 100px;
+    }
+}
+
 @media (min-width: 1024px) {
     body {
         font-size: 1.4rem;
@@ -1086,6 +1127,12 @@ body.theme-hacker .taskbar-app.active {
     .window .content-area {
         height: 50vh;
         max-height: 700px;
+    }
+
+    /* Optimisation Doom pour grands écrans */
+    #win-doom {
+        width: 900px !important;
+        height: 700px !important;
     }
 }
 
@@ -1173,4 +1220,19 @@ body.theme-hacker .taskbar-app.active {
     padding: 1px 2px;
     word-break: break-all;
     line-height: 1.1;
+}
+
+/* --- DOOM CANVAS --- */
+#win-doom .content-area {
+    height: 100%;
+    flex-grow: 1;
+}
+
+#doom-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
 }
