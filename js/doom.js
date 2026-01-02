@@ -1,6 +1,6 @@
 
-// --- DOOM-LIKE RAYCASTING ENGINE (Texture Mapped) ---
-// High Quality "Deluxe" Update
+// --- DOOM-LIKE RAYCASTING ENGINE (Deluxe V3) ---
+// High Quality Update: CRT, HUD, Crosshair, Robust Loading
 
 const mapWidth = 24;
 const mapHeight = 24;
@@ -48,10 +48,18 @@ let keys = { w: false, s: false, a: false, d: false };
 // Textures
 const texWall = new Image();
 const sprayGun = new Image();
-let texturesLoaded = false;
+let loadedCount = 0;
+const totalAssets = 2; // Wall + Gun
+
+function checkLoaded() {
+    loadedCount++;
+    if (loadedCount === totalAssets) {
+        console.log("All Doom assets loaded!");
+    }
+}
 
 function initDoom() {
-    console.log("Initializing Doom Engine V2 (Textures)...");
+    console.log("Initializing Doom Engine V3 (Visuals)...");
     const canvas = document.getElementById('doom-canvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -59,41 +67,39 @@ function initDoom() {
     // Fit canvas
     canvas.width = screenWidth;
     canvas.height = screenHeight;
+    ctx.imageSmoothingEnabled = false; // Important for pixel art
 
-    // Load assets
+    // Reset loader
+    loadedCount = 0;
+
+    // Load Wall
     texWall.src = 'assets/images/doom_wall.png';
+    texWall.onload = checkLoaded;
 
+    // Load Gun with Transparency Processing
     const rawGun = new Image();
     rawGun.src = 'assets/images/doom_gun.png';
     rawGun.onload = () => {
-        // Create offscreen canvas to process transparency
         const tempCanvas = document.createElement('canvas');
         tempCanvas.width = rawGun.width;
         tempCanvas.height = rawGun.height;
         const tempCtx = tempCanvas.getContext('2d');
         tempCtx.drawImage(rawGun, 0, 0);
 
-        // Get pixel data
         const imgData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
         const data = imgData.data;
 
-        // Loop through pixels: if close to white, make transparent
         for (let i = 0; i < data.length; i += 4) {
-            const r = data[i];
-            const g = data[i + 1];
-            const b = data[i + 2];
-            // Threshold for white/off-white background
-            if (r > 240 && g > 240 && b > 240) {
-                data[i + 3] = 0; // Alpha = 0
+            // White/Grey background removal
+            if (data[i] > 230 && data[i + 1] > 230 && data[i + 2] > 230) {
+                data[i + 3] = 0;
             }
         }
 
         tempCtx.putImageData(imgData, 0, 0);
         sprayGun.src = tempCanvas.toDataURL();
-        texturesLoaded = true;
+        checkLoaded();
     };
-
-    texWall.onload = () => { /* Wall loaded */ };
 
     // Controls
     window.addEventListener('keydown', (e) => {
@@ -122,13 +128,15 @@ function loop() {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
-    // Sky and Floor
-    ctx.fillStyle = '#111'; // Dark ceiling
+    // 1. Draw Environment (Ceiling/Floor)
+    ctx.fillStyle = '#111';
     ctx.fillRect(0, 0, screenWidth, screenHeight / 2);
-    ctx.fillStyle = '#333'; // Dark floor
+    ctx.fillStyle = '#222';
     ctx.fillRect(0, screenHeight / 2, screenWidth, screenHeight / 2);
 
-    // Raycasting
+    // 2. Raycasting
+    const canRenderTextures = (loadedCount === totalAssets);
+
     for (let x = 0; x < screenWidth; x++) {
         let cameraX = 2 * x / screenWidth - 1;
         let rayDirX = dirX + planeX * cameraX;
@@ -182,64 +190,89 @@ function loop() {
         let drawEnd = lineHeight / 2 + screenHeight / 2;
         if (drawEnd >= screenHeight) drawEnd = screenHeight - 1;
 
-        // TEXTURE CALCULATION
-        let wallX;
-        if (side == 0) wallX = posY + perpWallDist * rayDirY;
-        else wallX = posX + perpWallDist * rayDirX;
-        wallX -= Math.floor(wallX);
+        if (canRenderTextures) {
+            let wallX;
+            if (side == 0) wallX = posY + perpWallDist * rayDirY;
+            else wallX = posX + perpWallDist * rayDirX;
+            wallX -= Math.floor(wallX);
 
-        let texX = Math.floor(wallX * texWidth);
-        if (side == 0 && rayDirX > 0) texX = texWidth - texX - 1;
-        if (side == 1 && rayDirY < 0) texX = texWidth - texX - 1;
+            let texX = Math.floor(wallX * texWidth);
+            if (side == 0 && rayDirX > 0) texX = texWidth - texX - 1;
+            if (side == 1 && rayDirY < 0) texX = texWidth - texX - 1;
 
-        // Draw Texture Strip
-        // Note: drawImage with decimal scaling can be slow/blurry, but fine for demo
-        // For 'crisp' pixel look, disabling smoothing helps
-        ctx.imageSmoothingEnabled = false;
-
-        if (texturesLoaded) {
             ctx.drawImage(texWall,
                 texX, 0, 1, texHeight, // Source strip
                 x, drawStart, 1, drawEnd - drawStart // Dest strip
             );
         } else {
             // Fallback
-            ctx.fillStyle = (side === 1) ? '#550000' : '#AA0000';
+            ctx.fillStyle = (side === 1) ? '#660000' : '#880000';
             ctx.fillRect(x, drawStart, 1, drawEnd - drawStart);
         }
 
-        // FOG / SHADING
-        // Distance based shading
+        // FOG
         if (perpWallDist > 1) {
-            let opacity = (perpWallDist - 1) / 10; // Fog starts at 1, maxes at 11
-            if (opacity > 1) opacity = 1;
+            let opacity = (perpWallDist - 1) / 8; // Tweaked fog
+            if (opacity > 0.8) opacity = 0.8;
             ctx.fillStyle = `rgba(0, 0, 0, ${opacity})`;
             ctx.fillRect(x, drawStart, 1, drawEnd - drawStart);
         }
     }
 
-    // WEAPON SPRITE & BOBBING
+    // 3. Weapon Sprite (Bobbing)
     const time = Date.now() / 150;
-    const moveFactor = (keys.w || keys.s) ? 1 : 0;
-    const bobX = Math.cos(time) * 10 * moveFactor;
-    const bobY = Math.abs(Math.sin(time)) * 10 * moveFactor; // Only bob down
+    const moveFactor = (keys.w || keys.s || keys.a || keys.d) ? 1 : 0;
+    const bobX = Math.cos(time) * 12 * moveFactor; // Reduced sway
+    const bobY = Math.abs(Math.sin(time)) * 10 * moveFactor;
 
-    if (texturesLoaded) {
-        // Center gun
+    if (canRenderTextures) {
         const gunW = 256;
         const gunH = 256;
         const gunX = (screenWidth - gunW) / 2 + bobX;
-        const gunY = (screenHeight - gunH + 20) + bobY;
+        const gunY = (screenHeight - gunH + 30) + bobY;
         ctx.drawImage(sprayGun, gunX, gunY, gunW, gunH);
     }
 
-    // HUD
-    ctx.fillStyle = "red";
-    ctx.font = "20px 'Courier New'";
-    ctx.fillText("AMMO: 99", 20, screenHeight - 20);
-    ctx.fillText("HEALTH: 100%", screenWidth - 150, screenHeight - 20);
+    // 4. CRT Scanlines Effect
+    ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
+    for (let i = 0; i < screenHeight; i += 2) {
+        ctx.fillRect(0, i, screenWidth, 1);
+    }
+    // Vignette
+    const grad = ctx.createRadialGradient(screenWidth / 2, screenHeight / 2, screenHeight / 3, screenWidth / 2, screenHeight / 2, screenHeight);
+    grad.addColorStop(0, "transparent");
+    grad.addColorStop(1, "rgba(0,0,0,0.5)");
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, screenWidth, screenHeight);
 
-    // Movement Logic
+    // 5. Crosshair
+    ctx.strokeStyle = "#00ff00";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(screenWidth / 2 - 5, screenHeight / 2);
+    ctx.lineTo(screenWidth / 2 + 5, screenHeight / 2);
+    ctx.moveTo(screenWidth / 2, screenHeight / 2 - 5);
+    ctx.lineTo(screenWidth / 2, screenHeight / 2 + 5);
+    ctx.stroke();
+
+    // 6. Retro HUD Bar
+    ctx.fillStyle = "#444";
+    ctx.fillRect(0, screenHeight - 40, screenWidth, 40);
+    ctx.strokeStyle = "#777";
+    ctx.strokeRect(0, screenHeight - 40, screenWidth, 40);
+
+    // HUD Text
+    ctx.fillStyle = "#ff3333";
+    ctx.font = "bold 20px 'Courier New', monospace";
+    ctx.shadowColor = "black";
+    ctx.shadowBlur = 0;
+    ctx.fillText("AMMO: ∞", 20, screenHeight - 15);
+    ctx.fillText("HEALTH: 100%", screenWidth - 160, screenHeight - 15);
+    ctx.fillStyle = "white";
+    ctx.font = "12px monospace";
+    ctx.fillText("DOOM 98 - SHAREWARE", screenWidth / 2 - 60, screenHeight - 15);
+
+    // Movement
     const moveSpeed = 0.08;
     const rotSpeed = 0.05;
 
