@@ -62,10 +62,38 @@ function initDoom() {
 
     // Load assets
     texWall.src = 'assets/images/doom_wall.png';
-    sprayGun.src = 'assets/images/doom_gun.png';
 
-    // Wait for load (simple check)
-    texWall.onload = () => { texturesLoaded = true; };
+    const rawGun = new Image();
+    rawGun.src = 'assets/images/doom_gun.png';
+    rawGun.onload = () => {
+        // Create offscreen canvas to process transparency
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = rawGun.width;
+        tempCanvas.height = rawGun.height;
+        const tempCtx = tempCanvas.getContext('2d');
+        tempCtx.drawImage(rawGun, 0, 0);
+
+        // Get pixel data
+        const imgData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+        const data = imgData.data;
+
+        // Loop through pixels: if close to white, make transparent
+        for (let i = 0; i < data.length; i += 4) {
+            const r = data[i];
+            const g = data[i + 1];
+            const b = data[i + 2];
+            // Threshold for white/off-white background
+            if (r > 240 && g > 240 && b > 240) {
+                data[i + 3] = 0; // Alpha = 0
+            }
+        }
+
+        tempCtx.putImageData(imgData, 0, 0);
+        sprayGun.src = tempCanvas.toDataURL();
+        texturesLoaded = true;
+    };
+
+    texWall.onload = () => { /* Wall loaded */ };
 
     // Controls
     window.addEventListener('keydown', (e) => {
