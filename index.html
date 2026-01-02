@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LoukaOS 98</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
     <!-- BOOT SCREEN -->
@@ -14,104 +16,126 @@
         <div>Copyright (C) 1984-98, Award Software, Inc.</div>
         <br>
         <div>PENTIUM-MMX CPU at 233MHz</div>
-        <div>Memory Test :  64536K OK</div>
+        <div>Memory Test : 64536K OK</div>
         <br>
         <div>Award Plug and Play BIOS Extension v1.0A</div>
         <div>Initialize Plug and Play Cards...</div>
         <div>PNP Init Completed</div>
         <br>
         <div>Detecting Primary Master ... LOUKA-HD 20GB</div>
-        <div>Detecting Primary Slave  ... None</div>
+        <div>Detecting Primary Slave ... None</div>
         <br>
         <div id="boot-msg">Starting LoukaOS 98...<span class="cursor-blink">_</span></div>
     </div>
 
     <!-- BSOD SCREEN -->
-    <div id="bsod" onclick="location.reload()">
-        <p>A fatal exception 0E has occurred at 0028:C0011E36 in VXD VMM(01) + 00010E36.</p>
-        <p>The current application will be terminated.</p>
+    <div id="bsod" onclick="location.reload()" role="button" tabindex="0"
+        aria-label="Blue Screen of Death, click to restart">
+        <p data-lang-key="bsod_fatal">A fatal exception 0E has occurred at 0028:C0011E36 in VXD VMM(01) + 00010E36.</p>
+        <p data-lang-key="bsod_terminated">The current application will be terminated.</p>
         <br>
-        <p>* Press any key to terminate the current application.</p>
-        <p>* Press CTRL+ALT+DEL again to restart your computer.</p>
+        <p data-lang-key="bsod_press_any">* Press any key to terminate the current application.</p>
+        <p data-lang-key="bsod_ctrl_alt">* Press CTRL+ALT+DEL again to restart your computer.</p>
         <br>
-        <p>Press any key to continue _</p>
+        <p data-lang-key="bsod_continue">Press any key to continue _</p>
     </div>
 
     <div class="desktop" id="desktop">
-        
+
         <!-- Icônes positionnées en absolu pour le drag & drop -->
-        <div class="icon" style="top: 20px; left: 20px;" ondblclick="openWindow('win-about')" onmousedown="startIconDrag(event, this)">
+        <div class="icon" style="top: 20px; left: 20px;" ondblclick="openWindow('win-about')"
+            onmousedown="startIconDrag(event, this)" role="button" tabindex="0" aria-label="Poste de Louka">
             <div class="icon-img ico-pc"></div>
-            <div class="icon-text">Poste de Louka</div>
+            <div class="icon-text" data-lang-key="desktop_computer">Poste de Louka</div>
         </div>
 
-        <div class="icon" style="top: 120px; left: 20px;" ondblclick="openWindow('win-projects')" onmousedown="startIconDrag(event, this)">
+        <div class="icon" style="top: 120px; left: 20px;" ondblclick="openWindow('win-projects')"
+            onmousedown="startIconDrag(event, this)" role="button" tabindex="0" aria-label="Mes Projets">
             <div class="icon-img ico-folder"></div>
-            <div class="icon-text">Mes Projets</div>
+            <div class="icon-text" data-lang-key="desktop_projects">Mes Projets</div>
         </div>
 
-        <div class="icon" style="top: 220px; left: 20px;" ondblclick="openWindow('win-skills')" onmousedown="startIconDrag(event, this)">
+        <div class="icon" style="top: 220px; left: 20px;" ondblclick="openWindow('win-skills')"
+            onmousedown="startIconDrag(event, this)" role="button" tabindex="0" aria-label="Compétences">
             <div class="icon-img ico-game"></div>
-            <div class="icon-text">Compétences.exe</div>
+            <div class="icon-text" data-lang-key="desktop_skills">Compétences.exe</div>
         </div>
 
-        <div class="icon" style="top: 320px; left: 20px;" ondblclick="openWindow('win-contact')" onmousedown="startIconDrag(event, this)">
+        <div class="icon" style="top: 320px; left: 20px;" ondblclick="openWindow('win-contact')"
+            onmousedown="startIconDrag(event, this)" role="button" tabindex="0" aria-label="Contact">
             <div class="icon-img ico-mail"></div>
-            <div class="icon-text">Contact</div>
+            <div class="icon-text" data-lang-key="desktop_contact">Contact</div>
         </div>
 
-        <div class="icon" style="top: 420px; left: 20px;" onclick="downloadCV()" onmousedown="startIconDrag(event, this)">
-            <div class="icon-img" style="background-image: url('https://win98icons.alexmeub.com/icons/png/chm-1.png');"></div>
-            <div class="icon-text">Mon CV.pdf</div>
+        <div class="icon" style="top: 420px; left: 20px;" onclick="downloadCV()"
+            onmousedown="startIconDrag(event, this)" role="button" tabindex="0" aria-label="Télécharger CV">
+            <div class="icon-img" style="background-image: url('https://win98icons.alexmeub.com/icons/png/chm-1.png');">
+            </div>
+            <div class="icon-text" data-lang-key="desktop_cv">Mon CV.pdf</div>
         </div>
 
         <!-- NOUVELLES ICÔNES -->
-        <div class="icon" style="top: 20px; left: 120px;" ondblclick="openWindow('win-ie')" onmousedown="startIconDrag(event, this)">
-            <div class="icon-img" style="background-image: url('https://win98icons.alexmeub.com/icons/png/msie1-2.png');"></div>
-            <div class="icon-text">Internet Explorer</div>
+        <div class="icon" style="top: 20px; left: 120px;" ondblclick="openWindow('win-ie')"
+            onmousedown="startIconDrag(event, this)" role="button" tabindex="0" aria-label="Internet Explorer">
+            <div class="icon-img"
+                style="background-image: url('https://win98icons.alexmeub.com/icons/png/msie1-2.png');"></div>
+            <div class="icon-text" data-lang-key="desktop_ie">Internet Explorer</div>
         </div>
 
-        <div class="icon" style="top: 120px; left: 120px;" ondblclick="openWindow('win-terminal')" onmousedown="startIconDrag(event, this)">
-            <div class="icon-img" style="background-image: url('https://win98icons.alexmeub.com/icons/png/console_prompt-0.png');"></div>
-            <div class="icon-text">MS-DOS Prompt</div>
+        <div class="icon" style="top: 120px; left: 120px;" ondblclick="openWindow('win-terminal')"
+            onmousedown="startIconDrag(event, this)" role="button" tabindex="0" aria-label="MS-DOS Prompt">
+            <div class="icon-img"
+                style="background-image: url('https://win98icons.alexmeub.com/icons/png/console_prompt-0.png');"></div>
+            <div class="icon-text" data-lang-key="desktop_terminal">MS-DOS Prompt</div>
         </div>
 
-        <div class="icon" style="top: 220px; left: 120px;" ondblclick="openWindow('win-winamp')" onmousedown="startIconDrag(event, this)">
-            <div class="icon-img" style="background-image: url('https://win98icons.alexmeub.com/icons/png/cd_audio_cd_a-3.png');"></div>
-            <div class="icon-text">Winamp</div>
+        <div class="icon" style="top: 220px; left: 120px;" ondblclick="openWindow('win-winamp')"
+            onmousedown="startIconDrag(event, this)" role="button" tabindex="0" aria-label="Winamp">
+            <div class="icon-img"
+                style="background-image: url('https://win98icons.alexmeub.com/icons/png/cd_audio_cd_a-3.png');"></div>
+            <div class="icon-text" data-lang-key="desktop_winamp">Winamp</div>
         </div>
 
-        <div class="icon" style="top: 320px; left: 120px;" ondblclick="openWindow('win-minesweeper')" onmousedown="startIconDrag(event, this)">
-            <div class="icon-img" style="background-image: url('https://win98icons.alexmeub.com/icons/png/game_mine_1-0.png');"></div>
-            <div class="icon-text">Démineur</div>
+        <div class="icon" style="top: 320px; left: 120px;" ondblclick="openWindow('win-minesweeper')"
+            onmousedown="startIconDrag(event, this)" role="button" tabindex="0" aria-label="Démineur">
+            <div class="icon-img"
+                style="background-image: url('https://win98icons.alexmeub.com/icons/png/game_mine_1-0.png');"></div>
+            <div class="icon-text" data-lang-key="desktop_minesweeper">Démineur</div>
         </div>
 
-        <div class="icon" style="top: 420px; left: 120px;" ondblclick="openWindow('win-paint')" onmousedown="startIconDrag(event, this)">
-            <div class="icon-img" style="background-image: url('https://win98icons.alexmeub.com/icons/png/paint_file-2.png');"></div>
-            <div class="icon-text">Paint</div>
+        <div class="icon" style="top: 420px; left: 120px;" ondblclick="openWindow('win-paint')"
+            onmousedown="startIconDrag(event, this)" role="button" tabindex="0" aria-label="Paint">
+            <div class="icon-img"
+                style="background-image: url('https://win98icons.alexmeub.com/icons/png/paint_file-2.png');"></div>
+            <div class="icon-text" data-lang-key="desktop_paint">Paint</div>
         </div>
 
         <!-- RECYCLE BIN -->
-        <div class="icon" style="top: 20px; left: 220px;" ondblclick="openWindow('win-recycle')" onmousedown="startIconDrag(event, this)">
-            <div class="icon-img" style="background-image: url('https://win98icons.alexmeub.com/icons/png/recycle_bin_full-4.png');"></div>
-            <div class="icon-text">Corbeille</div>
+        <div class="icon" style="top: 20px; left: 220px;" ondblclick="openWindow('win-recycle')"
+            onmousedown="startIconDrag(event, this)" role="button" tabindex="0" aria-label="Corbeille">
+            <div class="icon-img"
+                style="background-image: url('https://win98icons.alexmeub.com/icons/png/recycle_bin_full-4.png');">
+            </div>
+            <div class="icon-text" data-lang-key="desktop_recycle">Corbeille</div>
         </div>
 
         <!-- Easter Egg: Danger -->
-        <div class="icon" style="top: 20px; right: 20px; left: auto;" ondblclick="triggerBSOD()" onmousedown="startIconDrag(event, this)">
-            <div class="icon-img" style="background-image: url('https://win98icons.alexmeub.com/icons/png/msg_warning-0.png');"></div>
-            <div class="icon-text">NE PAS CLIQUER</div>
+        <div class="icon" style="top: 100px; right: 20px; left: auto;" ondblclick="triggerBSOD()"
+            onmousedown="startIconDrag(event, this)" role="button" tabindex="0" aria-label="Danger">
+            <div class="icon-img"
+                style="background-image: url('https://win98icons.alexmeub.com/icons/png/msg_warning-0.png');"></div>
+            <div class="icon-text" data-lang-key="desktop_dont_click">NE PAS CLIQUER</div>
         </div>
 
     </div>
 
     <!-- CONTEXT MENU -->
     <div class="context-menu" id="context-menu">
-        <div class="ctx-item" onclick="location.reload()">Actualiser</div>
+        <div class="ctx-item" onclick="location.reload()" data-lang-key="ctx_refresh">Actualiser</div>
         <div class="ctx-line"></div>
-        <div class="ctx-item">Nouveau <span style="font-size:10px">▶</span></div>
+        <div class="ctx-item"><span data-lang-key="ctx_new">Nouveau</span> <span style="font-size:10px">▶</span></div>
         <div class="ctx-line"></div>
-        <div class="ctx-item" onclick="openWindow('win-properties')">Propriétés</div>
+        <div class="ctx-item" onclick="openWindow('win-properties')" data-lang-key="ctx_properties">Propriétés</div>
     </div>
 
     <!-- MENU DÉMARRER -->
@@ -119,101 +143,121 @@
         <div style="display: flex; height: 100%;">
             <div class="start-sidebar"><strong>LoukaOS</strong> 98</div>
             <div class="start-content">
-                <div class="start-item" onclick="openWindow('win-notepad')">
-                    <img src="https://win98icons.alexmeub.com/icons/png/notepad-5.png" width="24">
-                    Bloc-notes
+                <div class="start-item" onclick="openWindow('win-notepad')" role="button" tabindex="0">
+                    <img src="https://win98icons.alexmeub.com/icons/png/notepad-5.png" width="24" alt="">
+                    <span data-lang-key="start_notepad">Bloc-notes</span>
                 </div>
-                <div class="start-item" onclick="openWindow('win-projects')">
-                    <img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png" width="24">
-                    Mes Projets
+                <div class="start-item" onclick="openWindow('win-projects')" role="button" tabindex="0">
+                    <img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png" width="24"
+                        alt="">
+                    <span data-lang-key="start_projects">Mes Projets</span>
                 </div>
-                <div class="start-item" onclick="openWindow('win-skills')">
-                    <img src="https://win98icons.alexmeub.com/icons/png/game_solitaire-1.png" width="24">
-                    Compétences
+                <div class="start-item" onclick="openWindow('win-skills')" role="button" tabindex="0">
+                    <img src="https://win98icons.alexmeub.com/icons/png/game_solitaire-1.png" width="24" alt="">
+                    <span data-lang-key="start_skills">Compétences</span>
                 </div>
-                <div class="start-item" onclick="window.open('assets/docs/CV_LOUKA_RIQUOIR.pdf', '_blank')">
-                    <img src="https://win98icons.alexmeub.com/icons/png/chm-1.png" width="24">
-                    Mon CV
+                <div class="start-item" onclick="window.open('assets/docs/CV_LOUKA_RIQUOIR.pdf', '_blank')"
+                    role="button" tabindex="0">
+                    <img src="https://win98icons.alexmeub.com/icons/png/chm-1.png" width="24" alt="">
+                    <span data-lang-key="start_cv">Mon CV (FR)</span>
+                </div>
+                <div class="start-item" onclick="window.open('assets/docs/CV_EN.pdf', '_blank')" role="button"
+                    tabindex="0">
+                    <img src="https://win98icons.alexmeub.com/icons/png/chm-1.png" width="24" alt="">
+                    <span data-lang-key="start_cv_en">My CV (EN)</span>
                 </div>
                 <div class="start-line"></div>
-                <div class="start-item" onclick="openWindow('win-about')">
-                    <img src="https://win98icons.alexmeub.com/icons/png/help_book_big-0.png" width="24">
-                    A propos
+                <div class="start-item" onclick="openWindow('win-about')" role="button" tabindex="0">
+                    <img src="https://win98icons.alexmeub.com/icons/png/help_book_big-0.png" width="24" alt="">
+                    <span data-lang-key="start_about">A propos</span>
                 </div>
                 <div class="start-line"></div>
-                <div class="start-item" onclick="triggerShutdown()">
-                    <img src="https://win98icons.alexmeub.com/icons/png/shut_down_cool-4.png" width="24">
-                    Arrêter...
+                <div class="start-item" onclick="openWindow('win-taskmgr')" role="button" tabindex="0">
+                    <img src="https://win98icons.alexmeub.com/icons/png/computer_task_manager-0.png" width="24" alt="">
+                    <span data-lang-key="start_taskmgr">Task Manager</span>
+                </div>
+                <div class="start-line"></div>
+                <div class="start-item" onclick="triggerShutdown()" role="button" tabindex="0">
+                    <img src="https://win98icons.alexmeub.com/icons/png/shut_down_cool-4.png" width="24" alt="">
+                    <span data-lang-key="start_shutdown">Arrêter...</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="window" id="win-about" style="z-index: 10;">
+    <!-- WINDOW: ABOUT -->
+    <div class="window" id="win-about" style="z-index: 10;" role="dialog" aria-labelledby="title-about">
         <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
-            <span>Poste de Louka - Propriétés</span>
+            <span id="title-about" data-lang-key="win_about_title">Poste de Louka - Propriétés</span>
             <div class="win-controls">
-                <div class="min-btn" onclick="minimizeWindow('win-about')">_</div>
-                <div class="max-btn" onclick="maximizeWindow('win-about')"><div class="max-icon"></div></div>
-                <div class="close-btn" onclick="closeWindow('win-about')">X</div>
+                <div class="min-btn" onclick="minimizeWindow('win-about')" aria-label="Minimize">_</div>
+                <div class="max-btn" onclick="maximizeWindow('win-about')" aria-label="Maximize">
+                    <div class="max-icon"></div>
+                </div>
+                <div class="close-btn" onclick="closeWindow('win-about')" aria-label="Close">X</div>
             </div>
         </div>
         <div class="content-area">
-              <!-- Remplacez `portrait.png` par le fichier de votre photo placé à côté de index.html -->
-              <img src="assets/images/Photo cv (png).png" alt="Portrait" 
-                  onerror="this.onerror=null;this.src='https://win98icons.alexmeub.com/icons/png/user_world-0.png'"
-                  style="float:left; margin-right:15px; width:64px; height:64px; object-fit: cover; border:2px solid #fff;">
+            <img src="assets/images/Photo cv (png).png" alt="Portrait"
+                onerror="this.onerror=null;this.src='https://win98icons.alexmeub.com/icons/png/user_world-0.png'"
+                style="float:left; margin-right:15px; width:64px; height:64px; object-fit: cover; border:2px solid #fff;">
             <h2>LOUKA RIQUOIR</h2>
-            <p><strong>Système :</strong> Étudiant BUT Informatique</p>
-            <p><strong>Version :</strong> 2.0 (Année 2)</p>
-            <p><strong>Localisation :</strong> Douai / Lens</p>
+            <p><strong data-lang-key="about_system">Système :</strong> <span data-lang-key="about_system_val">Étudiant
+                    BUT Informatique</span></p>
+            <p><strong data-lang-key="about_version">Version :</strong> 2.0 (Année 2)</p>
+            <p><strong data-lang-key="about_location">Localisation :</strong> Douai / Lens</p>
             <br>
-            <p>Bienvenue sur mon système ! Je suis un développeur passionné par le Back-end, Java et l'automatisation.</p>
-            <p>Je cherche une alternance ou stage pour 2026.</p>
+            <p data-lang-key="about_intro">Bienvenue sur mon système ! Je suis un développeur passionné par le Back-end,
+                Java et l'automatisation.</p>
+            <p data-lang-key="about_goal">Je cherche une alternance ou stage pour 2026.</p>
             <br>
             <center><button class="btn-retro" onclick="closeWindow('win-about')">OK</button></center>
         </div>
     </div>
 
-    <div class="window" id="win-projects" style="top: 150px; left: 300px; width: 550px;">
+    <!-- WINDOW: PROJECTS (EXPLORER) -->
+    <div class="window" id="win-projects" style="top: 150px; left: 300px; width: 550px;" role="dialog"
+        aria-labelledby="title-projects">
         <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
-            <span>C:\Mes Documents\Projets</span>
+            <span id="title-projects" data-lang-key="win_projects_explorer">C:\Mes Documents\Projets</span>
             <div class="win-controls">
                 <div class="min-btn" onclick="minimizeWindow('win-projects')">_</div>
-                <div class="max-btn" onclick="maximizeWindow('win-projects')"><div class="max-icon"></div></div>
+                <div class="max-btn" onclick="maximizeWindow('win-projects')">
+                    <div class="max-icon"></div>
+                </div>
                 <div class="close-btn" onclick="closeWindow('win-projects')">X</div>
             </div>
         </div>
         <div class="content-area" style="background: white;">
             <div class="project-grid">
-                
-                <div class="project-icon" onclick="window.open('https://github.com/SaladeFetide/Projet-Bomberman', '_blank')">
-                    <img src="https://win98icons.alexmeub.com/icons/png/java-0.png">
+
+                <div class="project-icon" onclick="openProjectDetail('bomberman')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/java-0.png" alt="Icon">
                     <div class="icon-text">Bomberman.jar</div>
                 </div>
 
-                <div class="project-icon" onclick="window.open('https://poke-battle-vert.vercel.app/', '_blank')">
-                    <img src="https://win98icons.alexmeub.com/icons/png/html-0.png">
+                <div class="project-icon" onclick="openProjectDetail('pokebattle')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/html-0.png" alt="Icon">
                     <div class="icon-text">PokeBattle.html</div>
                 </div>
 
-                <div class="project-icon" onclick="window.open('https://github.com/SaladeFetide/TheCocktail', '_blank')">
-                    <img src="https://win98icons.alexmeub.com/icons/png/script_file_blue-0.png">
+                <div class="project-icon" onclick="openProjectDetail('cocktails')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/script_file_blue-0.png" alt="Icon">
                     <div class="icon-text">Cocktails.py</div>
                 </div>
 
-                <div class="project-icon" onclick="window.open('https://github.com/SaladeFetide/LenSymphony', '_blank')">
-                    <img src="https://win98icons.alexmeub.com/icons/png/cd_audio_cd_a-3.png">
+                <div class="project-icon" onclick="openProjectDetail('lensymphony')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/cd_audio_cd_a-3.png" alt="Icon">
                     <div class="icon-text">LenSymphony.lib</div>
                 </div>
 
-                <div class="project-icon" onclick="window.open('https://github.com/SaladeFetide/Onitama', '_blank')">
-                    <img src="https://win98icons.alexmeub.com/icons/png/game_freecell-1.png">
+                <div class="project-icon" onclick="openProjectDetail('onitama')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/game_freecell-1.png" alt="Icon">
                     <div class="icon-text">Onitama.exe</div>
                 </div>
 
-                <div class="project-icon" onclick="window.open('#', '_blank')">
-                    <img src="https://win98icons.alexmeub.com/icons/png/script_file_yellow-0.png">
+                <div class="project-icon" onclick="openProjectDetail('fivem')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/script_file_yellow-0.png" alt="Icon">
                     <div class="icon-text">FiveM_Scripts.lua</div>
                 </div>
 
@@ -224,70 +268,136 @@
         </div>
     </div>
 
-    <div class="window" id="win-skills" style="top: 50px; left: 500px;">
+    <!-- WINDOW: PROJECT DETAIL (NEW) -->
+    <div class="window" id="win-project-detail" style="top: 100px; left: 100px; width: 500px; z-index: 100;"
+        role="dialog" aria-labelledby="title-project-detail">
         <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
-            <span>Compétences.exe</span>
+            <span id="title-project-detail">Details</span>
+            <div class="win-controls">
+                <div class="close-btn" onclick="closeWindow('win-project-detail')">X</div>
+            </div>
+        </div>
+        <div class="content-area" style="background: #e0e0e0;">
+            <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                <img id="detail-icon" src="" width="48" height="48"
+                    style="background: white; border: 1px inset white; padding: 2px;">
+                <div>
+                    <h2 id="detail-title" style="margin: 0; border: none;">Project Title</h2>
+                    <p id="detail-subtitle" style="margin: 5px 0; font-style: italic;">Subtitle</p>
+                </div>
+            </div>
+            <div
+                style="background: white; border: 2px inset #fff; padding: 10px; height: calc(100% - 130px); overflow-y: auto;">
+                <p><strong data-lang-key="detail_desc">Description:</strong></p>
+                <div id="detail-desc" style="margin-bottom: 10px;">...</div>
+
+                <p><strong data-lang-key="detail_tech">Technologies:</strong></p>
+                <p id="detail-tech"
+                    style="font-family: 'Courier New', monospace; background: #eee; padding: 2px; margin-bottom: 10px;">
+                    ...</p>
+
+                <p><strong data-lang-key="detail_skills">Compétences:</strong></p>
+                <ul id="detail-skills"></ul>
+            </div>
+            <div style="text-align: right; margin-top: 10px;">
+                <a id="detail-link" href="#" target="_blank" class="btn-retro" data-lang-key="detail_btn_see">Voir le
+                    Code / Démo</a>
+                <button class="btn-retro" onclick="closeWindow('win-project-detail')"
+                    data-lang-key="detail_btn_close">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- WINDOW: SKILLS -->
+    <div class="window" id="win-skills" style="top: 50px; left: 500px;" role="dialog" aria-labelledby="title-skills">
+        <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+            <span id="title-skills">Compétences.exe</span>
             <div class="win-controls">
                 <div class="min-btn" onclick="minimizeWindow('win-skills')">_</div>
-                <div class="max-btn" onclick="maximizeWindow('win-skills')"><div class="max-icon"></div></div>
+                <div class="max-btn" onclick="maximizeWindow('win-skills')">
+                    <div class="max-icon"></div>
+                </div>
                 <div class="close-btn" onclick="closeWindow('win-skills')">X</div>
             </div>
         </div>
-        <div class="content-area" style="background: black; color: lime; font-family: 'Courier New';">
-            C:\> RUN SKILLS_SCAN<br><br>
-            SCANNING...<br><br>
-            [OK] JAVA ..........<br>
-            [OK] PYTHON ........<br>
-            [OK] LUA ...........<br>
-            [OK] SQL ...........<br>
-            [OK] Javascript .........<br>
-            [OK] PHP .........<br>
-            [OK] REACT .........<br>
-            [OK] Bash .........<br>
-            [OK] HTML/CSS .........<br>
+        <div class="content-area"
+            style="background: black; color: lime; font-family: 'Courier New'; font-size: 0.9rem; overflow-y: auto;">
+            <div>C:\&gt; RUN DEEP_SKILLS_SCAN.EXE -v</div>
             <br>
-            SYSTEM READY.
+            <div>INITIALIZING NEURAL LINK... [OK]</div>
+            <div>LOADING PROFILE: LOUKA_RIQUOIR...</div>
+            <br>
+            <div>&gt; ANALYSIS: CORE_BACKEND</div>
+            <div>&nbsp;&nbsp;[+] Java (OOP, MVC, JavaFX).... <span style="color:white">MASTERY_HIGH</span></div>
+            <div>&nbsp;&nbsp;[+] Python (Flask / Logic)..... <span style="color:white">OPTIMIZED</span></div>
+            <div>&nbsp;&nbsp;[+] PHP / Laravel.............. <span style="color:white">VERIFIED</span></div>
+            <br>
+            <div>&gt; ANALYSIS: FRONTEND_&_SCRIPTING</div>
+            <div>&nbsp;&nbsp;[+] React / JS (ES6)........... <span style="color:white">STANDARD</span></div>
+            <div>&nbsp;&nbsp;[+] Lua (FiveM Scripting)...... <span style="color:white">ADVANCED</span></div>
+            <div>&nbsp;&nbsp;[+] Bash / Shell Scripting..... <span style="color:white">SYSTEM_READY</span></div>
+            <br>
+            <div>&gt; ANALYSIS: METHODOLOGY_&_TOOLS</div>
+            <div>&nbsp;&nbsp;[+] Agile / Scrum.............. <span style="color:white">CERTIFIED</span></div>
+            <div>&nbsp;&nbsp;[+] Git / Gradle............... <span style="color:white">CONNECTED</span></div>
+            <div>&nbsp;&nbsp;[+] SQL (SQLite / MySQL)....... <span style="color:white">OPERATIONAL</span></div>
+            <br>
+            <div>&gt; ANALYSIS: HUMAN_LANGUAGES</div>
+            <div>&nbsp;&nbsp;[+] Français................... <span style="color:white">NATIVE</span></div>
+            <div>&nbsp;&nbsp;[+] Anglais (Technical)........ <span style="color:white">FLUENT</span></div>
+            <br>
+            <div>SYSTEM STATUS: READY FOR DEVELOPMENT.</div>
+            <div class="cursor-blink">_</div>
         </div>
     </div>
 
     <!-- BLOC-NOTES -->
-    <div class="window" id="win-notepad" style="top: 200px; left: 400px;">
+    <div class="window" id="win-notepad" style="top: 200px; left: 400px;" role="dialog" aria-labelledby="title-notepad">
         <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
-            <span>Sans titre - Bloc-notes</span>
+            <span id="title-notepad">Sans titre - Bloc-notes</span>
             <div class="win-controls">
                 <div class="min-btn" onclick="minimizeWindow('win-notepad')">_</div>
-                <div class="max-btn" onclick="maximizeWindow('win-notepad')"><div class="max-icon"></div></div>
+                <div class="max-btn" onclick="maximizeWindow('win-notepad')">
+                    <div class="max-icon"></div>
+                </div>
                 <div class="close-btn" onclick="closeWindow('win-notepad')">X</div>
             </div>
         </div>
         <div class="menubar">
-            <span onclick="saveNotepad()">Fichier</span>
-            <span>Edition</span>
-            <span>Recherche</span>
-            <span>Aide</span>
+            <span onclick="saveNotepad()" data-lang-key="notepad_file">Fichier</span>
+            <span data-lang-key="notepad_edit">Edition</span>
+            <span data-lang-key="notepad_search">Recherche</span>
+            <span data-lang-key="notepad_help">Aide</span>
         </div>
         <div class="content-area" style="padding: 0; overflow: hidden; height: calc(100% - 50px);">
-            <textarea class="notepad-area" id="notepad-content" placeholder="Écrivez quelque chose..." oninput="autoSaveNotepad()"></textarea>
+            <textarea class="notepad-area" id="notepad-content" aria-label="Notepad content"
+                data-lang-key="notepad_placeholder" placeholder="Écrivez quelque chose..."
+                oninput="autoSaveNotepad()"></textarea>
         </div>
     </div>
 
     <!-- CONTACT -->
-    <div class="window" id="win-contact" style="top: 100px; left: 100px; width: 300px;">
+    <div class="window" id="win-contact" style="top: 100px; left: 100px; width: 300px;" role="dialog"
+        aria-labelledby="title-contact">
         <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
-            <span>Contact</span>
+            <span id="title-contact">Contact</span>
             <div class="win-controls">
                 <div class="min-btn" onclick="minimizeWindow('win-contact')">_</div>
-                <div class="max-btn" onclick="maximizeWindow('win-contact')"><div class="max-icon"></div></div>
+                <div class="max-btn" onclick="maximizeWindow('win-contact')">
+                    <div class="max-icon"></div>
+                </div>
                 <div class="close-btn" onclick="closeWindow('win-contact')">X</div>
             </div>
         </div>
         <div class="content-area" style="text-align: center;">
-            <img src="https://win98icons.alexmeub.com/icons/png/outlook_express-4.png" style="margin-bottom: 10px;">
-            <p>Vous pouvez me contacter à cette adresse :</p>
+            <img src="https://win98icons.alexmeub.com/icons/png/outlook_express-4.png" style="margin-bottom: 10px;"
+                alt="">
+            <p data-lang-key="contact_intro">Vous pouvez me contacter à cette adresse :</p>
             <br>
-            <input type="text" value="louka.riquoir@gmail.com" readonly style="width: 80%; margin-bottom: 10px; text-align: center;">
+            <input type="text" value="louka.riquoir@gmail.com" readonly
+                style="width: 80%; margin-bottom: 10px; text-align: center;" aria-label="Email address">
             <br>
-            <button class="btn-retro" onclick="copyEmail()">Copier l'adresse</button>
+            <button class="btn-retro" onclick="copyEmail()" data-lang-key="contact_btn_copy">Copier l'adresse</button>
         </div>
     </div>
 
@@ -297,19 +407,27 @@
             <span>Internet Explorer</span>
             <div class="win-controls">
                 <div class="min-btn" onclick="minimizeWindow('win-ie')">_</div>
-                <div class="max-btn" onclick="maximizeWindow('win-ie')"><div class="max-icon"></div></div>
+                <div class="max-btn" onclick="maximizeWindow('win-ie')">
+                    <div class="max-icon"></div>
+                </div>
                 <div class="close-btn" onclick="closeWindow('win-ie')">X</div>
             </div>
         </div>
-        <div class="content-area" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: white;">
-            <img src="https://win98icons.alexmeub.com/icons/png/msie1-2.png" width="64" style="margin-bottom: 20px;">
-            <h3>Bienvenue sur Internet</h3>
+        <div class="content-area"
+            style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: white;">
+            <img src="https://win98icons.alexmeub.com/icons/png/msie1-2.png" width="64" style="margin-bottom: 20px;"
+                alt="">
+            <h3 data-lang-key="ie_welcome">Bienvenue sur Internet</h3>
             <div style="display: flex; gap: 20px; margin-top: 20px;">
-                <a href="https://github.com/SaladeFetide" target="_blank" class="btn-retro" style="text-decoration: none; color: black; padding: 5px 10px;">
-                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="16" style="vertical-align: middle;"> GitHub
+                <a href="https://github.com/SaladeFetide" target="_blank" class="btn-retro"
+                    style="text-decoration: none; color: black; padding: 5px 10px;">
+                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="16"
+                        style="vertical-align: middle;" alt=""> <span data-lang-key="ie_github">GitHub</span>
                 </a>
-                <a href="https://www.linkedin.com/in/louka-riquoir" target="_blank" class="btn-retro" style="text-decoration: none; color: black; padding: 5px 10px;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" width="16" style="vertical-align: middle;"> LinkedIn
+                <a href="https://www.linkedin.com/in/louka-riquoir" target="_blank" class="btn-retro"
+                    style="text-decoration: none; color: black; padding: 5px 10px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" width="16"
+                        style="vertical-align: middle;" alt=""> <span data-lang-key="ie_linkedin">LinkedIn</span>
                 </a>
             </div>
         </div>
@@ -321,20 +439,27 @@
             <span>MS-DOS Prompt</span>
             <div class="win-controls">
                 <div class="min-btn" onclick="minimizeWindow('win-terminal')">_</div>
-                <div class="max-btn" onclick="maximizeWindow('win-terminal')"><div class="max-icon"></div></div>
+                <div class="max-btn" onclick="maximizeWindow('win-terminal')">
+                    <div class="max-icon"></div>
+                </div>
                 <div class="close-btn" onclick="closeWindow('win-terminal')">X</div>
             </div>
         </div>
-        <div class="content-area" style="background: black; color: #c0c0c0; font-family: 'Courier New', monospace; padding: 5px; overflow-y: auto; position: relative;" id="terminal-content" onclick="document.getElementById('cmd-input').focus()">
-            <canvas id="matrix-canvas" style="display:none;"></canvas>
-            <div id="terminal-output" style="position: relative; z-index: 10;">
-                Microsoft(R) Windows 98<br>
-                (C)Copyright Microsoft Corp 1981-1998.<br><br>
-                C:\WINDOWS> Type 'help' for commands.<br><br>
-            </div>
-            <div style="display: flex; position: relative; z-index: 10;">
-                <span>C:\WINDOWS></span>
-                <input type="text" id="cmd-input" style="background: transparent; border: none; color: white; font-family: inherit; flex-grow: 1; outline: none; margin-left: 5px;" autocomplete="off">
+        <div class="content-area" id="terminal-content"
+            style="background: black; color: white; font-family: 'Courier New', monospace; padding: 5px; flex-grow: 1; overflow-y: auto; position: relative;">
+            <canvas id="matrix-canvas"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.8; display: none;"></canvas>
+            <div style="position: relative; z-index: 2;">
+                <div id="terminal-output">
+                    <div>Microsoft(R) Windows 98</div>
+                    <div>(C)Copyright Microsoft Corp 1981-1998.</div>
+                    <br>
+                </div>
+                <div style="display: flex;">
+                    <span>C:\WINDOWS&gt;</span>
+                    <input type="text" id="cmd-input" autocomplete="off" spellcheck="false" autofocus
+                        style="background: transparent; border: none; color: white; font-family: inherit; flex-grow: 1; outline: none; margin-left: 5px;">
+                </div>
             </div>
         </div>
     </div>
@@ -345,37 +470,53 @@
             <span>Winamp</span>
             <div class="win-controls">
                 <div class="min-btn" onclick="minimizeWindow('win-winamp')">_</div>
-                <div class="max-btn" onclick="maximizeWindow('win-winamp')"><div class="max-icon"></div></div>
+                <div class="max-btn" onclick="maximizeWindow('win-winamp')">
+                    <div class="max-icon"></div>
+                </div>
                 <div class="close-btn" onclick="closeWindow('win-winamp')">X</div>
             </div>
         </div>
         <div class="content-area" style="background: #222; color: #0f0; text-align: center;">
             <div style="border: 2px inset #444; padding: 10px; margin-bottom: 10px; background: black;">
-                <marquee scrollamount="4">WINAMP 1.91 - DEMO MODE - NO AUDIO FILE LOADED</marquee>
+                <marquee scrollamount="4" id="winamp-marquee" data-lang-key="winamp_marquee">WINAMP 1.91 - DEMO MODE -
+                    NO AUDIO FILE LOADED
+                </marquee>
             </div>
             <div style="display: flex; justify-content: center; gap: 5px;">
-                <button class="btn-retro" style="min-width: 30px;">&lt;&lt;</button>
-                <button class="btn-retro" style="min-width: 30px;">&gt;</button>
-                <button class="btn-retro" style="min-width: 30px;">||</button>
-                <button class="btn-retro" style="min-width: 30px;">&gt;&gt;</button>
+                <button class="btn-retro" style="min-width: 30px;" onclick="winampPrev()"
+                    aria-label="Previous">&lt;&lt;</button>
+                <button class="btn-retro" style="min-width: 30px;" onclick="winampPlay()" aria-label="Play">►</button>
+                <button class="btn-retro" style="min-width: 30px;" onclick="winampPause()"
+                    aria-label="Pause">||</button>
+                <button class="btn-retro" style="min-width: 30px;" onclick="winampStop()" aria-label="Stop">■</button>
+                <button class="btn-retro" style="min-width: 30px;" onclick="winampNext()"
+                    aria-label="Next">&gt;&gt;</button>
             </div>
+            <div style="margin-top: 10px; font-size: 0.8rem; color: #aaa;">
+                <span id="winamp-timer">00:00</span> <span id="winamp-status">STOPPED</span>
+                <input type="range" id="winamp-vol" min="0" max="1" step="0.1" value="0.5"
+                    style="width: 50px; vertical-align: middle;">
+            </div>
+            <audio id="winamp-audio" loop></audio>
         </div>
     </div>
 
     <!-- DÉMINEUR -->
     <div class="window" id="win-minesweeper" style="top: 100px; left: 300px; width: auto;">
         <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
-            <span>Démineur</span>
+            <span data-lang-key="win_minesweeper_title">Démineur</span>
             <div class="win-controls">
                 <div class="min-btn" onclick="minimizeWindow('win-minesweeper')">_</div>
-                <div class="max-btn" onclick="maximizeWindow('win-minesweeper')"><div class="max-icon"></div></div>
+                <div class="max-btn" onclick="maximizeWindow('win-minesweeper')">
+                    <div class="max-icon"></div>
+                </div>
                 <div class="close-btn" onclick="closeWindow('win-minesweeper')">X</div>
             </div>
         </div>
         <div class="content-area" style="background: #c0c0c0; padding: 5px;">
             <div class="mine-status-bar">
                 <div id="mine-count" class="digital-display">010</div>
-                <button class="btn-retro smiley-btn" onclick="initMinesweeper()">😊</button>
+                <button class="btn-retro smiley-btn" onclick="initMinesweeper()" aria-label="Reset Game">😊</button>
                 <div id="mine-timer" class="digital-display">000</div>
             </div>
             <div id="mine-grid" class="mine-grid"></div>
@@ -385,18 +526,23 @@
     <!-- PAINT -->
     <div class="window" id="win-paint" style="top: 50px; left: 50px; width: 600px; height: 450px;">
         <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
-            <span>Paint - Sans titre</span>
+            <span data-lang-key="win_paint_title">Paint - Sans titre</span>
             <div class="win-controls">
                 <div class="min-btn" onclick="minimizeWindow('win-paint')">_</div>
-                <div class="max-btn" onclick="maximizeWindow('win-paint')"><div class="max-icon"></div></div>
+                <div class="max-btn" onclick="maximizeWindow('win-paint')">
+                    <div class="max-icon"></div>
+                </div>
                 <div class="close-btn" onclick="closeWindow('win-paint')">X</div>
             </div>
         </div>
         <div class="content-area" style="padding: 0; display: flex; flex-direction: column; overflow: hidden;">
             <div class="paint-toolbar">
-                <div class="tool-btn active" id="tool-pencil" onclick="selectTool('pencil')">✏️</div>
-                <div class="tool-btn" id="tool-eraser" onclick="selectTool('eraser')">🧼</div>
-                <div class="tool-btn" onclick="clearCanvas()">🗑️</div>
+                <div class="tool-btn active" id="tool-pencil" onclick="selectTool('pencil')" aria-label="Pencil Tool"
+                    data-lang-key="tool_pencil">✏️</div>
+                <div class="tool-btn" id="tool-eraser" onclick="selectTool('eraser')" aria-label="Eraser Tool"
+                    data-lang-key="tool_eraser">🧼</div>
+                <div class="tool-btn" onclick="clearCanvas()" aria-label="Clear Canvas" data-lang-key="tool_clear">🗑️
+                </div>
                 <div style="width: 1px; background: #808080; margin: 0 5px;"></div>
                 <div class="color-palette" id="color-palette">
                     <!-- Colors generated by JS -->
@@ -405,18 +551,19 @@
             <div class="paint-canvas-container">
                 <canvas id="paint-canvas" class="paint-canvas" width="500" height="300"></canvas>
             </div>
-            <div style="background: var(--win-gray); padding: 2px 5px; font-size: 0.8rem; border-top: 1px solid white;">
+            <div style="background: var(--win-gray); padding: 2px 5px; font-size: 0.8rem; border-top: 1px solid white;"
+                data-lang-key="paint_help">
                 Pour aide, cliquez sur Aide dans le menu Aide.
             </div>
         </div>
     </div>
 
     <!-- SHUTDOWN SCREEN -->
-    <div id="shutdown-screen" onclick="location.reload()">
-        <div class="shutdown-text">
+    <div id="shutdown-screen" onclick="location.reload()" role="button" aria-label="Click to restart">
+        <div class="shutdown-text" data-lang-key="shutdown_text">
             VOUS POUVEZ MAINTENANT ÉTEINDRE<br>VOTRE ORDINATEUR EN TOUTE SÉCURITÉ.
         </div>
-        <div class="restart-hint">(Cliquez pour redémarrer)</div>
+        <div class="restart-hint" data-lang-key="restart_hint">(Cliquez pour redémarrer)</div>
     </div>
 
     <!-- CLIPPY -->
@@ -424,7 +571,8 @@
         <div class="clippy-bubble" id="clippy-text">
             Salut ! Je vois que vous cherchez un développeur compétent. Besoin d'aide ?
         </div>
-        <img src="https://web.archive.org/web/20160304035343im_/http://clipart.nicubunu.ro/svg/computer/clippy.svg" width="100" onclick="clippyTalk()">
+        <img src="https://web.archive.org/web/20160304035343im_/http://clipart.nicubunu.ro/svg/computer/clippy.svg"
+            width="100" onclick="clippyTalk()" alt="Clippy">
     </div>
 
     <!-- SELECTION BOX -->
@@ -433,18 +581,22 @@
     <!-- PROPRIÉTÉS AFFICHAGE -->
     <div class="window" id="win-properties" style="top: 100px; left: 150px; width: 350px; height: 300px;">
         <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
-            <span>Propriétés de Affichage</span>
+            <span data-lang-key="win_properties_title">Propriétés de Affichage</span>
             <div class="win-controls">
                 <div class="close-btn" onclick="closeWindow('win-properties')">X</div>
             </div>
         </div>
         <div class="content-area" style="display: flex; flex-direction: column; gap: 10px;">
-            <div style="border: 2px inset #fff; height: 100px; background: var(--desktop-teal); position: relative; margin-bottom: 10px;" id="preview-screen">
-                <div style="position: absolute; top: 20px; left: 20px; width: 30px; height: 30px; background: white; border: 1px solid black;"></div>
+            <div style="border: 2px inset #fff; height: 100px; background: var(--desktop-teal); position: relative; margin-bottom: 10px;"
+                id="preview-screen">
+                <div
+                    style="position: absolute; top: 20px; left: 20px; width: 30px; height: 30px; background: white; border: 1px solid black;">
+                </div>
             </div>
             <fieldset>
-                <legend>Papier peint</legend>
-                <select id="wallpaper-select" onchange="updatePreview()" size="4" style="width: 100%;">
+                <legend data-lang-key="prop_wallpaper">Papier peint</legend>
+                <select id="wallpaper-select" onchange="updatePreview()" size="4" style="width: 100%;"
+                    aria-label="Select Wallpaper">
                     <option value="teal" selected>Windows Standard (Teal)</option>
                     <option value="clouds">Nuages (Windows 98)</option>
                     <option value="matrix">Matrix Code</option>
@@ -453,8 +605,9 @@
                 </select>
             </fieldset>
             <div style="display: flex; justify-content: flex-end; gap: 5px; margin-top: auto;">
-                <button class="btn-retro" onclick="applyWallpaper()">Appliquer</button>
-                <button class="btn-retro" onclick="closeWindow('win-properties')">Annuler</button>
+                <button class="btn-retro" onclick="applyWallpaper()" data-lang-key="btn_apply">Appliquer</button>
+                <button class="btn-retro" onclick="closeWindow('win-properties')"
+                    data-lang-key="btn_cancel">Annuler</button>
             </div>
         </div>
     </div>
@@ -462,26 +615,28 @@
     <!-- RECYCLE BIN WINDOW -->
     <div class="window" id="win-recycle" style="top: 100px; left: 350px;">
         <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
-            <span>Corbeille</span>
+            <span data-lang-key="win_recycle_title" data-lang-key="win_recycle_explorer">Corbeille</span>
             <div class="win-controls">
                 <div class="min-btn" onclick="minimizeWindow('win-recycle')">_</div>
-                <div class="max-btn" onclick="maximizeWindow('win-recycle')"><div class="max-icon"></div></div>
+                <div class="max-btn" onclick="maximizeWindow('win-recycle')">
+                    <div class="max-icon"></div>
+                </div>
                 <div class="close-btn" onclick="closeWindow('win-recycle')">X</div>
             </div>
         </div>
         <div class="content-area">
             <div class="file-list">
                 <div class="file-item">
-                    <img src="https://win98icons.alexmeub.com/icons/png/wordpad-0.png">
-                    <span>Projet_abandonné_v1.doc</span>
+                    <img src="https://win98icons.alexmeub.com/icons/png/wordpad-0.png" alt="">
+                    <span data-lang-key="file_abandoned">Projet_abandonné_v1.doc</span>
                 </div>
                 <div class="file-item">
-                    <img src="https://win98icons.alexmeub.com/icons/png/excel_file-0.png">
-                    <span>Données_obsolètes.xls</span>
+                    <img src="https://win98icons.alexmeub.com/icons/png/excel_file-0.png" alt="">
+                    <span data-lang-key="file_obsolete">Données_obsolètes.xls</span>
                 </div>
                 <div class="file-item">
-                    <img src="https://win98icons.alexmeub.com/icons/png/script_file_blue-0.png">
-                    <span>bug_infini.js</span>
+                    <img src="https://win98icons.alexmeub.com/icons/png/script_file_blue-0.png" alt="">
+                    <span data-lang-key="file_bug">bug_infini.js</span>
                 </div>
             </div>
         </div>
@@ -490,22 +645,31 @@
     <!-- CALENDAR WINDOW -->
     <div class="window" id="win-calendar" style="top: 150px; left: 450px; width: 300px; height: auto;">
         <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
-            <span>Calendrier</span>
+            <span data-lang-key="win_calendar_title">Calendrier</span>
             <div class="win-controls">
                 <div class="min-btn" onclick="minimizeWindow('win-calendar')">_</div>
                 <div class="close-btn" onclick="closeWindow('win-calendar')">X</div>
             </div>
         </div>
         <div class="content-area" style="height: auto; min-height: 250px;">
-            <div id="calendar-header" style="text-align: center; font-weight: bold; margin-bottom: 10px; display: flex; justify-content: space-between;">
-                <button class="btn-retro" style="padding: 0 5px;" onclick="changeMonth(-1)">&lt;</button>
+            <div id="calendar-header"
+                style="text-align: center; font-weight: bold; margin-bottom: 10px; display: flex; justify-content: space-between;">
+                <button class="btn-retro" style="padding: 0 5px;" onclick="changeMonth(-1)"
+                    aria-label="Previous Month">&lt;</button>
                 <span id="calendar-month-year"></span>
-                <button class="btn-retro" style="padding: 0 5px;" onclick="changeMonth(1)">&gt;</button>
+                <button class="btn-retro" style="padding: 0 5px;" onclick="changeMonth(1)"
+                    aria-label="Next Month">&gt;</button>
             </div>
             <table id="calendar-table" style="width: 100%; text-align: center; border-collapse: collapse;">
                 <thead>
                     <tr>
-                        <th>Di</th><th>Lu</th><th>Ma</th><th>Me</th><th>Je</th><th>Ve</th><th>Sa</th>
+                        <th>Di</th>
+                        <th>Lu</th>
+                        <th>Ma</th>
+                        <th>Me</th>
+                        <th>Je</th>
+                        <th>Ve</th>
+                        <th>Sa</th>
                     </tr>
                 </thead>
                 <tbody id="calendar-body">
@@ -522,7 +686,7 @@
         </div>
         <div class="content-area" style="height: auto; background: #c0c0c0; border: none;">
             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-                <img src="https://win98icons.alexmeub.com/icons/png/download-0.png" width="32">
+                <img src="https://win98icons.alexmeub.com/icons/png/download-0.png" width="32" alt="">
                 <div>
                     <div>Téléchargement de <strong>CV_LOUKA_RIQUOIR.pdf</strong></div>
                     <div style="font-size: 0.8rem;">depuis c:\Users\Louka\Documents</div>
@@ -539,16 +703,63 @@
     </div>
 
     <div class="taskbar">
-        <div class="start-btn" id="start-btn">
-            <img src="https://win98icons.alexmeub.com/icons/png/windows-0.png">
+        <div class="start-btn" id="start-btn" role="button" tabindex="0" aria-label="Start Menu">
+            <img src="https://win98icons.alexmeub.com/icons/png/windows-0.png" alt="">
             Start
         </div>
         <div class="taskbar-apps" id="taskbar-apps">
             <!-- Les applications ouvertes s'afficheront ici -->
         </div>
-        <div class="clock" id="clock" onclick="openWindow('win-calendar'); renderCalendar();" style="cursor: pointer;">12:00 PM</div>
+        <div style="display: flex; align-items: center; gap: 5px; margin-right: 5px;">
+            <!-- LANG TOGGLE -->
+            <div class="lang-toggle" onclick="toggleLanguage()"
+                style="cursor: pointer; background: var(--win-gray); border: 2px inset white; padding: 2px 5px; font-size: 0.8rem;"
+                role="button" tabindex="0">
+                FR
+            </div>
+            <div class="clock" id="clock" onclick="openWindow('win-calendar'); renderCalendar();"
+                style="cursor: pointer;" role="button" tabindex="0">12:00 PM</div>
+        </div>
     </div>
 
+    <!-- TASK MANAGER WINDOW -->
+    <div class="window" id="win-taskmgr" style="top: 200px; left: 400px; width: 350px;">
+        <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+            <span data-lang-key="win_taskmgr_title">Gestionnaire des tâches</span>
+            <div class="win-controls">
+                <div class="close-btn" onclick="closeWindow('win-taskmgr')">X</div>
+            </div>
+        </div>
+        <div class="menubar">
+            <span data-lang-key="notepad_file">Fichier</span>
+            <span data-lang-key="notepad_edit">Options</span>
+            <span data-lang-key="notepad_help">Vue</span>
+        </div>
+        <div class="content-area" style="background: white; padding: 5px;">
+            <div
+                style="display: flex; justify-content: space-between; border-bottom: 2px solid #808080; padding-bottom: 2px; margin-bottom: 5px;">
+                <span style="font-weight: bold;">Image Name</span>
+                <span style="font-weight: bold;">CPU</span>
+                <span style="font-weight: bold;">Mem Usage</span>
+            </div>
+            <div id="taskmgr-list"
+                style="height: 150px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 0.9em;">
+                <!-- Filled by JS -->
+            </div>
+            <div
+                style="border-top: 1px solid #808080; margin-top: 10px; padding-top: 5px; display: flex; justify-content: space-between; font-size: 0.8em;">
+                <span>Processes: <span id="taskmgr-procs">14</span></span>
+                <span>CPU Usage: <span id="taskmgr-cpu">4%</span></span>
+                <span>Mem Usage: <span id="taskmgr-mem">14%</span></span>
+            </div>
+        </div>
+        <div class="status-bar">
+            <span>System Normal</span>
+        </div>
+    </div>
+
+    <!-- SCREENSAVER (just a container) -->
     <script src="js/script.js"></script>
 </body>
+
 </html>

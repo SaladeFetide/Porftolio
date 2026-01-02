@@ -1,8 +1,383 @@
+// --- TRANSLATIONS ---
+const translations = {
+    fr: {
+        desktop_computer: "Poste de Louka",
+        desktop_projects: "Mes Projets",
+        desktop_contact: "Contact",
+        desktop_computer: "Poste de Louka",
+        desktop_projects: "Mes Projets",
+        desktop_contact: "Contact",
+        desktop_minesweeper: "Démineur",
+        desktop_skills: "Compétences.exe",
+        desktop_recycle: "Corbeille",
+        desktop_dont_click: "NE PAS CLIQUER",
+        desktop_ie: "Internet Explorer",
+        desktop_terminal: "MS-DOS Prompt",
+        desktop_winamp: "Winamp",
+        desktop_paint: "Paint",
+        desktop_cv: "Mon CV.pdf",
+        win_minesweeper_title: "Démineur",
+        win_paint_title: "Paint - Sans titre",
+        ctx_refresh: "Actualiser",
+        ctx_new: "Nouveau",
+        ctx_properties: "Propriétés",
+        start_notepad: "Bloc-notes",
+        start_projects: "Mes Projets",
+        start_skills: "Compétences",
+        start_cv: "Mon CV (FR)",
+        start_cv_en: "Mon CV (EN)",
+        start_about: "A propos",
+        start_shutdown: "Arrêter...",
+        win_about_title: "Poste de Louka - Propriétés",
+        about_system: "Système :",
+        about_system_val: "Étudiant BUT Informatique",
+        about_version: "Version :",
+        about_location: "Localisation :",
+        about_intro: "Bienvenue sur mon système ! Je suis un développeur passionné par le Back-end, Java et l'automatisation.",
+        about_goal: "Je cherche une alternance ou stage pour 2026.",
+        notepad_file: "Fichier",
+        notepad_edit: "Edition",
+        notepad_search: "Recherche",
+        notepad_help: "Aide",
+        contact_intro: "Vous pouvez me contacter à cette adresse :",
+        contact_btn_copy: "Copier l'adresse",
+        ie_welcome: "Bienvenue sur Internet",
+        paint_help: "Pour aide, cliquez sur Aide dans le menu Aide.",
+        shutdown_text: "VOUS POUVEZ MAINTENANT ÉTEINDRE<br>VOTRE ORDINATEUR EN TOUTE SÉCURITÉ.",
+        restart_hint: "(Cliquez pour redémarrer)",
+        win_properties_title: "Propriétés de Affichage",
+        prop_wallpaper: "Papier peint",
+        btn_apply: "Appliquer",
+        btn_cancel: "Annuler",
+        win_recycle_title: "Corbeille",
+        win_calendar_title: "Calendrier",
+        detail_desc: "Description:",
+        detail_tech: "Technologies:",
+        detail_skills: "Compétences:",
+        detail_btn_see: "Voir le Code / Démo",
+        detail_btn_close: "Fermer",
+        clippy_intro: "Salut ! Je vois que vous cherchez un développeur compétent. Besoin d'aide ?",
+        clippy_dblclick: "Astuce : Double-cliquez sur les icônes pour les ouvrir.",
+        clippy_cv: "Je vois que vous regardez mon CV. Excellent choix !",
+        clippy_mine: "N'oubliez pas de tester le Démineur !",
+        clippy_projects: "Besoin d'un site web ? Louka est là pour ça !",
+        clippy_matrix: "Tapez 'matrix' dans le terminal pour un effet cool.",
+        clippy_wallpaper: "Vous pouvez changer le fond d'écran avec un clic droit !",
+
+        // NEW ENHANCEMENTS keys
+        start_taskmgr: "Gestionnaire des tâches",
+        win_taskmgr_title: "Gestionnaire des tâches",
+        winamp_playing: "LECTURE ENC: SYNTHWAVE_MIX_2024.MP3",
+        winamp_paused: "PAUSE",
+        winamp_stopped: "STOP",
+
+        // NOUVEAUX AJOUTS (Missing static text)
+        boot_sequence: "Démarrage de LoukaOS 98...",
+        bsod_fatal: "Une exception fatale 0E est survenue à 0028:C0011E36 dans VXD VMM(01) + 00010E36.",
+        bsod_terminated: "L'application en cours va se terminer.",
+        bsod_press_any: "* Appuyez sur une touche pour terminer l'application.",
+        bsod_ctrl_alt: "* Appuyez sur CTRL+ALT+SUPPR pour redémarrer.",
+        bsod_continue: "Appuyez sur une touche pour continuer _",
+
+        win_projects_explorer: "C:\\Mes Documents\\Projets",
+        win_recycle_explorer: "C:\\Corbeille",
+
+        file_abandoned: "Projet_abandonné_v1.doc",
+        file_obsolete: "Données_obsolètes.xls",
+        file_bug: "bug_infini.js",
+
+        cal_mo: "Lu", cal_tu: "Ma", cal_we: "Me", cal_th: "Je", cal_fr: "Ve", cal_sa: "Sa", cal_su: "Di",
+
+        winamp_marquee: "WINAMP 1.91 - MODE DEMO - AUCUN FICHIER AUDIO CHARGÉ",
+
+        ie_github: "GitHub",
+        ie_linkedin: "LinkedIn",
+
+        notepad_placeholder: "Écrivez quelque chose...",
+
+        tool_pencil: "Crayon",
+        tool_eraser: "Gomme",
+        tool_clear: "Tout effacer",
+
+        month_0: "Janvier", month_1: "Février", month_2: "Mars", month_3: "Avril", month_4: "Mai", month_5: "Juin",
+        month_6: "Juillet", month_7: "Août", month_8: "Septembre", month_9: "Octobre", month_10: "Novembre", month_11: "Décembre"
+    },
+    en: {
+        desktop_computer: "Louka's PC",
+        desktop_projects: "My Projects",
+        desktop_contact: "Contact",
+        desktop_minesweeper: "Minesweeper",
+        desktop_skills: "Skills.exe",
+        desktop_recycle: "Recycle Bin",
+        desktop_dont_click: "DO NOT CLICK",
+        desktop_ie: "Internet Explorer",
+        desktop_terminal: "MS-DOS Prompt",
+        desktop_winamp: "Winamp",
+        desktop_paint: "Paint",
+        desktop_cv: "My CV.pdf",
+        win_minesweeper_title: "Minesweeper",
+        win_paint_title: "Paint - Untitled",
+        ctx_refresh: "Refresh",
+        ctx_new: "New",
+        ctx_properties: "Properties",
+        start_notepad: "Notepad",
+        start_projects: "My Projects",
+        start_skills: "Skills",
+        start_cv: "My CV (FR)",
+        start_cv_en: "My CV (EN)",
+        start_about: "About",
+        start_shutdown: "Shutdown...",
+        win_about_title: "Louka's PC - Properties",
+        about_system: "System :",
+        about_system_val: "CS Student (BUT Info)",
+        about_version: "Version :",
+        about_location: "Location :",
+        about_intro: "Welcome to my system! I am a developer passionate about Back-end, Java, and automation.",
+        about_goal: "Looking for an internship for 2026.",
+        notepad_file: "File",
+        notepad_edit: "Edit",
+        notepad_search: "Search",
+        notepad_help: "Help",
+        contact_intro: "You can contact me at:",
+        contact_btn_copy: "Copy Address",
+        ie_welcome: "Welcome to the Internet",
+        paint_help: "For help, click Help in Help menu.",
+        shutdown_text: "IT IS NOW SAFE TO TURN OFF<br>YOUR COMPUTER.",
+        restart_hint: "(Click to restart)",
+        win_properties_title: "Display Properties",
+        prop_wallpaper: "Wallpaper",
+        btn_apply: "Apply",
+        btn_cancel: "Cancel",
+        win_recycle_title: "Recycle Bin",
+        win_calendar_title: "Calendar",
+        detail_desc: "Description:",
+        detail_tech: "Technologies:",
+        detail_skills: "Skills:",
+        detail_btn_see: "View Code / Demo",
+        detail_btn_close: "Close",
+        clippy_intro: "Hi! I see you're looking for a skilled dev. Need help?",
+        clippy_dblclick: "Tip: Double-click icons to open them.",
+        clippy_cv: "I see you're checking my CV. Great choice!",
+        clippy_mine: "Don't forget to try Minesweeper!",
+        clippy_projects: "Need a website? Louka is here for that!",
+        clippy_matrix: "Type 'matrix' in the terminal for a cool effect.",
+        clippy_wallpaper: "You can change the wallpaper with right-click!",
+
+        // NEW ENHANCEMENTS keys
+        start_taskmgr: "Task Manager",
+        win_taskmgr_title: "Task Manager",
+        winamp_playing: "PLAYING: SYNTHWAVE_MIX_2024.MP3",
+        winamp_paused: "PAUSED",
+        winamp_stopped: "STOPPED",
+
+        // NEW ADDITIONS
+        boot_sequence: "Starting LoukaOS 98...",
+        bsod_fatal: "A fatal exception 0E has occurred at 0028:C0011E36 in VXD VMM(01) + 00010E36.",
+        bsod_terminated: "The current application will be terminated.",
+        bsod_press_any: "* Press any key to terminate the current application.",
+        bsod_ctrl_alt: "* Press CTRL+ALT+DEL again to restart your computer.",
+        bsod_continue: "Press any key to continue _",
+
+        win_projects_explorer: "C:\\My Documents\\Projects",
+        win_recycle_explorer: "C:\\Recycle Bin",
+
+        file_abandoned: "Abandoned_Project_v1.doc",
+        file_obsolete: "Obsolete_Data.xls",
+        file_bug: "infinite_bug.js",
+
+        cal_mo: "Mo", cal_tu: "Tu", cal_we: "We", cal_th: "Th", cal_fr: "Fr", cal_sa: "Sa", cal_su: "Su",
+
+        winamp_marquee: "WINAMP 1.91 - DEMO MODE - NO AUDIO FILE LOADED",
+
+        ie_github: "GitHub",
+        ie_linkedin: "LinkedIn",
+
+        notepad_placeholder: "Type something...",
+
+        tool_pencil: "Pencil",
+        tool_eraser: "Eraser",
+        tool_clear: "Clear All",
+
+        month_0: "January", month_1: "February", month_2: "March", month_3: "April", month_4: "May", month_5: "June",
+        month_6: "July", month_7: "August", month_8: "September", month_9: "October", month_10: "November", month_11: "December"
+    }
+};
+
+let currentLang = 'fr';
+
+function toggleLanguage() {
+    currentLang = currentLang === 'fr' ? 'en' : 'fr';
+    updateLanguage();
+}
+
+function updateLanguage() {
+    document.documentElement.lang = currentLang;
+
+    // Update text elements
+    document.querySelectorAll('[data-lang-key]').forEach(el => {
+        const key = el.getAttribute('data-lang-key');
+        if (translations[currentLang][key]) {
+            if (el.tagName === 'INPUT' && el.type === 'button') {
+                el.value = translations[currentLang][key];
+            } else if (el.tagName === 'TEXTAREA' && key === 'notepad_placeholder') {
+                el.placeholder = translations[currentLang][key];
+            } else {
+                el.innerHTML = translations[currentLang][key];
+            }
+        }
+    });
+
+    // Update Calendar if open
+    if (document.getElementById('win-calendar').style.display === 'flex') {
+        renderCalendar();
+    }
+
+    // Update Winamp Marquee
+    const winampMarquee = document.querySelector('#win-winamp marquee');
+    if (winampMarquee) winampMarquee.textContent = translations[currentLang]['winamp_marquee'];
+
+    // Update toggle button text
+    const toggle = document.querySelector('.lang-toggle');
+    if (toggle) toggle.textContent = currentLang.toUpperCase();
+}
+
+// --- PROJECT DATA ---
+const projectsData = {
+    'bomberman': {
+        title: 'Bomberman.jar',
+        subtitle: 'Jeu Arcade / Arcade Game',
+        icon: 'https://win98icons.alexmeub.com/icons/png/java-0.png',
+        desc: {
+            fr: "Implémentation complète du jeu Bomberman en Java/JavaFX. Projet universitaire axé sur l'architecture MVC et la gestion de projet avec Gradle. Inclut un éditeur de niveau procédural et une IA basique.",
+            en: "Complete implementation of Bomberman in Java/JavaFX. University project focused on MVC architecture and Gradle project management. Includes a procedural level editor and basic AI."
+        },
+        tech: "Java 11+, JavaFX, Gradle, MVC",
+        skills: {
+            fr: ["Architecture MVC & Clean Code", "Gestion d'événements & Multithreading", "Génération Algorithmique (Procedural)"],
+            en: ["MVC Architecture & Clean Code", "Event Handling & Multithreading", "Algorithmic Generation (Procedural)"]
+        },
+        link: "https://github.com/SaladeFetide/Projet-Bomberman"
+    },
+    'pokebattle': {
+        title: 'PokeBattle.html',
+        subtitle: 'Jeu Web / Web Game',
+        icon: 'https://win98icons.alexmeub.com/icons/png/html-0.png',
+        desc: {
+            fr: "Simulateur de combat Pokémon au tour par tour. Utilise l'API PokéAPI pour récupérer les statistiques et sprites en temps réel. logique de combat fidèle.",
+            en: "Turn-based Pokémon battle simulator. Uses PokéAPI to fetch stats and sprites in real-time. Faithful battle logic."
+        },
+        tech: "HTML5, CSS3, JavaScript (Vanilla), REST API",
+        skills: {
+            fr: ["Intégration API REST (Asynchrone/Promises)", "Manipulation DOM Avancée", "Programmation Orientée Objet JS"],
+            en: ["REST API Integration (Async/Promises)", "Advanced DOM Manipulation", "JS Object-Oriented Programming"]
+        },
+        link: "https://poke-battle-vert.vercel.app/"
+    },
+    'cocktails': {
+        title: 'Cocktails.py',
+        subtitle: 'App Web / Web App',
+        icon: 'https://win98icons.alexmeub.com/icons/png/script_file_blue-0.png',
+        desc: {
+            fr: "Jeu de quiz interactif (Projet Agile/Scrum). Devinez les ingrédients des cocktails en temps limité ! Backend Flask robuste et Frontend Bulma responsive.",
+            en: "Interactive quiz game (Agile/Scrum Project). Guess cocktail ingredients within the time limit! Robust Flask backend and responsive Bulma frontend."
+        },
+        tech: "Python (Flask), SQLite, Bulma CSS",
+        skills: {
+            fr: ["Méthodologie Agile (Scrum/Jira)", "Développement Fullstack Python", "Modélisation Base de Données Relationalle"],
+            en: ["Agile Methodology (Scrum/Jira)", "Python Fullstack Development", "Relational Database Modeling"]
+        },
+        link: "https://github.com/SaladeFetide/TheCocktail"
+    },
+    'lensymphony': {
+        title: 'LenSymphony.lib',
+        subtitle: 'Bibliothèque Audio / Audio Lib',
+        icon: 'https://win98icons.alexmeub.com/icons/png/cd_audio_cd_a-3.png',
+        desc: {
+            fr: "Bibliothèque Java pour la synthèse musicale. Permet de modéliser notes, silences et portées pour jouer des partitions virtuelles via synthèse audio.",
+            en: "Java library for music synthesis. Allows modeling notes, rests, and staffs to play virtual scores via audio synthesis."
+        },
+        tech: "Java, Sound API, Data Structures",
+        skills: {
+            fr: ["Développement de Librairie & API", "Traitement Numérique du Signal", "Structures de Données Complexes"],
+            en: ["Library & API Development", "Digital Signal Processing", "Complex Data Structures"]
+        },
+        link: "https://github.com/SaladeFetide/LenSymphony"
+    },
+    'onitama': {
+        title: 'Onitama.exe',
+        subtitle: 'Moteur de Jeu / Game Engine',
+        icon: 'https://win98icons.alexmeub.com/icons/png/game_freecell-1.png',
+        desc: {
+            fr: "Moteur complet pour le jeu de société Onitama. Architecture modulaire exemplaire avec une IA Minimax intégrée pour le mode solo.",
+            en: "Complete engine for the Onitama board game. Exemplary modular architecture with an integrated Minimax AI for solo mode."
+        },
+        tech: "Java 17+, Gradle, Minimax Algorithm",
+        skills: {
+            fr: ["IA & Théorie des Jeux (Minimax/Alpha-Beta)", "Algorithmique Avancée", "Architecture Modulaire & Extensible"],
+            en: ["AI & Game Theory (Minimax/Alpha-Beta)", "Advanced Algorithmics", "Modular & Extensible Architecture"]
+        },
+        link: "https://github.com/SaladeFetide/Onitama"
+    },
+    'fivem': {
+        title: 'FiveM_Scripts.lua',
+        subtitle: 'Scripts & Mods',
+        icon: 'https://win98icons.alexmeub.com/icons/png/script_file_yellow-0.png',
+        desc: {
+            fr: "Scripts Lua optimisés pour serveurs GTA V RP. Création d'interfaces (NUI), systèmes de métiers et synchronisation client/serveur.",
+            en: "Optimized Lua scripts for GTA V RP servers. Creation of UIs (NUI), job systems, and client/server synchronization."
+        },
+        tech: "Lua, SQL, HTML/JS (NUI)",
+        skills: {
+            fr: ["Scripting Lua & Optimisation", "Synchronisation Réseau (NetCode)", "Interfaces Fullstack (NUI)"],
+            en: ["Lua Scripting & Optimization", "Network Synchronization (NetCode)", "Fullstack Interfaces (NUI)"]
+        },
+        link: "https://github.com/SaladeFetide?tab=repositories"
+    }
+};
+
+function openProjectDetail(id) {
+    const project = projectsData[id];
+    if (!project) return;
+
+    // Update Icon and Title
+    document.getElementById('detail-icon').src = project.icon;
+    document.getElementById('detail-title').textContent = project.title;
+    document.getElementById('detail-subtitle').textContent = project.subtitle;
+
+    // We'll store the ID to handle language translation updates for the opened window
+    document.getElementById('win-project-detail').dataset.currentProject = id;
+
+    updateProjectDetailContent(id);
+
+    document.getElementById('detail-link').href = project.link;
+
+    openWindow('win-project-detail');
+}
+
+function updateProjectDetailContent(id) {
+    if (!id) return;
+    const project = projectsData[id];
+
+    // Content based on lang
+    document.getElementById('detail-desc').innerHTML = project.desc[currentLang] || project.desc.fr;
+    document.getElementById('detail-tech').textContent = project.tech;
+
+    const skillsList = document.getElementById('detail-skills');
+    skillsList.innerHTML = '';
+    const skills = project.skills[currentLang] || project.skills.fr;
+    skills.forEach(skill => {
+        const li = document.createElement('li');
+        li.textContent = skill;
+        skillsList.appendChild(li);
+    });
+}
+
+
 // --- BOOT SEQUENCE ---
-window.onload = function() {
+window.onload = function () {
     loadIconPositions(); // Load saved positions
     setTimeout(() => {
-        document.getElementById('boot-msg').innerHTML = "Starting LoukaOS 98... OK";
+        document.getElementById('boot-msg').innerHTML = (translations[currentLang]?.boot_sequence || "Starting LoukaOS 98...") + " <span class='cursor-blink'>_</span>";
     }, 1500);
     setTimeout(() => {
         document.getElementById('boot-screen').style.display = 'none';
@@ -10,6 +385,31 @@ window.onload = function() {
     }, 3000);
     initPaint(); // Init Paint
     initNotepad(); // Init Notepad
+
+    // Add accessibility support for keyboard
+    setupKeyboardAccessibility();
+}
+
+function setupKeyboardAccessibility() {
+    // Make elements with role="button" clickable via Enter key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            const el = document.activeElement;
+            if (el && el.getAttribute('role') === 'button') {
+                el.click(); // Trigger click
+                if (el.getAttribute('ondblclick')) {
+                    // For desktop icons, they are set to open on double click, 
+                    // but accessibility wise Enter should probably open them.
+                    // The click listener on them (if any) or dblclick needs handling.
+                    // Let's just manually trigger map
+                    const dblclick = el.getAttribute('ondblclick');
+                    if (dblclick) new Function(dblclick)();
+                }
+            }
+        }
+    });
+
+    // Make window controls focusable? Maybe overkill, but good for navigation
 }
 
 function playStartupSound() {
@@ -21,23 +421,24 @@ function playStartupSound() {
 const clickAudio = new Audio('https://www.myinstants.com/media/sounds/windows-98-click.mp3');
 document.addEventListener('mousedown', () => {
     clickAudio.currentTime = 0;
-    clickAudio.play().catch(() => {});
+    clickAudio.play().catch(() => { });
 });
 
 // --- MENU DÉMARRER ---
 const startMenu = document.getElementById('start-menu');
 const startBtn = document.getElementById('start-btn');
 
-startBtn.onclick = function(e) {
+startBtn.onclick = function (e) {
     e.stopPropagation();
     const isVisible = startMenu.style.display === 'flex';
     startMenu.style.display = isVisible ? 'none' : 'flex';
-    startBtn.classList.toggle('active'); // Style enfoncé à ajouter si voulu
+    startBtn.classList.toggle('active');
 };
 
-document.addEventListener('click', function(e) {
+document.addEventListener('click', function (e) {
     if (!startMenu.contains(e.target) && e.target !== startBtn) {
         startMenu.style.display = 'none';
+        startBtn.classList.remove('active');
     }
 });
 
@@ -48,15 +449,15 @@ function updateClock() {
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const ampm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12;
-    hours = hours ? hours : 12; 
+    hours = hours ? hours : 12;
     const timeStr = `${hours}:${minutes} ${ampm}`;
-    
+
     const clockEl = document.getElementById('clock');
     clockEl.textContent = timeStr;
-    
+
     // Tooltip avec la date complète
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    clockEl.title = now.toLocaleDateString('fr-FR', options);
+    clockEl.title = now.toLocaleDateString(currentLang === 'fr' ? 'fr-FR' : 'en-US', options);
 }
 setInterval(updateClock, 1000);
 updateClock();
@@ -64,8 +465,10 @@ updateClock();
 // --- BSOD ---
 function triggerBSOD() {
     document.getElementById('bsod').style.display = 'block';
-    // On peut aussi jouer un son d'erreur
 }
+
+// --- MATRIX RAIN EFFECT ---
+// (Logic moved to bottom of file or implemented in one place)
 
 // --- GESTION FENÊTRES & BARRE DES TÂCHES ---
 const taskbarApps = document.getElementById('taskbar-apps');
@@ -83,7 +486,9 @@ const windowsInfo = {
     'win-minesweeper': { title: 'Démineur', icon: 'https://win98icons.alexmeub.com/icons/png/game_mine_1-0.png' },
     'win-paint': { title: 'Paint', icon: 'https://win98icons.alexmeub.com/icons/png/paint_file-2.png' },
     'win-recycle': { title: 'Corbeille', icon: 'https://win98icons.alexmeub.com/icons/png/recycle_bin_full-4.png' },
-    'win-calendar': { title: 'Calendrier', icon: 'https://win98icons.alexmeub.com/icons/png/calendar-1.png' }
+    'win-calendar': { title: 'Calendrier', icon: 'https://win98icons.alexmeub.com/icons/png/calendar-1.png' },
+    'win-project-detail': { title: 'Details', icon: 'https://win98icons.alexmeub.com/icons/png/chm-1.png' },
+    'win-taskmgr': { title: 'Task Manager', icon: 'https://win98icons.alexmeub.com/icons/png/computer_task_manager-0.png' }
 };
 
 function openWindow(id) {
@@ -91,10 +496,19 @@ function openWindow(id) {
     win.style.display = 'flex';
     bringToFront(win);
     updateTaskbar(id, true);
+
+    if (id === 'win-taskmgr') {
+        startTaskManager();
+    }
 }
 
 function closeWindow(id) {
     document.getElementById(id).style.display = 'none';
+
+    if (id === 'win-taskmgr') {
+        stopTaskManager();
+    }
+
     // Retirer de la barre des tâches
     const appBtn = document.getElementById('btn-' + id);
     if (appBtn) appBtn.remove();
@@ -113,7 +527,7 @@ const restoreState = {};
 
 function maximizeWindow(id) {
     const win = document.getElementById(id);
-    
+
     if (win.dataset.maximized === 'true') {
         // RESTORE
         win.style.top = restoreState[id].top;
@@ -141,7 +555,7 @@ function maximizeWindow(id) {
 function toggleWindow(id) {
     const win = document.getElementById(id);
     const appBtn = document.getElementById('btn-' + id);
-    
+
     if (win.style.display === 'none') {
         win.style.display = 'flex';
         bringToFront(win);
@@ -159,16 +573,16 @@ function toggleWindow(id) {
 
 function updateTaskbar(id, isActive) {
     let appBtn = document.getElementById('btn-' + id);
-    
+
     // Créer le bouton s'il n'existe pas
     if (!appBtn) {
         appBtn = document.createElement('div');
         appBtn.id = 'btn-' + id;
         appBtn.className = 'taskbar-app';
         appBtn.onclick = () => toggleWindow(id);
-        
+
         const info = windowsInfo[id] || { title: 'Application', icon: '' };
-        
+
         appBtn.innerHTML = `<img src="${info.icon}"><span>${info.title}</span>`;
         taskbarApps.appendChild(appBtn);
     }
@@ -184,11 +598,11 @@ function bringToFront(element) {
         w.style.zIndex = 1;
         w.classList.add('inactive');
     });
-    
+
     // Activer la fenêtre cible
     element.style.zIndex = 10;
     element.classList.remove('inactive');
-    
+
     // Mettre à jour la barre des tâches
     document.querySelectorAll('.taskbar-app').forEach(btn => btn.classList.remove('active'));
     const btn = document.getElementById('btn-' + element.id);
@@ -206,8 +620,7 @@ function startDrag(e, windowEl) {
     dragType = 'window';
     currentElement = windowEl;
     bringToFront(windowEl);
-    
-    // Si maximisé, on ne déplace pas (ou on restaure, mais simple ici)
+
     if (windowEl.dataset.maximized === 'true') {
         isDragging = false;
         return;
@@ -238,7 +651,6 @@ document.addEventListener('mousemove', (e) => {
         currentElement.style.left = `${x}px`;
         currentElement.style.top = `${y}px`;
     } else if (dragType === 'icon') {
-        // Limites du bureau pour les icônes
         currentElement.style.left = `${x}px`;
         currentElement.style.top = `${y}px`;
     }
@@ -260,7 +672,7 @@ function saveIconPositions() {
     const positions = [];
     icons.forEach((icon, index) => {
         positions.push({
-            index: index,
+            index: index, // This relies on DOM order, which might change? Better to use text as key but index is fine for now
             left: icon.style.left,
             top: icon.style.top
         });
@@ -273,6 +685,7 @@ function loadIconPositions() {
     if (saved) {
         const positions = JSON.parse(saved);
         const icons = document.querySelectorAll('.icon');
+        // Simple heuristic matching by index
         positions.forEach(pos => {
             if (icons[pos.index]) {
                 icons[pos.index].style.left = pos.left;
@@ -298,8 +711,6 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Ouvrir la fenêtre principale au démarrage
-// openWindow('win-about'); // Déplacé dans le onload pour éviter conflit avec boot screen
 setTimeout(() => openWindow('win-about'), 3100);
 
 function copyEmail() {
@@ -307,7 +718,6 @@ function copyEmail() {
     navigator.clipboard.writeText(email).then(() => {
         alert("Email copié dans le presse-papier !");
     }).catch(err => {
-        console.error('Erreur lors de la copie :', err);
         alert("Erreur lors de la copie.");
     });
 }
@@ -317,17 +727,15 @@ const cmdInput = document.getElementById('cmd-input');
 const terminalOutput = document.getElementById('terminal-output');
 
 if (cmdInput) {
-    cmdInput.addEventListener('keydown', function(e) {
+    cmdInput.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
             const command = this.value.trim().toLowerCase();
             this.value = '';
-            
-            // Afficher la commande tapée
+
             terminalOutput.innerHTML += `<div>C:\\WINDOWS> ${command}</div>`;
-            
-            // Traiter la commande
+
             let response = '';
-            switch(command) {
+            switch (command) {
                 case 'help':
                     response = 'COMMANDS: HELP, ABOUT, SKILLS, PROJECTS, CONTACT, CLEAR, EXIT';
                     break;
@@ -350,7 +758,7 @@ if (cmdInput) {
                     return;
                 case 'clear':
                     terminalOutput.innerHTML = '';
-                    return; // Pas de nouvelle ligne
+                    return;
                 case 'exit':
                     closeWindow('win-terminal');
                     return;
@@ -359,13 +767,12 @@ if (cmdInput) {
                 default:
                     response = 'Bad command or file name';
             }
-            
+
             if (response) {
                 terminalOutput.innerHTML += `<div>${response}</div>`;
             }
             terminalOutput.innerHTML += '<br>';
-            
-            // Scroll vers le bas
+
             const contentArea = document.getElementById('terminal-content');
             contentArea.scrollTop = contentArea.scrollHeight;
         }
@@ -401,7 +808,6 @@ function initMinesweeper() {
 
     document.querySelector('.smiley-btn').textContent = '😊';
 
-    // Init grid
     for (let r = 0; r < mineRows; r++) {
         let row = [];
         for (let c = 0; c < mineCols; c++) {
@@ -422,7 +828,6 @@ function initMinesweeper() {
         mineGrid.push(row);
     }
 
-    // Place mines
     let minesPlaced = 0;
     while (minesPlaced < mineCount) {
         let r = Math.floor(Math.random() * mineRows);
@@ -433,15 +838,14 @@ function initMinesweeper() {
         }
     }
 
-    // Calc neighbors
     for (let r = 0; r < mineRows; r++) {
         for (let c = 0; c < mineCols; c++) {
             if (!mineGrid[r][c].isMine) {
                 let count = 0;
                 for (let i = -1; i <= 1; i++) {
                     for (let j = -1; j <= 1; j++) {
-                        if (r+i >= 0 && r+i < mineRows && c+j >= 0 && c+j < mineCols) {
-                            if (mineGrid[r+i][c+j].isMine) count++;
+                        if (r + i >= 0 && r + i < mineRows && c + j >= 0 && c + j < mineCols) {
+                            if (mineGrid[r + i][c + j].isMine) count++;
                         }
                     }
                 }
@@ -455,7 +859,7 @@ function handleMineClick(e, r, c) {
     if (mineGameOver) return;
     const cell = mineGrid[r][c];
 
-    if (e.button === 2) { // Right click (Flag)
+    if (e.button === 2) {
         if (!cell.isRevealed) {
             cell.isFlagged = !cell.isFlagged;
             cell.el.textContent = cell.isFlagged ? '🚩' : '';
@@ -463,7 +867,7 @@ function handleMineClick(e, r, c) {
             mineFlags += cell.isFlagged ? 1 : -1;
             document.getElementById('mine-count').textContent = String(mineCount - mineFlags).padStart(3, '0');
         }
-    } else if (e.button === 0) { // Left click (Reveal)
+    } else if (e.button === 0) {
         if (cell.isFlagged) return;
         if (cell.isMine) {
             gameOver(false);
@@ -474,34 +878,150 @@ function handleMineClick(e, r, c) {
     }
 }
 
-function revealCell(r, c) {
-    if (r < 0 || r >= mineRows || c < 0 || c >= mineCols) return;
-    const cell = mineGrid[r][c];
-    if (cell.isRevealed || cell.isFlagged) return;
+// --- WINAMP LOGIC ---
+const winampTracks = [
+    "https://upload.wikimedia.org/wikipedia/commons/d/d9/Wilhelm_Scream.ogg", // Placeholder
+    "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" // Demo song
+];
+let winampIsPlaying = false;
+const winampAudio = document.getElementById('winamp-audio');
 
-    cell.isRevealed = true;
-    cell.el.classList.add('revealed');
+function winampPlay() {
+    if (!winampAudio.src) {
+        winampAudio.src = winampTracks[1];
+        winampAudio.volume = 0.3;
+    }
+    winampAudio.play().then(() => {
+        winampIsPlaying = true;
+        updateWinampStatus();
+    }).catch(e => console.error("Audio play failed", e));
+}
 
-    if (cell.neighbors > 0) {
-        cell.el.textContent = cell.neighbors;
-        cell.el.classList.add('c' + cell.neighbors);
+function winampPause() {
+    winampAudio.pause();
+    winampIsPlaying = false;
+    updateWinampStatus();
+}
+
+function winampStop() {
+    winampAudio.pause();
+    winampAudio.currentTime = 0;
+    winampIsPlaying = false;
+    updateWinampStatus();
+}
+
+function winampNext() {
+    // Just restart for demo
+    winampAudio.currentTime = 0;
+    winampAudio.play();
+}
+
+function winampPrev() {
+    winampAudio.currentTime = 0;
+    winampAudio.play();
+}
+
+function updateWinampStatus() {
+    const marquee = document.getElementById('winamp-marquee');
+    const status = document.getElementById('winamp-status');
+
+    if (!marquee) return;
+
+    if (winampIsPlaying) {
+        marquee.textContent = translations[currentLang]?.winamp_playing || "PLAYING...";
+        if (status) status.textContent = "PLAYING";
+        marquee.scrollAmount = 4;
     } else {
-        // Flood fill
-        for (let i = -1; i <= 1; i++) {
-            for (let j = -1; j <= 1; j++) {
-                revealCell(r+i, c+j);
-            }
+        if (winampAudio.currentTime > 0) {
+            marquee.textContent = translations[currentLang]?.winamp_paused || "PAUSED";
+            if (status) status.textContent = "PAUSED";
+            marquee.scrollAmount = 0;
+        } else {
+            marquee.textContent = translations[currentLang]?.winamp_stopped || "STOPPED";
+            if (status) status.textContent = "STOPPED";
+            marquee.scrollAmount = 0;
         }
     }
+}
+
+// Volume control
+const winampVol = document.getElementById('winamp-vol');
+if (winampVol) {
+    winampVol.addEventListener('input', (e) => {
+        if (winampAudio) winampAudio.volume = e.target.value;
+    });
+}
+if (winampAudio) {
+    winampAudio.addEventListener('timeupdate', () => {
+        const timer = document.getElementById('winamp-timer');
+        if (timer) {
+            const min = Math.floor(winampAudio.currentTime / 60);
+            const sec = Math.floor(winampAudio.currentTime % 60);
+            timer.textContent = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+        }
+    });
+}
+
+
+// --- TASK MANAGER LOGIC ---
+let taskMgrInterval;
+
+function startTaskManager() {
+    if (taskMgrInterval) clearInterval(taskMgrInterval);
+    updateTaskMgr();
+    taskMgrInterval = setInterval(updateTaskMgr, 1500);
+}
+
+function stopTaskManager() {
+    clearInterval(taskMgrInterval);
+}
+
+function updateTaskMgr() {
+    const list = document.getElementById('taskmgr-list');
+    if (!list) return;
+
+    // Mock processes
+    const processes = [
+        { name: "System Idle Process", cpu: Math.floor(Math.random() * 90), mem: "16 K" },
+        { name: "java_backend.exe", cpu: Math.floor(Math.random() * 5), mem: "14,020 K" },
+        { name: "louka_brain.sys", cpu: Math.floor(Math.random() * 2), mem: "99,999 K" },
+        { name: "explorer.exe", cpu: 1, mem: "4,500 K" },
+        { name: "winamp.exe", cpu: 0, mem: "2,300 K" },
+        { name: "taskmgr.exe", cpu: 2, mem: "1,200 K" },
+        { name: "skills_scan.dll", cpu: 0, mem: "120 K" },
+        { name: "fivem_server.lua", cpu: 0, mem: "8,400 K" },
+        { name: "laravel_artisan", cpu: 0, mem: "6,100 K" },
+    ];
+
+    // Sort by CPU
+    processes.sort((a, b) => b.cpu - a.cpu);
+
+    let html = '<table style="width:100%; border-collapse:collapse;">';
+    processes.forEach(p => {
+        html += `<tr>
+            <td>${p.name}</td>
+            <td style="text-align:right">${p.cpu} %</td>
+            <td style="text-align:right">${p.mem}</td>
+        </tr>`;
+    });
+    html += '</table>';
+
+    list.innerHTML = html;
+
+    // Update footer stats
+    const totalCpu = processes.reduce((acc, p) => acc + (p.name === 'System Idle Process' ? 0 : p.cpu), 0);
+    const cpuEl = document.getElementById('taskmgr-cpu');
+    const memEl = document.getElementById('taskmgr-mem');
+    if (cpuEl) cpuEl.textContent = totalCpu + "%";
+    if (memEl) memEl.textContent = Math.floor(Math.random() * 20 + 10) + "%";
 }
 
 function gameOver(won) {
     mineGameOver = true;
     clearInterval(mineTimerInterval);
     document.querySelector('.smiley-btn').textContent = won ? '😎' : '😵';
-    
+
     if (!won) {
-        // Reveal all mines
         for (let r = 0; r < mineRows; r++) {
             for (let c = 0; c < mineCols; c++) {
                 if (mineGrid[r][c].isMine) {
@@ -525,16 +1045,12 @@ function checkWin() {
     }
 }
 
-// Init Minesweeper on load (but window is hidden)
 initMinesweeper();
 
 // --- MOBILE OPTIMIZATIONS ---
-// Convert double-click to single-click for icons on mobile
 if (window.innerWidth <= 768) {
     document.querySelectorAll('.icon').forEach(icon => {
         icon.addEventListener('click', (e) => {
-            // Only trigger if it has an ondblclick attribute (standard icons)
-            // Links with onclick will work natively
             const action = icon.getAttribute('ondblclick');
             if (action) {
                 new Function(action)();
@@ -549,7 +1065,7 @@ function startMatrix() {
     const canvas = document.getElementById('matrix-canvas');
     const ctx = canvas.getContext('2d');
     const terminalContent = document.getElementById('terminal-content');
-    
+
     canvas.style.display = 'block';
     canvas.width = terminalContent.clientWidth;
     canvas.height = terminalContent.clientHeight;
@@ -563,7 +1079,7 @@ function startMatrix() {
     const columns = canvas.width / fontSize;
 
     const rainDrops = [];
-    for( let x = 0; x < columns; x++ ) {
+    for (let x = 0; x < columns; x++) {
         rainDrops[x] = 1;
     }
 
@@ -574,11 +1090,11 @@ function startMatrix() {
         ctx.fillStyle = '#0F0';
         ctx.font = fontSize + 'px monospace';
 
-        for(let i = 0; i < rainDrops.length; i++) {
+        for (let i = 0; i < rainDrops.length; i++) {
             const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-            ctx.fillText(text, i*fontSize, rainDrops[i]*fontSize);
+            ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
 
-            if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
+            if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
                 rainDrops[i] = 0;
             }
             rainDrops[i]++;
@@ -587,15 +1103,13 @@ function startMatrix() {
 
     if (matrixInterval) clearInterval(matrixInterval);
     matrixInterval = setInterval(draw, 30);
-    
-    // Stop on click or keypress
+
     const stopMatrix = () => {
         clearInterval(matrixInterval);
         canvas.style.display = 'none';
         document.removeEventListener('click', stopMatrix);
         document.removeEventListener('keydown', stopMatrix);
     };
-    // Delay adding listener to avoid immediate stop
     setTimeout(() => {
         document.addEventListener('click', stopMatrix);
         document.addEventListener('keydown', stopMatrix);
@@ -611,15 +1125,13 @@ let currentColor = '#000000';
 function initPaint() {
     paintCanvas = document.getElementById('paint-canvas');
     paintCtx = paintCanvas.getContext('2d');
-    
-    // White background
+
     paintCtx.fillStyle = 'white';
     paintCtx.fillRect(0, 0, paintCanvas.width, paintCanvas.height);
 
-    // Colors
     const colors = ['#000000', '#808080', '#800000', '#808000', '#008000', '#008080', '#000080', '#800080', '#808040', '#004040', '#0080FF', '#004080', '#4000FF', '#804000',
-                    '#FFFFFF', '#C0C0C0', '#FF0000', '#FFFF00', '#00FF00', '#00FFFF', '#0000FF', '#FF00FF', '#FFFF80', '#00FF80', '#80FFFF', '#8080FF', '#FF80FF', '#FF8040'];
-    
+        '#FFFFFF', '#C0C0C0', '#FF0000', '#FFFF00', '#00FF00', '#00FFFF', '#0000FF', '#FF00FF', '#FFFF80', '#00FF80', '#80FFFF', '#8080FF', '#FF80FF', '#FF8040'];
+
     const palette = document.getElementById('color-palette');
     colors.forEach((c, i) => {
         const swatch = document.createElement('div');
@@ -630,7 +1142,6 @@ function initPaint() {
         palette.appendChild(swatch);
     });
 
-    // Events
     paintCanvas.addEventListener('mousedown', startPainting);
     paintCanvas.addEventListener('mousemove', drawPaint);
     paintCanvas.addEventListener('mouseup', stopPainting);
@@ -682,7 +1193,7 @@ function drawPaint(e) {
         paintCtx.moveTo(x, y);
     } else if (currentTool === 'eraser') {
         paintCtx.fillStyle = 'white';
-        paintCtx.fillRect(x-5, y-5, 10, 10);
+        paintCtx.fillRect(x - 5, y - 5, 10, 10);
     }
 }
 
@@ -709,7 +1220,11 @@ let currentMonth = new Date().getMonth();
 let currentYear = new Date().getFullYear();
 
 function renderCalendar() {
-    const monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+    const monthNamesFr = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+    const monthNamesEn = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    const monthNames = currentLang === 'fr' ? monthNamesFr : monthNamesEn;
+
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
     const firstDay = new Date(currentYear, currentMonth, 1).getDay(); // 0 = Sunday
 
@@ -755,14 +1270,29 @@ function changeMonth(delta) {
 
 // --- FAKE DOWNLOAD ---
 function downloadCV() {
+    const filename = currentLang === 'en' ? 'CV_EN.pdf' : 'CV_LOUKA_RIQUOIR.pdf';
+    const filepath = `assets/docs/${filename}`;
+
     const win = document.getElementById('win-download');
-    const bar = document.getElementById('download-bar');
+    // Update text content of download window if open, but simple toggle here
+    // We really should update the text inside the window before showing it
+
+    // Simulating updating the window content
+    const winTitle = win.querySelector('.title-bar span');
+    if (winTitle) winTitle.textContent = currentLang === 'en' ? 'File Download' : 'Téléchargement de fichier';
+
+    const winContent = win.querySelector('.content-area div div div strong');
+    if (winContent) winContent.textContent = filename;
+
+    // ... rest of logic
+
     win.style.display = 'flex';
     bringToFront(win);
-    
+
     let progress = 0;
+    const bar = document.getElementById('download-bar');
     bar.style.width = '0%';
-    
+
     const interval = setInterval(() => {
         progress += Math.random() * 10;
         if (progress >= 100) {
@@ -770,7 +1300,7 @@ function downloadCV() {
             clearInterval(interval);
             setTimeout(() => {
                 closeWindow('win-download');
-                window.open('assets/docs/CV_LOUKA_RIQUOIR.pdf', '_blank');
+                window.open(filepath, '_blank');
             }, 500);
         }
         bar.style.width = progress + '%';
@@ -782,96 +1312,53 @@ function triggerShutdown() {
     // Fade out effect
     document.body.style.transition = "filter 1s ease";
     document.body.style.filter = "grayscale(100%) brightness(0.5)";
-    
+
     setTimeout(() => {
         document.getElementById('shutdown-screen').style.display = 'flex';
-        document.body.style.filter = "none"; // Reset for the black screen
+        document.body.style.filter = "none";
     }, 1000);
 }
 
 // --- CLIPPY ---
-const clippyPhrases = [
-    "Il semble que vous cherchiez un développeur. Voulez-vous de l'aide ?",
-    "Astuce : Double-cliquez sur les icônes pour les ouvrir.",
-    "Je vois que vous regardez mon CV. Excellent choix !",
-    "N'oubliez pas de tester le Démineur !",
-    "Besoin d'un site web ? Louka est là pour ça !",
-    "Tapez 'matrix' dans le terminal pour un effet cool.",
-    "Vous pouvez changer le fond d'écran avec un clic droit !"
+const clippyPhrasesKeys = [
+    "clippy_intro",
+    "clippy_dblclick",
+    "clippy_cv",
+    "clippy_mine",
+    "clippy_projects",
+    "clippy_matrix",
+    "clippy_wallpaper"
 ];
 
-function showClippy() {
+function clippyTalk() {
+    const bubble = document.getElementById('clippy-text');
+    const randomKey = clippyPhrasesKeys[Math.floor(Math.random() * clippyPhrasesKeys.length)];
+    bubble.textContent = translations[currentLang][randomKey] || translations.fr[randomKey];
+
     const clippy = document.getElementById('clippy');
     clippy.style.display = 'flex';
-    clippyTalk();
+
+    // Hide after 5 seconds
+    setTimeout(() => {
+        clippy.style.display = 'none';
+    }, 5000);
 }
 
-function clippyTalk() {
-    const textEl = document.getElementById('clippy-text');
-    const phrase = clippyPhrases[Math.floor(Math.random() * clippyPhrases.length)];
-    textEl.textContent = phrase;
-}
-
-// Show Clippy randomly
-setTimeout(showClippy, 10000);
+// Show clippy randomly
 setInterval(() => {
-    if (Math.random() > 0.7) showClippy();
+    if (Math.random() > 0.7) clippyTalk();
 }, 30000);
 
-
-// --- WALLPAPER CHANGER ---
-function updatePreview() {
-    const select = document.getElementById('wallpaper-select');
-    const preview = document.getElementById('preview-screen');
-    const val = select.value;
-    
-    let bg = '';
-    if (val === 'teal') bg = '#008080';
-    else if (val === 'clouds') bg = 'url(https://win98icons.alexmeub.com/images/clouds-wallpaper.jpg)'; // Exemple
-    else if (val === 'matrix') bg = 'black';
-    else if (val === 'red') bg = '#800000';
-    else if (val === 'black') bg = '#000000';
-
-    preview.style.background = bg;
-    preview.style.backgroundSize = 'cover';
-}
-
-function applyWallpaper() {
-    const select = document.getElementById('wallpaper-select');
-    const val = select.value;
-    
-    if (val === 'teal') {
-        document.body.style.backgroundImage = 'none';
-        document.body.style.backgroundColor = '#008080';
-    } else if (val === 'clouds') {
-        document.body.style.backgroundImage = "url('https://win98icons.alexmeub.com/images/clouds-wallpaper.jpg')"; // Placeholder
-        document.body.style.backgroundSize = "cover";
-    } else if (val === 'matrix') {
-        document.body.style.backgroundImage = 'none';
-        document.body.style.backgroundColor = 'black';
-        // On pourrait lancer l'effet matrix en background mais restons simple
-    } else if (val === 'red') {
-        document.body.style.backgroundImage = 'none';
-        document.body.style.backgroundColor = '#800000';
-    } else if (val === 'black') {
-        document.body.style.backgroundImage = 'none';
-        document.body.style.backgroundColor = '#000000';
-    }
-    closeWindow('win-properties');
-}
-
-// --- DESKTOP SELECTION (RUBBER BAND) ---
+// --- SELECTION BOX ---
 const selectionBox = document.getElementById('selection-box');
 let startX, startY;
+let isSelecting = false;
 
 document.addEventListener('mousedown', (e) => {
-    // Only on desktop (body) directly
-    if (e.target === document.body || e.target.classList.contains('desktop')) {
-        isDragging = true; // Reuse existing flag or create new one
-        dragType = 'selection';
+    if (e.target.id === 'desktop') {
+        isSelecting = true;
         startX = e.clientX;
         startY = e.clientY;
-        
         selectionBox.style.left = startX + 'px';
         selectionBox.style.top = startY + 'px';
         selectionBox.style.width = '0px';
@@ -881,50 +1368,80 @@ document.addEventListener('mousedown', (e) => {
 });
 
 document.addEventListener('mousemove', (e) => {
-    if (dragType === 'selection') {
-        const currentX = e.clientX;
-        const currentY = e.clientY;
-        
-        const width = Math.abs(currentX - startX);
-        const height = Math.abs(currentY - startY);
-        const left = Math.min(currentX, startX);
-        const top = Math.min(currentY, startY);
-        
-        selectionBox.style.width = width + 'px';
-        selectionBox.style.height = height + 'px';
-        selectionBox.style.left = left + 'px';
-        selectionBox.style.top = top + 'px';
-    }
+    if (!isSelecting) return;
+
+    const currentX = e.clientX;
+    const currentY = e.clientY;
+
+    const width = Math.abs(currentX - startX);
+    const height = Math.abs(currentY - startY);
+    const left = Math.min(currentX, startX);
+    const top = Math.min(currentY, startY);
+
+    selectionBox.style.width = width + 'px';
+    selectionBox.style.height = height + 'px';
+    selectionBox.style.left = left + 'px';
+    selectionBox.style.top = top + 'px';
 });
 
 document.addEventListener('mouseup', () => {
-    if (dragType === 'selection') {
-        selectionBox.style.display = 'none';
-        dragType = null;
-        isDragging = false;
-    }
+    isSelecting = false;
+    selectionBox.style.display = 'none';
 });
 
-// --- KONAMI CODE ---
-const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-let konamiIndex = 0;
+// --- WALLPAPER PREVIEW ---
+function updatePreview() {
+    const select = document.getElementById('wallpaper-select');
+    const preview = document.getElementById('preview-screen');
+    const value = select.value;
 
-document.addEventListener('keydown', (e) => {
-    if (e.key === konamiCode[konamiIndex]) {
-        konamiIndex++;
-        if (konamiIndex === konamiCode.length) {
-            activateKonami();
-            konamiIndex = 0;
-        }
-    } else {
-        konamiIndex = 0;
+    // Check if it's a color or image (simplified logic)
+    switch (value) {
+        case 'teal': preview.style.background = '#008080'; break;
+        case 'red': preview.style.background = '#800000'; break;
+        case 'black': preview.style.background = '#000000'; break;
+        case 'clouds':
+            preview.style.background = 'url("https://win98icons.alexmeub.com/images/clouds.jpg") no-repeat center center';
+            preview.style.backgroundSize = 'cover';
+            break;
+        case 'matrix':
+            preview.style.background = 'black';
+            // In a real app we might show a static matrix image
+            break;
+        default: preview.style.background = '#008080';
     }
-});
+}
 
-function activateKonami() {
-    alert("CHEAT CODE ACTIVATED: GOD MODE (Just kidding, but here's a cool effect)");
-    document.body.style.filter = "invert(100%)";
-    setTimeout(() => {
-        document.body.style.filter = "none";
-    }, 5000);
+function applyWallpaper() {
+    const select = document.getElementById('wallpaper-select');
+    const value = select.value;
+
+    switch (value) {
+        case 'teal':
+            document.body.style.backgroundImage = 'none';
+            document.body.style.backgroundColor = '#008080';
+            break;
+        case 'red':
+            document.body.style.backgroundImage = 'none';
+            document.body.style.backgroundColor = '#800000';
+            break;
+        case 'black':
+            document.body.style.backgroundImage = 'none';
+            document.body.style.backgroundColor = '#000000';
+            break;
+        case 'clouds':
+            // Using a public URL for demo, ideally local asset
+            document.body.style.backgroundColor = '#008080';
+            document.body.style.backgroundImage = 'url("https://win98icons.alexmeub.com/images/clouds.jpg")';
+            break;
+        case 'matrix':
+            // Start matrix effect as wallpaper?
+            // Reusing canvas but z-index -1
+            document.body.style.backgroundImage = 'none';
+            document.body.style.backgroundColor = 'black';
+            // Simple hack: start matrix in terminal but full screen
+            alert("Matrix wallpaper not fully supported yet! Try 'matrix' in terminal.");
+            break;
+    }
+    closeWindow('win-properties');
 }
