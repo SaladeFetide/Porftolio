@@ -77,7 +77,7 @@ function initDoom() {
     texWall.onload = checkLoaded;
 
     // Load Gun (Directly, transparency handled by user)
-    sprayGun.src = 'assets/images/doom_gun.png';
+    sprayGun.src = 'assets/images/doom_gun.png?v=' + new Date().getTime();
     sprayGun.onload = checkLoaded;
 
     // Controls
