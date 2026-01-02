@@ -88,7 +88,8 @@ body {
     margin: 0;
     padding: 0;
     background-color: var(--desktop-bg);
-    /* Image logic will be handled by JS or inline styles */
+    background-image: url('../assets/images/Fond.jpg');
+    /* Default Wallpaper */
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
