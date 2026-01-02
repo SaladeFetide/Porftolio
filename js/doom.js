@@ -76,30 +76,9 @@ function initDoom() {
     texWall.src = 'assets/images/doom_wall.png';
     texWall.onload = checkLoaded;
 
-    // Load Gun with Transparency Processing
-    const rawGun = new Image();
-    rawGun.src = 'assets/images/doom_gun.png';
-    rawGun.onload = () => {
-        const tempCanvas = document.createElement('canvas');
-        tempCanvas.width = rawGun.width;
-        tempCanvas.height = rawGun.height;
-        const tempCtx = tempCanvas.getContext('2d');
-        tempCtx.drawImage(rawGun, 0, 0);
-
-        const imgData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
-        const data = imgData.data;
-
-        for (let i = 0; i < data.length; i += 4) {
-            // White/Grey background removal
-            if (data[i] > 230 && data[i + 1] > 230 && data[i + 2] > 230) {
-                data[i + 3] = 0;
-            }
-        }
-
-        tempCtx.putImageData(imgData, 0, 0);
-        sprayGun.src = tempCanvas.toDataURL();
-        checkLoaded();
-    };
+    // Load Gun (Directly, transparency handled by user)
+    sprayGun.src = 'assets/images/doom_gun.png';
+    sprayGun.onload = checkLoaded;
 
     // Controls
     window.addEventListener('keydown', (e) => {
