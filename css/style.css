@@ -1087,3 +1087,89 @@ body.theme-hacker .taskbar-app.active {
         max-height: 700px;
     }
 }
+
+/* --- VS CODE STYLES --- */
+.vscode-tab {
+    padding: 8px 15px;
+    background: #2d2d2d;
+    color: #969696;
+    border-right: 1px solid #1e1e1e;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+.vscode-tab.active {
+    background: #1e1e1e;
+    color: white;
+    border-top: 1px solid #007acc;
+}
+
+.vscode-file-item {
+    padding: 3px 10px;
+    cursor: pointer;
+    color: #cccccc;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.vscode-file-item:hover {
+    background: #2a2d2e;
+}
+
+.token-keyword {
+    color: #569cd6;
+}
+
+/* Blue */
+.token-string {
+    color: #ce9178;
+}
+
+/* Orange */
+.token-comment {
+    color: #6a9955;
+}
+
+/* Green */
+.token-function {
+    color: #dcdcaa;
+}
+
+/* Yellow */
+.token-number {
+    color: #b5cea8;
+}
+
+/* Light Green */
+
+/* --- EXPLORER ITEMS --- */
+.dir-item {
+    width: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    color: black;
+    margin: 5px;
+}
+
+.dir-item:hover .dir-text {
+    background: #000080;
+    color: white;
+}
+
+.dir-icon {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 2px;
+}
+
+.dir-text {
+    font-size: 0.8rem;
+    padding: 1px 2px;
+    word-break: break-all;
+    line-height: 1.1;
+}

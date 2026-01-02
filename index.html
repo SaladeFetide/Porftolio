@@ -43,7 +43,7 @@
     <div class="desktop" id="desktop">
 
         <!-- Icônes positionnées en absolu pour le drag & drop -->
-        <div class="icon" style="top: 20px; left: 20px;" ondblclick="openWindow('win-about')"
+        <div class="icon" style="top: 20px; left: 20px;" ondblclick="openExplorer('C:')"
             onmousedown="startIconDrag(event, this)" role="button" tabindex="0" aria-label="Poste de Louka">
             <div class="icon-img ico-pc"></div>
             <div class="icon-text" data-lang-key="desktop_computer">Poste de Louka</div>
@@ -456,6 +456,93 @@
                         style="background: transparent; border: none; color: white; font-family: inherit; flex-grow: 1; outline: none; margin-left: 5px;">
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- VS CODE 98 (Visual J++) -->
+    <div class="window" id="win-vscode"
+        style="top: 50px; left: 150px; width: 800px; height: 500px; display: none; flex-direction: column;">
+        <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+            <span id="vscode-title">Visual J++ Mode - Code Editor</span>
+            <div class="win-controls">
+                <div class="min-btn" onclick="minimizeWindow('win-vscode')">_</div>
+                <div class="max-btn" onclick="maximizeWindow('win-vscode')">
+                    <div class="max-icon"></div>
+                </div>
+                <div class="close-btn" onclick="closeWindow('win-vscode')">X</div>
+            </div>
+        </div>
+        <div class="menubar">
+            <span>File</span>
+            <span>Edit</span>
+            <span>View</span>
+            <span>Project</span>
+            <span>Help</span>
+        </div>
+        <div class="content-area"
+            style="padding: 0; display: flex; flex-direction: row; height: 100%; overflow: hidden; background: #1e1e1e;">
+            <!-- Sidebar -->
+            <div
+                style="width: 200px; background: #252526; color: #cccccc; border-right: 1px solid #333; display: flex; flex-direction: column;">
+                <div style="padding: 10px; font-weight: bold; font-size: 0.8rem; background: #333;">EXPLORER</div>
+                <div id="vscode-sidebar"
+                    style="overflow-y: auto; flex-grow: 1; padding: 5px; font-family: 'Tahoma', sans-serif; font-size: 0.8rem;">
+                    <!-- Tree items injected by JS -->
+                </div>
+            </div>
+            <!-- Editor -->
+            <div style="flex-grow: 1; display: flex; flex-direction: column;">
+                <!-- Tabs -->
+                <div style="background: #2d2d2d; display: flex; overflow-x: auto;" id="vscode-tabs">
+                    <!-- <div class="vscode-tab active">script.js</div> -->
+                </div>
+                <!-- Code Area -->
+                <pre id="vscode-code"
+                    style="margin: 0; flex-grow: 1; padding: 10px; font-family: 'Consolas', 'Courier New', monospace; color: #d4d4d4; overflow: auto; font-size: 14px; line-height: 1.5;">
+// Select a file to view code...
+                </pre>
+            </div>
+        </div>
+        <div
+            style="background: #007acc; color: white; padding: 2px 5px; font-size: 0.7rem; display: flex; justify-content: space-between;">
+            <span>Ready</span>
+            <span>Ln 1, Col 1</span>
+        </div>
+    </div>
+
+    <!-- GENERIC FILE EXPLORER -->
+    <div class="window" id="win-explorer"
+        style="top: 60px; left: 60px; width: 600px; height: 400px; display: none; flex-direction: column;">
+        <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+            <span id="explorer-title">File Explorer</span>
+            <div class="win-controls">
+                <div class="min-btn" onclick="minimizeWindow('win-explorer')">_</div>
+                <div class="max-btn" onclick="maximizeWindow('win-explorer')">
+                    <div class="max-icon"></div>
+                </div>
+                <div class="close-btn" onclick="closeWindow('win-explorer')">X</div>
+            </div>
+        </div>
+        <div class="menubar">
+            <span>File</span>
+            <span>Edit</span>
+            <span>View</span>
+            <span>Go</span>
+            <span>Favorites</span>
+            <span>Help</span>
+        </div>
+        <div
+            style="background: #efefef; padding: 5px; border-bottom: 1px solid #808080; display: flex; gap: 5px; align-items: center;">
+            <span>Address:</span>
+            <input type="text" id="explorer-address"
+                style="flex-grow: 1; background: white; border: 1px inset white; padding: 2px;" readonly>
+        </div>
+        <div class="content-area" id="explorer-content"
+            style="background: white; border: 2px inset white; flex-grow: 1; padding: 10px; display: flex; flex-wrap: wrap; align-content: flex-start; gap: 10px; overflow-y: auto;">
+            <!-- Files injected by JS -->
+        </div>
+        <div style="border-top: 1px solid #808080; padding: 2px 5px; font-size: 0.8rem;">
+            <span id="explorer-status">0 object(s)</span>
         </div>
     </div>
 

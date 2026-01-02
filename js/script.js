@@ -1408,6 +1408,218 @@ function applyThemeUser(theme) {
     }
 }
 
+// --- FILE SYSTEM LOGIC ---
+const fileSystem = {
+    "C:": {
+        type: "folder",
+        children: {
+            "Mes Documents": {
+                type: "folder",
+                children: {
+                    "Projets": {
+                        type: "folder",
+                        children: {
+                            "Bomberman": { type: "folder", children: {} },
+                            "Onitama": { type: "folder", children: {} },
+                            "PokeBattle": { type: "folder", children: {} }
+                        }
+                    },
+                    "CV_FR.pdf": { type: "file", icon: "pdf", action: "downloadCV('fr')" },
+                    "CV_EN.pdf": { type: "file", icon: "pdf", action: "downloadCV('en')" },
+                    "secret.txt": { type: "file", icon: "txt", content: "Bravo ! Vous avez trouvé un fichier caché." }
+                }
+            },
+            "Program Files": {
+                type: "folder",
+                children: {
+                    "Visual J++": { type: "file", icon: "vscode", action: "openWindow('win-vscode')" },
+                    "Internet Explorer": { type: "file", icon: "ie", action: "openWindow('win-ie')" },
+                    "Winamp": { type: "file", icon: "winamp", action: "openWindow('win-winamp')" },
+                    "System32": { type: "folder", children: {} }
+                }
+            },
+            "Windows": {
+                type: "folder",
+                children: {
+                    "System32": { type: "folder", children: {} }
+                }
+            }
+        }
+    }
+};
+
+let currentPath = [];
+
+function openExplorer(pathStr) {
+    if (!pathStr) pathStr = "C:";
+
+    // Parse path string to array
+    const parts = pathStr.split('/').filter(p => p);
+    currentPath = parts;
+
+    // Traverse
+    let currentDir = fileSystem;
+    let valid = true;
+    if (!fileSystem[parts[0]]) valid = false;
+    else currentDir = fileSystem[parts[0]];
+
+    for (let i = 1; i < parts.length; i++) {
+        if (currentDir.children && currentDir.children[parts[i]]) {
+            currentDir = currentDir.children[parts[i]];
+        } else {
+            valid = false;
+            break;
+        }
+    }
+
+    if (!valid || currentDir.type !== 'folder') {
+        alert("Chemin introuvable : " + pathStr);
+        return;
+    }
+
+    // Render
+    const win = document.getElementById('win-explorer');
+    win.style.display = 'flex';
+    bringToFront(win);
+    updateTaskbar('win-explorer', true);
+
+    document.getElementById('explorer-title').textContent = pathStr;
+    document.getElementById('explorer-address').value = pathStr;
+
+    const content = document.getElementById('explorer-content');
+    content.innerHTML = '';
+
+    // "Up" button if not root
+    if (parts.length > 1) {
+        const upDiv = document.createElement('div');
+        upDiv.className = 'dir-item';
+        upDiv.ondblclick = () => {
+            parts.pop();
+            openExplorer(parts.join('/'));
+        };
+        upDiv.innerHTML = `
+            <img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png" class="dir-icon">
+            <div class="dir-text">..</div>
+        `;
+        content.appendChild(upDiv);
+    }
+
+    const items = currentDir.children || {};
+    const count = Object.keys(items).length;
+    document.getElementById('explorer-status').textContent = `${count} object(s)`;
+
+    for (const [name, data] of Object.entries(items)) {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'dir-item';
+
+        let iconUrl = "https://win98icons.alexmeub.com/icons/png/directory_closed-4.png";
+        if (data.type === 'file') {
+            if (data.icon === 'pdf') iconUrl = "https://win98icons.alexmeub.com/icons/png/chm-1.png";
+            else if (data.icon === 'txt') iconUrl = "https://win98icons.alexmeub.com/icons/png/notepad-5.png";
+            else if (data.icon === 'vscode') iconUrl = "https://win98icons.alexmeub.com/icons/png/template_empty-2.png";
+            else if (data.icon === 'ie') iconUrl = "https://win98icons.alexmeub.com/icons/png/msie1-2.png";
+            else if (data.icon === 'winamp') iconUrl = "https://win98icons.alexmeub.com/icons/png/cd_audio_cd_a-3.png";
+        }
+
+        itemDiv.innerHTML = `
+            <img src="${iconUrl}" class="dir-icon">
+            <div class="dir-text">${name}</div>
+        `;
+
+        if (data.type === 'folder') {
+            itemDiv.ondblclick = () => openExplorer(pathStr + "/" + name);
+        } else {
+            itemDiv.ondblclick = () => {
+                if (data.action) {
+                    new Function(data.action)();
+                } else if (data.content) {
+                    alert(data.content);
+                }
+            };
+        }
+
+        content.appendChild(itemDiv);
+    }
+}
+
+// --- VS CODE / EDITOR LOGIC ---
+const codeFiles = {
+    "LoginController.java": `package com.louka.onitama.controller;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+
+public class LoginController {
+    @FXML
+    private TextField usernameField;
+
+    public void onLogin() {
+        String user = usernameField.getText();
+        if (isValid(user)) {
+            System.out.println("User " + user + " logged in.");
+            SceneManager.load("GameView.fxml");
+        }
+    }
+
+    private boolean isValid(String u) {
+        return u != null && !u.isEmpty();
+    }
+}`,
+    "server.lua": `AddEventHandler('onResourceStart', function(resourceName)
+    if (getCurrentResourceName() ~= resourceName) then
+        return
+    end
+    print('The resource ' .. resourceName .. ' has been started.')
+end)
+
+RegisterCommand('hello', function(source, args, rawCommand)
+    print("Hello Louka!")
+    TriggerClientEvent('chat:addMessage', source, {
+        args = { 'System', 'Hello world!' }
+    })
+end, false)`
+};
+
+function initVSCode() {
+    const sidebar = document.getElementById('vscode-sidebar');
+    if (!sidebar) return;
+    sidebar.innerHTML = '';
+
+    Object.keys(codeFiles).forEach(filename => {
+        const item = document.createElement('div');
+        item.className = 'vscode-file-item';
+        item.innerHTML = `<span>☕</span> ${filename}`;
+        item.onclick = () => loadVSCodeFile(filename);
+        sidebar.appendChild(item);
+    });
+
+    loadVSCodeFile("LoginController.java");
+}
+
+function loadVSCodeFile(filename) {
+    const code = codeFiles[filename];
+    const codeEl = document.getElementById('vscode-code');
+    const tabsEl = document.getElementById('vscode-tabs');
+
+    tabsEl.innerHTML = `<div class="vscode-tab active">${filename}</div>`;
+
+    let formatted = code
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/\b(public|class|private|void|String|import|package|return|if|else|function|end|local|then)\b/g, '<span class="token-keyword">$1</span>')
+        .replace(/(".*?")/g, '<span class="token-string">$1</span>')
+        .replace(/(\/\/.*)/g, '<span class="token-comment">$1</span>')
+        .replace(/\b(\d+)\b/g, '<span class="token-number">$1</span>');
+
+    codeEl.innerHTML = formatted;
+}
+
+// Hook into window.onload for VS Code init
+const originalOnload = window.onload;
+window.onload = function () {
+    if (originalOnload) originalOnload();
+    initVSCode();
+};
+
 function updatePreview() {
     const select = document.getElementById('wallpaper-select');
     const value = select.value;
@@ -1564,6 +1776,9 @@ window.onload = function () {
     initPaint();
     initNotepad();
     setupKeyboardAccessibility();
+
+    // Init VS Code Mock
+    if (typeof initVSCode === 'function') initVSCode();
 
     // Start Modem text instead of direct boot
     simulateModem();
