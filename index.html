@@ -673,6 +673,7 @@
         <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
             <span>DOOM 98 (Shareware)</span>
             <div class="win-controls">
+                <div class="minimize-btn" onclick="maximizeWindow('win-doom')">□</div>
                 <div class="close-btn" onclick="closeWindow('win-doom'); stopDoom();">X</div>
             </div>
         </div>
@@ -681,7 +682,7 @@
             <img src="assets/images/doom_logo.png"
                 style="width: 300px; margin-bottom: 10px; image-rendering: pixelated;" alt="DOOM 98">
             <canvas id="doom-canvas" width="640" height="480"
-                style="background: black; border: 4px inset #666; width: 640px; height: 480px; box-shadow: 0 0 20px rgba(0,0,0,0.8);"></canvas>
+                style="background: black; border: 4px inset #666; width: 100%; height: 100%; object-fit: contain; box-shadow: 0 0 20px rgba(0,0,0,0.8);"></canvas>
         </div>
     </div>
 
