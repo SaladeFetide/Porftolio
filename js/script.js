@@ -1815,7 +1815,7 @@ function clippyAsk(topic) {
             answer = "Je suis disponible pour un stage ou une alternance ! On signe où ? ✍️";
             break;
         case 'stack':
-            answer = "J'adore Java et Spring pour le backend robuste, et React/JS pour le front. Mais je m'adapte à tout ! 🚀";
+            answer = "J'adore Java pour le backend robuste, et React/JS pour le front. Mais je m'adapte à tout ! 🚀";
             break;
         case 'contact':
             answer = "Envoyez-moi un mail à louka.riquoir@gmail.com ou ajoutez-moi sur LinkedIn via Internet Explorer ! 🌐";
