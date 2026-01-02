@@ -137,9 +137,9 @@ function initDoom() {
 
     // Enhanced Controls
     const keyHandler = (e, pressed) => {
-        if (e.key === 'w' || e.key === 'ArrowUp') keys.w = pressed;
+        if (e.key === 'z' || e.key === 'ArrowUp') keys.w = pressed;
         if (e.key === 's' || e.key === 'ArrowDown') keys.s = pressed;
-        if (e.key === 'a' || e.key === 'ArrowLeft') keys.a = pressed;
+        if (e.key === 'q' || e.key === 'ArrowLeft') keys.a = pressed;
         if (e.key === 'd' || e.key === 'ArrowRight') keys.d = pressed;
         if (e.key === 'Shift') keys.shift = pressed;
         if (e.key === ' ') {
@@ -357,8 +357,8 @@ function loop() {
     if (canRenderTextures && sprayGun.complete && sprayGun.naturalWidth > 0) {
         // Adaptation responsive de la taille de l'arme
         const baseGunScale = Math.min(screenWidth / 640, screenHeight / 480);
-        const gunW = 320 * baseGunScale;
-        const gunH = 320 * baseGunScale;
+        const gunW = 600 * baseGunScale;
+        const gunH = 600 * baseGunScale;
         const gunX = (screenWidth - gunW) / 2 + bobX;
         const gunY = (screenHeight - gunH + 60 * baseGunScale) + bobY + breatheY - gunRecoil;
 
@@ -392,7 +392,6 @@ function loop() {
     }
 
     // 5. Crosshair
-    ctx.strokeStyle = 'rgba(0, 255, 0, 0.7)';
     ctx.lineWidth = 2;
     const chSize = 10;
     const chX = screenWidth / 2;
