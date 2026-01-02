@@ -224,9 +224,7 @@ function loop() {
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, screenWidth, screenHeight);
 
-    // 5. Crosshair
-    ctx.strokeStyle = "#00ff00";
-    ctx.lineWidth = 2;
+
     ctx.beginPath();
     ctx.moveTo(screenWidth / 2 - 5, screenHeight / 2);
     ctx.lineTo(screenWidth / 2 + 5, screenHeight / 2);
