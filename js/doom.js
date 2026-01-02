@@ -201,7 +201,7 @@ function loop() {
         const gunW = 256;
         const gunH = 256;
         const gunX = (screenWidth - gunW) / 2 + bobX;
-        const gunY = (screenHeight - gunH) + bobY;
+        const gunY = (screenHeight - gunH + 20) + bobY;
         ctx.drawImage(sprayGun, gunX, gunY, gunW, gunH);
     }
 
