@@ -61,6 +61,14 @@
             <div class="icon-text" data-lang-key="desktop_skills">Compétences.exe</div>
         </div>
 
+        <!-- DOOM 98 ICON -->
+        <div class="icon" style="top: 320px; left: 20px;" ondblclick="{ openWindow('win-doom'); initDoom(); }"
+            onmousedown="startIconDrag(event, this)" role="button" tabindex="0" aria-label="Doom 98">
+            <div class="icon-img"
+                style="background-image: url('https://win98icons.alexmeub.com/icons/png/game_doom-0.png');"></div>
+            <div class="icon-text" style="color: red; font-weight: bold; text-shadow: 1px 1px black;">DOOM 98</div>
+        </div>
+
         <div class="icon" style="top: 320px; left: 20px;" ondblclick="openWindow('win-contact')"
             onmousedown="startIconDrag(event, this)" role="button" tabindex="0" aria-label="Contact">
             <div class="icon-img ico-mail"></div>
@@ -651,14 +659,33 @@
     <!-- CLIPPY -->
     <div id="clippy">
         <div class="clippy-bubble" id="clippy-text">
-            Salut ! Je vois que vous cherchez un développeur compétent. Besoin d'aide ?
+            <!-- Content injected by JS -->
         </div>
         <img src="https://web.archive.org/web/20160304035343im_/http://clipart.nicubunu.ro/svg/computer/clippy.svg"
-            width="100" onclick="clippyTalk()" alt="Clippy">
+            width="100" onclick="showClippy()" alt="Clippy" style="cursor: pointer;">
     </div>
 
     <!-- SELECTION BOX -->
     <div id="selection-box"></div>
+
+    <!-- DOOM 98 WINDOW -->
+    <div class="window" id="win-doom"
+        style="top: 50px; left: 100px; width: 660px; height: 530px; display: none; background: #333;">
+        <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+            <span>DOOM 98 (Shareware)</span>
+            <div class="win-controls">
+                <div class="close-btn" onclick="closeWindow('win-doom'); stopDoom();">X</div>
+            </div>
+        </div>
+        <div class="content-area"
+            style="padding: 0; overflow: hidden; display: flex; justify-content: center; align-items: center; background: black;">
+            <canvas id="doom-canvas" width="640" height="480" style="background: black;"></canvas>
+            <div
+                style="position: absolute; bottom: 10px; color: red; font-family: monospace; font-weight: bold; pointer-events: none;">
+                USE ARROW KEYS TO MOVE
+            </div>
+        </div>
+    </div>
 
     <!-- PROPRIÉTÉS AFFICHAGE -->
     <div class="window" id="win-properties" style="top: 100px; left: 150px; width: 350px; height: 300px;">
@@ -885,6 +912,7 @@
 
     <!-- SCREENSAVER (just a container) -->
     <script src="js/script.js"></script>
+    <script src="js/doom.js"></script>
 </body>
 
 </html>

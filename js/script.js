@@ -1783,3 +1783,44 @@ window.onload = function () {
     // Start Modem text instead of direct boot
     simulateModem();
 }
+
+// --- CLIPPY INTERACTION ---
+function showClippy(text) {
+    const clippy = document.getElementById('clippy');
+    const bubble = document.getElementById('clippy-text');
+
+    if (!text) text = "Salut ! Je vois que vous cherchez un développeur compétent. Besoin d'aide ?";
+
+    // Add interactive buttons if it's the intro
+    if (text.includes("Besoin d'aide") || text.includes("Need help")) {
+        bubble.innerHTML = `
+            ${text}<br><br>
+            <button class="btn-retro" style="width:100%; margin-bottom:5px;" onclick="clippyAsk('dispo')">📅 Vos disponibilités ?</button>
+            <button class="btn-retro" style="width:100%; margin-bottom:5px;" onclick="clippyAsk('stack')">💻 Pourquoi cette stack ?</button>
+            <button class="btn-retro" style="width:100%;" onclick="clippyAsk('contact')">📧 Vous contacter ?</button>
+        `;
+    } else {
+        bubble.innerHTML = text;
+    }
+
+    clippy.style.display = 'flex';
+}
+
+function clippyAsk(topic) {
+    const bubble = document.getElementById('clippy-text');
+    let answer = "";
+
+    switch (topic) {
+        case 'dispo':
+            answer = "Je suis disponible immédiatement pour des missions freelance ou CDI ! On signe où ? ✍️";
+            break;
+        case 'stack':
+            answer = "J'adore Java et Spring pour le backend robuste, et React/JS pour le front. Mais je m'adapte à tout ! 🚀";
+            break;
+        case 'contact':
+            answer = "Envoyez-moi un mail à louka.riquoir@gmail.com ou ajoutez-moi sur LinkedIn via Internet Explorer ! 🌐";
+            break;
+    }
+
+    bubble.innerHTML = `${answer}<br><br><span style="font-size:0.7rem; color:blue; cursor:pointer;" onclick="showClippy()">🔙 Retour</span>`;
+}
