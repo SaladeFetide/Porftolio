@@ -224,13 +224,7 @@ function loop() {
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, screenWidth, screenHeight);
 
-
-    ctx.beginPath();
-    ctx.moveTo(screenWidth / 2 - 5, screenHeight / 2);
-    ctx.lineTo(screenWidth / 2 + 5, screenHeight / 2);
-    ctx.moveTo(screenWidth / 2, screenHeight / 2 - 5);
-    ctx.lineTo(screenWidth / 2, screenHeight / 2 + 5);
-    ctx.stroke();
+    // 5. Crosshair (Removed)
 
     // 6. Retro HUD Bar
     ctx.fillStyle = "#444";
