@@ -675,8 +675,9 @@
                     style="position: absolute; top: 20px; left: 20px; width: 30px; height: 30px; background: white; border: 1px solid black;">
                 </div>
             </div>
-            <fieldset>
-                <legend data-lang-key="prop_wallpaper">Papier peint</legend>
+            <fieldset
+                style="border: 1px solid white; border-left: 1px solid #808080; border-top: 1px solid #808080; padding: 10px; margin-bottom: 10px;">
+                <legend data-lang-key="prop_wallpaper" style="margin-left: 5px; padding: 0 3px;">Papier peint</legend>
                 <select id="wallpaper-select" onchange="updatePreview()" size="4" style="width: 100%;"
                     aria-label="Select Wallpaper">
                     <option value="teal">Windows Standard (Teal)</option>
@@ -686,18 +687,20 @@
                     <option value="red">Rouge Brique</option>
                     <option value="black">Noir (Hacker)</option>
                 </select>
-        </div>
+            </fieldset>
 
-        <div style="margin-bottom: 15px; border-top: 1px solid #808080; padding-top: 10px;">
-            <label style="font-weight: bold;">Thème (Plus! Pack):</label><br>
-            <select id="theme-select" style="width: 100%; margin-top: 5px;" onchange="applyThemeUser(this.value)">
-                <option value="default" selected>Windows 98 (Défaut)</option>
-                <option value="hacker">Hacker (Matrix Console)</option>
-                <option value="vaporwave">Vaporwave (Aesthetic)</option>
-                <option value="win2000">Windows 2000 Pro</option>
-            </select>
+            <div
+                style="border-top: 1px solid #808080; padding-top: 10px; border-bottom: 1px solid white; margin-bottom: 15px;">
+                <label style="font-weight: bold;">Thème (Plus! Pack):</label><br>
+                <select id="theme-select" style="width: 100%; margin-top: 5px;" onchange="applyThemeUser(this.value)">
+                    <option value="default" selected>Windows 98 (Défaut)</option>
+                    <option value="hacker">Hacker (Matrix Console)</option>
+                    <option value="vaporwave">Vaporwave (Aesthetic)</option>
+                    <option value="win2000">Windows 2000 Pro</option>
+                </select>
+            </div>
         </div>
-        <div style="display: flex; justify-content: flex-end; gap: 5px; margin-top: auto;">
+        <div style="display: flex; justify-content: flex-end; gap: 5px; padding: 5px; margin-top: auto;">
             <button class="btn-retro" onclick="applyWallpaper()" data-lang-key="btn_apply">Appliquer</button>
             <button class="btn-retro" onclick="closeWindow('win-properties')"
                 data-lang-key="btn_cancel">Annuler</button>
