@@ -1,23 +1,25 @@
 
-// --- DOOM-LIKE RAYCASTING ENGINE (Vanilla JS) ---
-// Based on Lodev's Raycasting Tutorial
+// --- DOOM-LIKE RAYCASTING ENGINE (Texture Mapped) ---
+// High Quality "Deluxe" Update
 
 const mapWidth = 24;
 const mapHeight = 24;
 const screenWidth = 640;
 const screenHeight = 480;
+const texWidth = 64;
+const texHeight = 64;
 
-// 1 = wall, 0 = empty
+// 1 = wall
 const worldMap = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 3, 0, 3, 0, 3, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 0, 0, 0, 3, 0, 3, 0, 3, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -25,26 +27,31 @@ const worldMap = [
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 4, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 4, 0, 0, 0, 0, 5, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 4, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 4, 0, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
 // Player state
-let posX = 22, posY = 12;  // x and y start position
-let dirX = -1, dirY = 0; // initial direction vector
-let planeX = 0, planeY = 0.66; // the 2d raycaster version of camera plane
+let posX = 22, posY = 12;
+let dirX = -1, dirY = 0;
+let planeX = 0, planeY = 0.66;
 
 let loopId = null;
 let keys = { w: false, s: false, a: false, d: false };
 
+// Textures
+const texWall = new Image();
+const sprayGun = new Image();
+let texturesLoaded = false;
+
 function initDoom() {
-    console.log("Initializing Doom Engine...");
+    console.log("Initializing Doom Engine V2 (Textures)...");
     const canvas = document.getElementById('doom-canvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -52,6 +59,13 @@ function initDoom() {
     // Fit canvas
     canvas.width = screenWidth;
     canvas.height = screenHeight;
+
+    // Load assets
+    texWall.src = 'assets/images/doom_wall.png';
+    sprayGun.src = 'assets/images/doom_gun.png';
+
+    // Wait for load (simple check)
+    texWall.onload = () => { texturesLoaded = true; };
 
     // Controls
     window.addEventListener('keydown', (e) => {
@@ -80,40 +94,29 @@ function loop() {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
-    // Clear background
-    ctx.fillStyle = '#333';
-    ctx.fillRect(0, 0, screenWidth, screenHeight / 2); // Ceiling
-    ctx.fillStyle = '#666';
-    ctx.fillRect(0, screenHeight / 2, screenWidth, screenHeight / 2); // Floor
+    // Sky and Floor
+    ctx.fillStyle = '#111'; // Dark ceiling
+    ctx.fillRect(0, 0, screenWidth, screenHeight / 2);
+    ctx.fillStyle = '#333'; // Dark floor
+    ctx.fillRect(0, screenHeight / 2, screenWidth, screenHeight / 2);
 
-    // Raycasting Loop
+    // Raycasting
     for (let x = 0; x < screenWidth; x++) {
-        // Calculate ray position and direction
-        let cameraX = 2 * x / screenWidth - 1; // x-coordinate in camera space
+        let cameraX = 2 * x / screenWidth - 1;
         let rayDirX = dirX + planeX * cameraX;
         let rayDirY = dirY + planeY * cameraX;
 
-        // Which box of the map we're in
         let mapX = Math.floor(posX);
         let mapY = Math.floor(posY);
 
-        // Length of ray from current position to next x or y-side
-        let sideDistX;
-        let sideDistY;
-
-        // Length of ray from one x or y-side to next x or y-side
+        let sideDistX, sideDistY;
         let deltaDistX = (rayDirX === 0) ? 1e30 : Math.abs(1 / rayDirX);
         let deltaDistY = (rayDirY === 0) ? 1e30 : Math.abs(1 / rayDirY);
         let perpWallDist;
+        let stepX, stepY;
+        let hit = 0;
+        let side;
 
-        // What direction to step in x or y-direction (either +1 or -1)
-        let stepX;
-        let stepY;
-
-        let hit = 0; // was there a wall hit?
-        let side; // was a NS or a EW wall hit?
-
-        // Calculate step and initial sideDist
         if (rayDirX < 0) {
             stepX = -1;
             sideDistX = (posX - mapX) * deltaDistX;
@@ -129,9 +132,7 @@ function loop() {
             sideDistY = (mapY + 1.0 - posY) * deltaDistY;
         }
 
-        // DDA
         while (hit === 0) {
-            // jump to next map square, OR in x-direction, OR in y-direction
             if (sideDistX < sideDistY) {
                 sideDistX += deltaDistX;
                 mapX += stepX;
@@ -141,47 +142,78 @@ function loop() {
                 mapY += stepY;
                 side = 1;
             }
-            // Check if ray has hit a wall
             if (worldMap[mapX][mapY] > 0) hit = 1;
         }
 
-        // Calculate distance projected on camera direction
         if (side === 0) perpWallDist = (sideDistX - deltaDistX);
         else perpWallDist = (sideDistY - deltaDistY);
 
-        // Calculate height of line to draw on screen
         let lineHeight = Math.floor(screenHeight / perpWallDist);
-
-        // Calculate lowest and highest pixel to fill in current stripe
         let drawStart = -lineHeight / 2 + screenHeight / 2;
         if (drawStart < 0) drawStart = 0;
         let drawEnd = lineHeight / 2 + screenHeight / 2;
         if (drawEnd >= screenHeight) drawEnd = screenHeight - 1;
 
-        // Color
-        let color = '#fff';
-        switch (worldMap[mapX][mapY]) {
-            case 1: color = '#AA0000'; break; // Red wall
-            case 2: color = '#00AA00'; break; // Green wall
-            case 3: color = '#0000AA'; break; // Blue wall
-            case 4: color = '#fff'; break;    // White wall
-            default: color = '#ffff00'; break;
-        }
-        // Give x and y sides different brightness
-        if (side === 1) {
-            // darker
-            // Simple shift not easy in hex string, just use another logic or keep simple
-            // Let's just use CSS filter later or different palette
-            // For now keep simple
+        // TEXTURE CALCULATION
+        let wallX;
+        if (side == 0) wallX = posY + perpWallDist * rayDirY;
+        else wallX = posX + perpWallDist * rayDirX;
+        wallX -= Math.floor(wallX);
+
+        let texX = Math.floor(wallX * texWidth);
+        if (side == 0 && rayDirX > 0) texX = texWidth - texX - 1;
+        if (side == 1 && rayDirY < 0) texX = texWidth - texX - 1;
+
+        // Draw Texture Strip
+        // Note: drawImage with decimal scaling can be slow/blurry, but fine for demo
+        // For 'crisp' pixel look, disabling smoothing helps
+        ctx.imageSmoothingEnabled = false;
+
+        if (texturesLoaded) {
+            ctx.drawImage(texWall,
+                texX, 0, 1, texHeight, // Source strip
+                x, drawStart, 1, drawEnd - drawStart // Dest strip
+            );
+        } else {
+            // Fallback
+            ctx.fillStyle = (side === 1) ? '#550000' : '#AA0000';
+            ctx.fillRect(x, drawStart, 1, drawEnd - drawStart);
         }
 
-        ctx.fillStyle = color;
-        ctx.fillRect(x, drawStart, 1, drawEnd - drawStart);
+        // FOG / SHADING
+        // Distance based shading
+        if (perpWallDist > 1) {
+            let opacity = (perpWallDist - 1) / 10; // Fog starts at 1, maxes at 11
+            if (opacity > 1) opacity = 1;
+            ctx.fillStyle = `rgba(0, 0, 0, ${opacity})`;
+            ctx.fillRect(x, drawStart, 1, drawEnd - drawStart);
+        }
     }
 
-    // Movement
-    const moveSpeed = 0.05 * 2.0; // speed
-    const rotSpeed = 0.03 * 2.0; // rot speed
+    // WEAPON SPRITE & BOBBING
+    const time = Date.now() / 150;
+    const moveFactor = (keys.w || keys.s) ? 1 : 0;
+    const bobX = Math.cos(time) * 10 * moveFactor;
+    const bobY = Math.abs(Math.sin(time)) * 10 * moveFactor; // Only bob down
+
+    if (texturesLoaded) {
+        // Center gun
+        const gunW = 256;
+        const gunH = 256;
+        const gunX = (screenWidth - gunW) / 2 + bobX;
+        const gunY = (screenHeight - gunH) + bobY;
+        ctx.drawImage(sprayGun, gunX, gunY, gunW, gunH);
+    }
+
+    // HUD
+    ctx.fillStyle = "red";
+    ctx.font = "20px 'Courier New'";
+    ctx.fillText("AMMO: 99", 20, screenHeight - 20);
+    ctx.fillText("HEALTH: 100%", screenWidth - 150, screenHeight - 20);
+
+    // Movement Logic
+    const moveSpeed = 0.08;
+    const rotSpeed = 0.05;
 
     if (keys.w) {
         if (worldMap[Math.floor(posX + dirX * moveSpeed)][Math.floor(posY)] === 0) posX += dirX * moveSpeed;
@@ -191,7 +223,7 @@ function loop() {
         if (worldMap[Math.floor(posX - dirX * moveSpeed)][Math.floor(posY)] === 0) posX -= dirX * moveSpeed;
         if (worldMap[Math.floor(posX)][Math.floor(posY - dirY * moveSpeed)] === 0) posY -= dirY * moveSpeed;
     }
-    if (keys.d) { // Rotate Right
+    if (keys.d) {
         let oldDirX = dirX;
         dirX = dirX * Math.cos(-rotSpeed) - dirY * Math.sin(-rotSpeed);
         dirY = oldDirX * Math.sin(-rotSpeed) + dirY * Math.cos(-rotSpeed);
@@ -199,7 +231,7 @@ function loop() {
         planeX = planeX * Math.cos(-rotSpeed) - planeY * Math.sin(-rotSpeed);
         planeY = oldPlaneX * Math.sin(-rotSpeed) + planeY * Math.cos(-rotSpeed);
     }
-    if (keys.a) { // Rotate Left
+    if (keys.a) {
         let oldDirX = dirX;
         dirX = dirX * Math.cos(rotSpeed) - dirY * Math.sin(rotSpeed);
         dirY = oldDirX * Math.sin(rotSpeed) + dirY * Math.cos(rotSpeed);

@@ -1812,7 +1812,7 @@ function clippyAsk(topic) {
 
     switch (topic) {
         case 'dispo':
-            answer = "Je suis disponible immédiatement pour des missions freelance ou CDI ! On signe où ? ✍️";
+            answer = "Je suis disponible pour un stage ou une alternance ! On signe où ? ✍️";
             break;
         case 'stack':
             answer = "J'adore Java et Spring pour le backend robuste, et React/JS pour le front. Mais je m'adapte à tout ! 🚀";
